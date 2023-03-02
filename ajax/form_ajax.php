@@ -1,11 +1,12 @@
 <?php
 
+global $db,$conn;
 require '../includes/config.php';
 
 if (isset($_POST['action']) && $_POST['action'] == "list") {
 
     header('Content-type: application/json');
-    global $db,$conn;
+    
 
         $sql = "SELECT * FROM users";
         $result=mysqli_query($conn,$sql);
@@ -20,9 +21,12 @@ if (isset($_POST['action']) && $_POST['action'] == "list") {
                     'phone'=>$row['phone'],
                     'password'=>$row['password'],
                     'address'=>$row['address'],
+                    
 
                 );
+
             }
+            
             
         }
         echo json_encode($response);
@@ -30,6 +34,7 @@ if (isset($_POST['action']) && $_POST['action'] == "list") {
 }
 
 if (isset($_POST['action']) && $_POST['action'] == "add") {
+    
     $fname=$_REQUEST['fname_form'];
     $lname=$_REQUEST['lname_form'];
     $email=$_REQUEST['email_form'];
@@ -51,7 +56,40 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
         echo "success";
  }
 }
+if(isset($_POST['action'])&&($_POST['action']=='delete')){
+    $id=$_REQUEST['id'];
+    $sql="DELETE FROM users WHERE id=$id";
+    $result=mysqli_query($conn,$sql);
+    if ($result == 0) {
+        echo "Error";
+    } else if ($result == 1) {
+        echo "success";
+    }
+}
+if(isset($_POST['action'])&& ($_POST['action']=='update')){
+    $id=$_REQUEST['user_id'];
+    $fname=$_REQUEST['fname'];
+    $lname=$_REQUEST['lname'];
+    $email=$_REQUEST['email'];
+    $phone=$_REQUEST['cnt'];
+    $password=$_REQUEST['pwd'];
+    $address=$_REQUEST['address'];
+    $arr=array(
+        "fname"=>$fname,
+        "lname"=>$lname,
+        "email"=>$email,
+        "phone"=>$phone,
+        "password"=>$password,
+        "address"=>$address,
+    );
+    $where_id=array("id"=>$id);
+    $result=UpdateData($arr,"users",$where_id);
+    if ($result == 0) {
+        echo "Error";
+    } else if ($result == 1) {
+        echo "success";
+ }
 
 
 
-?>
+}

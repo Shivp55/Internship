@@ -13,3 +13,5 @@
 <script src="https://cdn.datatables.net/1.13.2/js/dataTables.jqueryui.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
 <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo SITE_URL?>js/uses.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>

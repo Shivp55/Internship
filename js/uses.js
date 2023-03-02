@@ -1,126 +1,120 @@
-"use strict";
-// Class definition
-
-var KTDatatableAutoColumnHideDemo = function () {
-    // Private functions
-
-    // basic demo
-    var demo = function () {
-
-        var datatable = $('.kt-datatable').DataTable({
-            // datasource definition
-            data: {
-                // saveState: {cookie: false, webstorage: false,},
-                type: 'remote',
-                source: {
-                    read: {
-                        url:'../ajax/form_ajax.php',
-                        method: 'POST',
-                        params: {
-                            action: 'list',
-                        },
-                    },
-
-                },
+var validate=function validate() {
+    var i;
+    var fname_str = document.frmadd.fname_form;
+    var lname_str = document.frmadd.lname_form;
+    var email_str = document.frmadd.email_form;
+    var phone_str = document.frmadd.cnt_form;
+    var pwd_str = document.frmadd.password_form;
+    var address_str = document.frmadd.address_form;
+    var FirstCharStr1 = /^[A-Za-z]/;
+    var FirstCharStr2 = /^_[A-Za-z]/;
+    var FirstCharStr3 = /^[0-9]/;
 
 
-            },
 
-            /*  webstorage: false,
-              cookie: false,*/
-            layout: {
-                scroll: false,
-                footer: false,
-            },
+    if ((fname_str.value == null) || (fname_str.value == "")) {
+        alert("Enter First Name")
+        fname_str.focus();
+        return false;
 
-            // column sorting
-            sortable: true,
-            pagination: true,
+    }
+    if ((lname_str.value == null) || (lname_str.value == "")) {
+        alert("Enter Last Name")
+        lname_str.focus();
+        return false;
+    }
+    if ((email_str.value == null) || (email_str.value == "")) {
+        alert("Enter Email")
+        email_str.focus();
+        return false;
+    }
+    if ((phone_str.value == null) || (phone_str.value == "")) {
+        alert("Enter Phone Number")
+        phone_str.focus();
+        return false;
+    }
+    if ((pwd_str.value == null) || (pwd_str.value == "")) {
+        alert("Enter Password")
+        pwd_str.focus();
+        return false;
+    }
+    if ((address_str.value == null) || (address_str.value == "")) {
+        alert("Enter Address")
+        address_str.focus();
+        return false;
+    }
+    if ((cnt_form.length < 1) || (cnt_form.length > 11)) {
+        alert("Enter Valid Phone Number")
+        phone_str.focus();
+        return false;
 
-            search: {
-                input: $('#generalSearch'),
-            },
+    }
+    for (i = 0; i < cnt_form.length; i++) {
+        var ch = cnt_form.charAt(i);
+        if ((ch < "0") || (ch > "9")) {
+            alert("Enter Valid Phone Number")
+            phone_str.focus();
+            return false;
+        }
 
-            // columns definition
-            columns: [
-                // {
-                //     field: 'id',
-                //     title: 'ID',
+    }
+    var index_at = str.indexOf("@");
+    var len = str.length();
+    var index_dot = str.indexOf(".");
+    if (email_str.value == null || email_str.value == "") {
+        alert("Please enter a valid email address");
+        email_str.focus();
+        return false;
+    }
+    if (index_at == -1 || index_dot == -1 || index_at > index_dot) {
+        alert("Please enter a valid email address");
+        email_str.focus();
+        return false;
+    }
+    if (password_str.length < 6 || password_str.length > 12) {
+        alert("Please enter a valid password between 6 and 12 characters");
+    }
+    if (FirstCharStr1.test(fname_str)) {
+        alert("Please enter a valid First Name");
+        fname_str.focus();
+        return false;
+    }
+    if (FirstCharStr1.test(lname_str)) {
+        alert("Please enter a valid Last Name");
+        lname_str.focus();
+        return false;
+    }
+    if (FirstCharStr3.test(phone_str)) {
+        alert("Please enter a valid Phone Number");
+        phone_str.focus();
+        return false;
+    }
+    
+    return true;
 
-                // },
-                {
-                    field: 'fname',
-                    title: 'First Name',
-                    // template: function (row) {
-                    //     return row.elements_master_size + " " + row.elements_master_size_unit;
-
-                    },
-                
-                {
-                    field: 'lname',
-                    title: 'Last Name',
-                    // template: function (row) {
-                    //     return row.elements_master_calories + " " + row.elements_master_calories_unit;
-
-                    // },
-                },
-                {
-                    field: 'email',
-                    title: 'Email',
-                    // template: function (row) {
-                    //     return row.elements_master_fat + " " + row.elements_master_fat_unit;
-
-                    // },
-                },
-                {
-                    field: 'phone',
-                    title: 'Contact',
-                    // template: function (row) {
-                    //     return row.elements_master_protien + " " + row.elements_master_protien_unit;
-
-                    // },
-                },
-                {
-                    field: 'password',
-                    title: 'Password',
-                    // template: function (row) {
-                    //     return row.elements_master_carbohydrate + " " + row.elements_master_carbohydrate_unit;
-
-                    // },
-                },
-                {
-                    field: 'id',
-                    title: 'Action',
-                    overflow: 'visible',
-                    autoHide: false,
-                    textAlign: 'center',
-                    template: function (row) {
-                        return '<Button id="' + row.id + '" title="Edit user" href="javascript:;" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details"><span class="svg-icon svg-icon-md"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "></path><rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1"></rect></g></svg></span></a>';
-                    },
-                },
-            ],
-
+}
+if(validate==true){
+    $(document).ready(function() {
+        
+        $('#frmadd').submit(function(e) {
+          e.preventDefault();
+          var url = '../ajax/form_ajax.php';
+          $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'html',
+            data: $('#frmadd').serialize(),
+            success: function(data) {
+              if (data == 'success') {
+                table.ajax.reload();
+              } else {
+                alert(data);
+              }
+            }
+          });
         });
+      });
 
-        datatable.on('click', '[id]', function () {
 
-            var id = $(this).data('id');
 
-            window.open('main/user_edit.php?id=' + id, "_blank");
-
-        });
-    };
-
-    return {
-        // public functions
-        init: function () {
-            demo();
-        },
-    };
-}();
-
-jQuery(document).ready(function () {
-    KTDatatableAutoColumnHideDemo.init();
-
-});
-
+}

@@ -11,5 +11,5 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo SITE_URL?>assets/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.jqueryui.min.css">
-  
+
 </head>
