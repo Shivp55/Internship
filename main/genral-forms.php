@@ -21,7 +21,7 @@ include './head.php';
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
                 <li class="breadcrumb-item active">General Form</li>
               </ol>
             </div>
@@ -274,7 +274,7 @@ include './head.php';
       });
       table.on("click",'[data-delete-id]',function(){
         var id=$(this).data("delete-id");
-        if(confirm("Are you sure you want to delete record "+id)){   
+        if(confirm("Are you sure you want to delete record "+id)){
         var url = "../ajax/form_ajax.php?id="+id;
         $.ajax({
           url: url,

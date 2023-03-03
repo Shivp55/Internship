@@ -7,7 +7,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="./index.php" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="./admin_profile.php" class="nav-link"><?php echo  $_SESSION['name'];?></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -19,7 +22,6 @@
       <!-- Navbar Search -->
       <li class="nav-item">
       <a href="./logout.php" class="btn btn-danger font-weight-bolder py-2 px-5">Sign Out</a>
-        
       </li>
     </ul>
   </nav>
