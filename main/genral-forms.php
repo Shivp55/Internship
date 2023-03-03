@@ -74,10 +74,10 @@ include './head.php';
                     </div>
                   </div>
                   <!-- /.card-body -->
-                  <div class="card-footer">
+                  <div class="card-footer" style="background-color:white;">
                     <center>
                       <input type="hidden" name="action" value="add">
-                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button type="submit" class="btn btn-primary mr-4" style="margin-bottom:30px;">Submit</button>
                     </center>
                   </div>
                 </form>
@@ -89,9 +89,7 @@ include './head.php';
               <div class="card card-custom">
                 <div class="card-body">
                   <div id="example">
-                  
                     <table id="kt-datatable">
-                      
                     </table>
                   </div>
                 </div>
@@ -276,6 +274,7 @@ include './head.php';
       });
       table.on("click",'[data-delete-id]',function(){
         var id=$(this).data("delete-id");
+        if(confirm("Are you sure you want to delete record "+id)){   
         var url = "../ajax/form_ajax.php?id="+id;
         $.ajax({
           url: url,
@@ -295,6 +294,7 @@ include './head.php';
             // $(this)[0].reset();
           }
         });
+      }
       });
 
 
