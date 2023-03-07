@@ -17,12 +17,12 @@ include './head.php';
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>General Form</h1>
+              <h1>User Details</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-                <li class="breadcrumb-item active">General Form</li>
+                <li class="breadcrumb-item active">User Details</li>
               </ol>
             </div>
           </div>
@@ -34,43 +34,23 @@ include './head.php';
         <div class="container-fluid">
           <div class="row">
             <!-- left column -->
-            <div class="col-md-5">
+            <div class="col-md-4">
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Quick Example</h3>
+                  <h3 class="card-title">User Details Form</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form method="post" name="frmadd" id="frmadd">
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="fname">First Name</label>
-                      <input type="text" class="form-control" placeholder="Enter first Name" id="fname_form" name="fname_form">
+                      <label for="fname">Supplier Name</label>
+                      <input type="text" class="form-control" placeholder="Enter Supplier Name" id="name_form" name="name_form">
                     </div>
                     <div class="form-group">
-                      <label for="lname">Last Name</label>
-                      <input type="text" class="form-control" placeholder="Enter Last Name" id="lname_form" name="lname_form">
-                    </div>
-                    <div class="form-group">
-                      <label for="cnt">Contact Number</label>
-                      <input type="text" class="form-control" placeholder="Enter Contact" id="cnt_form" name="cnt_form">
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email address</label>
-                      <input type="email" class="form-control" placeholder="Enter email" id="email_form" name="email_form">
-                    </div>
-                    <div class="form-group">
-                      <label for="address">Address</label>
-                      <input type="text" class="form-control" placeholder="Enter Your Address" id="address_form" name="address_form">
-                    </div>
-                    <div class="form-group">
-                      <label for="pwd">Password</label>
-                      <input type="password" class="form-control" placeholder="Password" id="password_form" name="password_form">
-                    </div>
-                    <div class="form-group">
-                      <label for="pwd">Password</label>
-                      <input type="password" class="form-control" placeholder="Confirm Password" id="cfm_password_form" name="cfm_password_form">
+                      <label for="lname">Supplier Opening Balance</label>
+                      <input type="text" class="form-control" placeholder="Enter Supplier Opening Balance" id="op_form" name="op_form">
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -85,11 +65,11 @@ include './head.php';
 
 
             </div>
-            <div class="col-md-7">
+            <div class="col-md-8">
               <div class="card card-custom">
                 <div class="card-body">
                   <div id="example">
-                    <table id="kt-datatable">
+                    <table id="kt-datatable" class="table table-striped table-bordered">
                     </table>
                   </div>
                 </div>
@@ -116,6 +96,14 @@ include './head.php';
   <script type="text/javascript">
     $(document).ready(function(e) {
       var table = $("#kt-datatable").DataTable({
+        "responsive": true,
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+      
         ajax: {
           url: '../ajax/form_ajax.php',
           method: "POST",
@@ -129,28 +117,24 @@ include './head.php';
             data: "id"
           },
           {
-            title:"First Name",
-            data: "fname"
+            title:"Supplier Name",
+            data: "name"
           },
           {
-            title:"Last Name",
-            data: "lname"
+            title:"Opening Balance",
+            data: "ob"
           },
           {
-            title:"Contact",
-            data: "phone"
+            title:"Current Balance",
+            data: "cb"
           },
           {
-            title:"Email",
-            data: "email"
+            title:"Created On",
+            data: "co"
           },
           {
-            title:"Address",
-            data: "address"
-          },
-          {
-            title:"Password",
-            data: "password"
+            title:"Updated On",
+            data: "up"
           },
           {
             title:"Edit",
@@ -172,7 +156,7 @@ include './head.php';
                   "targets": -2 // -1 is the last column, 0 the first, 1 the second, etc.
           },
           {
-            title:"edit",
+            title:"delete",
                        "render": function ( data, type, row ) {
                         return "<button data-delete-id='" + row.id + "' class='btn btn-danger btn-delete' data-pk='" + data + "'>Delete</button>";
                     },
@@ -183,65 +167,34 @@ include './head.php';
 
         ],
 
-        scrollY: 500,
-        scrollX: true,
+        // scrollY: 500,
+        // scrollX: true,
       });
 
       $("form[name='frmadd']").validate({
         rules: {
-          fname_form: {
+          name_form: {
             required:true,
-            digits:false,
+            
           },
-          lname_form:
-            {
+            
+            op_form:{
               required:true,
-            },
-          cnt_form: {
-            required: true,
-            minlength: 10,
-            maxlength: 12,
-          },
-          email_form: "required",
-          address_form: "required",
-          password_form:
-            {
-              required:true,
-              minlength: 6,
-              maxlength: 20,
-            },
-            cfm_password_form:{
-              required:true,
-              equalTo:"#password_form",
+              
             }
         },
         messages: {
-          fname_form:
+          name_form:
             {
-              required: 'Enter your first name',
-              digits:"This field can contain only letters",
+              required: 'Enter your Supplier name',
+              
             },
-          lname_form:
+          op_form:
             {
-              required: 'Enter your last name',
-              text:"Enter only text",
+              required: 'Enter Opening Balance',
+             
             },
-          cnt_form:{
-            required: 'Enter your contact number',
-            minlength: 'Enter at least {10} numbers',
-            maxlength: 'Enter no more than {12} numbers',
-          },
-          email_form: "please enter email",
-          address_form: "please enter address",
-          password_form:{
-            required: 'Enter your password',
-            minlength: 'Enter at least {6} characters',
-            maxlength: 'Enter no more than {12} characters',
-          },
-          cfm_password_form:{
-            required:"Enter Your Confirm Password",
-            equalTo:"Enter Same Passwords",
-          },
+          
         },
         invalidHandler: function(event ,validator) {
           //display error alert on form submit
@@ -250,21 +203,17 @@ include './head.php';
         submitHandler: function (form) {
           var url = "../ajax/form_ajax.php";
           $.ajax({
-
             url: url,
             type: "POST",
             data: $("#frmadd").serialize(),
             success: function(data) {
-              if (data == "success") {
-                table.ajax.reload();
-                window.location.reload();
-                // window.location.reload();
-                // this.reset();
-              } else {
-                alert(data.msg);
+              window.location.reload();
+              table.ajax.reload();
+              // }
+              
               }
-              $(this)[0].reset();
-            }
+              
+            
           });
         }
       });
@@ -296,6 +245,10 @@ include './head.php';
         });
       }
       });
+    
+    
+   
+
 
 
     });

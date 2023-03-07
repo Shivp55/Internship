@@ -9,22 +9,22 @@ date_default_timezone_set("Asia/Kolkata");
 switch ($server_name) {
 
     case "LOCALHOST":
-        $physical_path = $_SERVER['DOCUMENT_ROOT']."/php_mvc/";
-        $site_url = "http://" . $_SERVER['HTTP_HOST']."/php_mvc/";
+        $physical_path = $_SERVER['DOCUMENT_ROOT']."/banking/";
+        $site_url = "http://" . $_SERVER['HTTP_HOST']."/banking/";
         $host_name = "localhost";
         $user_name = "root";
         $password = "";
-        $db_name = "keto_nutri";
+        $db_name = "banking";
 
         break;
 
     default:
-        $physical_path = $_SERVER['DOCUMENT_ROOT']."/php_mvc/";
-        $site_url = "http://" . $_SERVER['HTTP_HOST'].'/php_mvc/';
+        $physical_path = $_SERVER['DOCUMENT_ROOT']."/banking/";
+        $site_url = "http://" . $_SERVER['HTTP_HOST'].'/banking/';
         $host_name = "localhost";
         $user_name = "root";
         $password = "";
-        $db_name = "keto_nutri";
+        $db_name = "banking";
         break;
 
 
@@ -55,3 +55,4 @@ $conn = $db->CONNECTION($host_name, $db_name, $user_name, $password, false);
 
 
 
+?>

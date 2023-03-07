@@ -8,21 +8,18 @@ if (isset($_POST['action']) && $_POST['action'] == "list") {
     header('Content-type: application/json');
 
 
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM supplier_master WHERE record_status=1";
     $result = mysqli_query($conn, $sql);
     $response['data'] = array();
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
             $response['data'][] = array(
-                'id' => $row['id'],
-                'fname' => $row['fname'],
-                'lname' => $row['lname'],
-                'email' => $row['email'],
-                'phone' => $row['phone'],
-                'password' => $row['password'],
-                'address' => $row['address'],
-
-
+                'id' => $row['supplier_master_id'],
+                'name' => $row['supplier_master_name'],
+                'ob' => $row['supplier_master_opening_balance'],
+                'cb' => $row['supplier_master_current_balance'],
+                'co' => $row['created_on'],
+                'up' => $row['updated_on'],
             );
         }
     }
@@ -31,21 +28,14 @@ if (isset($_POST['action']) && $_POST['action'] == "list") {
 
 if (isset($_POST['action']) && $_POST['action'] == "add") {
 
-    $fname = $_REQUEST['fname_form'];
-    $lname = $_REQUEST['lname_form'];
-    $email = $_REQUEST['email_form'];
-    $phone = $_REQUEST['cnt_form'];
-    $password = $_REQUEST['password_form'];
-    $address = $_REQUEST['address_form'];
+    $name = $_REQUEST['name_form'];
+    $op = $_REQUEST['op_form'];
     $arr = array(
-        "fname" => $fname,
-        "lname" => $lname,
-        "email" => $email,
-        "phone" => $phone,
-        "password" => $password,
-        "address" => $address,
+        "supplier_master_name" => $name,
+        "supplier_master_opening_balance"=>$op,
+        "supplier_master_current_balance"=>$op,
     );
-    $result = InsertData($arr, "users");
+    $result = InsertData($arr, "supplier_master");
     if ($result == 0) {
         echo "Error";
     } else if ($result == 1) {
@@ -54,7 +44,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
 }
 if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
     $id = $_REQUEST['id'];
-    $sql = "DELETE FROM users WHERE id=$id";
+    $sql = "UPDATE supplier_master SET record_status=0 AND deleted=0 WHERE supplier_master_id=$id";
     $result = mysqli_query($conn, $sql);
     if ($result == 0) {
         echo "Error";
@@ -79,7 +69,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'update')) {
         "address" => $address,
     );
     $where_id = array("id" => $id);
-    $result = UpdateData($arr, "users", $where_id);
+    $result = UpdateData($arr, "supplier_master", $where_id);
     if ($result == 0) {
         echo "Error";
     } else if ($result == 1) {
@@ -87,5 +77,5 @@ if (isset($_POST['action']) && ($_POST['action'] == 'update')) {
     }
 }
 
-
+?>
 

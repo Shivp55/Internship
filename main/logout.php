@@ -2,7 +2,7 @@
 
 session_start();
 session_destroy();
-header('Location: http://localhost/admin/main/login.php');
+header('Location: http://localhost/banking/main/login.php');
 echo "success";
 exit;
 
