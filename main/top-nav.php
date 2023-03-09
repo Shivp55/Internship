@@ -2,7 +2,6 @@
 <!-- Navbar -->
 <?php
 include './admin_detail.php';
-
 ?>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <!-- Left navbar links -->
@@ -14,7 +13,7 @@ include './admin_detail.php';
       <a href="./index.php" class="nav-link">Home</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a class="nav-link" href="./admin_profile.php" style="background-color:white; border:0;" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='grey'"><?php echo  $name;?> </a>
+      <a class="nav-link" href="./admin_profile.php" style="background-color:white; border:0;" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='grey'"><?php echo  $name; ?> </a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link">Contact</a>
@@ -23,7 +22,6 @@ include './admin_detail.php';
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <!-- Navbar Search -->
-    
   </ul>
 </nav>
 <script type="text/javascript">

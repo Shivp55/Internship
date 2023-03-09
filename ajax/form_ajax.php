@@ -1,39 +1,33 @@
 <?php
 
-global $db, $conn;
+
 require '../includes/config.php';
 
 if (isset($_POST['action']) && $_POST['action'] == "list") {
 
     header('Content-type: application/json');
 
+    $user_obj = new Supplier();
 
-    $sql = "SELECT * FROM supplier_master WHERE record_status=1";
-    $result = mysqli_query($conn, $sql);
-    $response['data'] = array();
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_array($result)) {
-            $response['data'][] = array(
-                'id' => $row['supplier_master_id'],
-                'name' => $row['supplier_master_name'],
-                'ob' => $row['supplier_master_opening_balance'],
-                'cb' => $row['supplier_master_current_balance'],
-                'co' => $row['created_on'],
-                'up' => $row['updated_on'],
-            );
-        }
+    $user_data=$user_obj->GET_ALL_SUPPLIERS();
+    $response_array['data']=array();
+    foreach ($user_data as $val) {
+        array_push($response_array['data'], $val);
     }
-    echo json_encode($response);
+    echo json_encode($response_array);
 }
 
 if (isset($_POST['action']) && $_POST['action'] == "add") {
 
     $name = $_REQUEST['name_form'];
     $op = $_REQUEST['op_form'];
+    $date=$_REQUEST['date'];
     $arr = array(
         "supplier_master_name" => $name,
         "supplier_master_opening_balance"=>$op,
         "supplier_master_current_balance"=>$op,
+        "created_on" => $date
+
     );
     $result = InsertData($arr, "supplier_master");
     if ($result == 0) {
@@ -44,31 +38,23 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
 }
 if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
     $id = $_REQUEST['id'];
-    $sql = "UPDATE supplier_master SET record_status=0 AND deleted=0 WHERE supplier_master_id=$id";
-    $result = mysqli_query($conn, $sql);
-    if ($result == 0) {
-        echo "Error";
-    } else if ($result == 1) {
-        echo "success";
-    }
+    echo $id;
+    $supplier_obj=new Supplier;
+    $supplier_obj->DELETE_SUPPLIER($id);
+    echo "success";
 }
 if (isset($_POST['action']) && ($_POST['action'] == 'update')) {
-    $id = $_REQUEST['user_id'];
-    $fname = $_REQUEST['fname'];
-    $lname = $_REQUEST['lname'];
-    $email = $_REQUEST['email'];
-    $phone = $_REQUEST['cnt'];
-    $password = $_REQUEST['pwd'];
-    $address = $_REQUEST['address'];
+    $id = $_REQUEST['id'];
+    $name = $_REQUEST['supplier_master_name'];
+    $op = $_REQUEST['supplier_master_opening_balance'];
+    $cb = $_REQUEST['supplier_master_current_balance'];
+    
     $arr = array(
-        "fname" => $fname,
-        "lname" => $lname,
-        "email" => $email,
-        "phone" => $phone,
-        "password" => $password,
-        "address" => $address,
+        "supplier_master_name" => $name,
+        "supplier_master_opening_balance" => $op,
+        "supplier_master_current_balance" => $cb,
     );
-    $where_id = array("id" => $id);
+    $where_id = array("supplier_master_id" => $id);
     $result = UpdateData($arr, "supplier_master", $where_id);
     if ($result == 0) {
         echo "Error";

@@ -16,6 +16,8 @@
 <script type="text/javascript" src="<?php echo SITE_URL?>js/uses.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="https://kit.fontawesome.com/3c53481c56.js" crossorigin="anonymous"></script>
+<!-- <script src="<?php echo SITE_URL?>assets/plugins/daterangepicker/daterangepicker.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js"></script>
 
 <!-- DataTable -->
 <!-- <script src="<?php echo SITE_URL?>assets/plugins/datatables/jquery.dataTables.min.js"></script> -->

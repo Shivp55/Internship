@@ -3,23 +3,9 @@
 <?php
 include './head.php';
 $id = $_GET['id'];
+$supplier_data=new Supplier;
+$supplier_data->GET_SUPPLIER_BY_ID($id);
 
-$sql = "SELECT * FROM users WHERE id=$id";
-
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $fname = $row['fname'];
-        $lname = $row['lname'];
-        $email = $row['email'];
-        $cnt = $row['phone'];
-        $pwd = $row['password'];
-        $user_id = $row['id'];
-        $address = $row['address'];
-        $email = $row['email'];
-    }
-}
 
 ?>
 

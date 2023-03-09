@@ -42,6 +42,7 @@ include './head.php';
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
+
                 <form method="post" name="frmadd" id="frmadd">
                   <div class="card-body">
                     <div class="form-group">
@@ -51,6 +52,10 @@ include './head.php';
                     <div class="form-group">
                       <label for="lname">Supplier Opening Balance</label>
                       <input type="text" class="form-control" placeholder="Enter Supplier Opening Balance" id="op_form" name="op_form">
+                    </div>
+                    <div class="form-group">
+                      <label>Date</label>
+                      <input type="date" class="form-control"  id="date" name="date">
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -93,161 +98,153 @@ include './head.php';
   <?php include 'js.php'; ?>
   <!-- script_start -->
 
+
+
+
+
   <script type="text/javascript">
     $(document).ready(function(e) {
-      var table = $("#kt-datatable").DataTable({
-        "responsive": true,
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-      
-        ajax: {
-          url: '../ajax/form_ajax.php',
-          method: "POST",
-          data: {
-            action: 'list',
-            // etc..
-          },
+  
+    var table = $("#kt-datatable").DataTable({
+      "responsive": true,
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+
+      ajax: {
+        url: '../ajax/form_ajax.php',
+        method: "POST",
+        data: {
+          action: 'list',
+          // etc..
         },
-        columns: [{
-          title:"ID",
-            data: "id"
-          },
-          {
-            title:"Supplier Name",
-            data: "name"
-          },
-          {
-            title:"Opening Balance",
-            data: "ob"
-          },
-          {
-            title:"Current Balance",
-            data: "cb"
-          },
-          {
-            title:"Created On",
-            data: "co"
-          },
-          {
-            title:"Updated On",
-            data: "up"
-          },
-          {
-            title:"Edit",
-            data:""
-          },
-          {
-            title:"Delete",
-            data:""
-          }
-
-        ],
-        "columnDefs":[
-          {
-            field:"id",
-            title:"edit",
-                       "render": function ( data, type, row ) {
-                        return "<button data-record-id='" + row.id + "'  value='Edit' class='btn btn-success btn-delete' data-pk='" + data + "'>Edit</button>";
-                    },
-                  "targets": -2 // -1 is the last column, 0 the first, 1 the second, etc.
-          },
-          {
-            title:"delete",
-                       "render": function ( data, type, row ) {
-                        return "<button data-delete-id='" + row.id + "' class='btn btn-danger btn-delete' data-pk='" + data + "'>Delete</button>";
-                    },
-                  "targets": -1 // -1 is the last column, 0 the first, 1 the second, etc.
-          }
-
-
-
-        ],
-
-        // scrollY: 500,
-        // scrollX: true,
-      });
-
-      $("form[name='frmadd']").validate({
-        rules: {
-          name_form: {
-            required:true,
-            
-          },
-            
-            op_form:{
-              required:true,
-              
-            }
+      },
+      columns: [{
+          title: "ID",
+          data: "supplier_master_id"
         },
-        messages: {
-          name_form:
-            {
-              required: 'Enter your Supplier name',
-              
-            },
-          op_form:
-            {
-              required: 'Enter Opening Balance',
-             
-            },
-          
+        {
+          title: "Supplier Name",
+          data: "supplier_master_name"
         },
-        invalidHandler: function(event ,validator) {
-          //display error alert on form submit
-          alert("Invalid Form Data!!");
+        {
+          title: "Opening Balance",
+          data: "supplier_master_opening_balance"
         },
-        submitHandler: function (form) {
-          var url = "../ajax/form_ajax.php";
-          $.ajax({
-            url: url,
-            type: "POST",
-            data: $("#frmadd").serialize(),
-            success: function(data) {
-              window.location.reload();
-              table.ajax.reload();
-              // }
-              
-              }
-              
-            
-          });
+        {
+          title: "Current Balance",
+          data: "supplier_master_current_balance"
+        },
+        {
+          title: "Created On",
+          data: "created_on"
+        },
+        {
+          title: "Updated On",
+          data: "updated_on"
+        },
+        {
+          title: "Action",
+          data: ""
+        },
+        // {
+        //   title:"Status",
+        //   data: "supplier_master_status"
+        // }
+
+
+      ],
+      "columnDefs": [{
+          field: "supplier_master_id",
+          title: "Action",
+          "render": function(data, type, row) {
+            return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.supplier_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.supplier_master_id + "'></i>"
+            // return "<i class='fa-solid fa-trash' data-delete-id='" + row.supplier_master_id + "'></i>"
+          },
+          "targets": -1 // -1 is the last column, 0 the first, 1 the second, etc.
+        },
+        // {
+        //   field:"supplier_master_id",
+        //   title:"delete",
+
+        //         "targets": -1 // -1 is the last column, 0 the first, 1 the second, etc.
+        // }
+
+
+
+      ],
+
+      // scrollY: 500,
+      // scrollX: true,
+    });
+
+    $("form[name='frmadd']").validate({
+      rules: {
+        name_form: {
+          required: true,
+
+        },
+
+        op_form: {
+          required: true,
+
         }
-      });
-      table.on("click",'[data-record-id]',function(){
-        var id=$(this).data("record-id");
-        window.open('./edit_user.php?id='+id,"_self");
-      });
-      table.on("click",'[data-delete-id]',function(){
-        var id=$(this).data("delete-id");
-        if(confirm("Are you sure you want to delete record "+id)){
-        var url = "../ajax/form_ajax.php?id="+id;
+      },
+      messages: {
+        name_form: {
+          required: 'Enter your Supplier name',
+
+        },
+        op_form: {
+          required: 'Enter Opening Balance',
+
+        },
+
+      },
+      invalidHandler: function(event, validator) {
+        alert("Invalid Form Data!!");
+      },
+      submitHandler: function(form) {
+        var url = "../ajax/form_ajax.php";
         $.ajax({
           url: url,
           type: "POST",
-          data:{
-            action:'delete',
-          },
+          data: $("#frmadd").serialize(),
           success: function(data) {
-            if (data == "success") {
-              table.ajax.reload();
-              window.location.reload();
-              // window.location.reload();
-              // this.reset();
-            } else {
-              alert(data.msg);
-            }
-            // $(this)[0].reset();
+            window.location.reload();
+            table.ajax.reload();
+
           }
         });
       }
+    });
+    table.on("click", '[data-record-id]', function() {
+      var id = $(this).data("record-id");
+      window.open('./edit_user.php?id=' + id, "_self");
+    });
+    table.on("click", '[data-delete-id]', function() {
+    var id = $(this).data("delete-id");
+    if (confirm("Are you sure you want to delete record " + id)) {
+      var url = "../ajax/form_ajax.php?id=" + id;
+      $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+          action: 'delete',
+        },
+        success: function(data) {
+          table.ajax.reload();
+          // // $(this)[0].reset();
+        }
       });
-    
-    
-   
+    }
+    });
+
+
+
 
 
 

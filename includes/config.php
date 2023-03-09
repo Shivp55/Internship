@@ -35,6 +35,11 @@ define("SITE_URL", $site_url);
 
 require_once(SITE_PATH . "/includes/functions.php");
 require_once(SITE_PATH . "/classes/class.mysqli.php");
+require_once(SITE_PATH . "/classes/class.supplier.php");
+
+// define("CLASS_PATH", SITE_PATH . "/classes/");
+
+// require_once(SITE_PATH . "/classes/class.user.php");
 
 
 
