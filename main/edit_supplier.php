@@ -2,21 +2,9 @@
 <html lang="en">
 <?php
 include './head.php';
-$id = $_SESSION['login_id'];
-
-$sql = "SELECT * FROM admin WHERE id=$id";
-
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $fname=$row['name'];
-        $email=$row['email'];
-        $password=$row['password'];
-        $uname=$row['username'];
-    }
-}
-
+$id = $_GET['id'];
+$supplier_data = new Supplier;
+$supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
 ?>
 
 <body class="hold-transition sidebar-mini">
@@ -38,47 +26,41 @@ if (mysqli_num_rows($result) > 0) {
                             <!-- general form elements disabled -->
                             <div class="card card-warning">
                                 <div class="card-header">
-                                    <h3 class="card-title">Edit User Details</h3>
+                                    <h3 class="card-title">Edit Supplier Details</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <form name="edit" id="edit">
                                         <div class="row">
                                             <div class="col-sm-6">
-
-
-                                                <input type="hidden" class="form-control" id="admin_id" name="admin_id" value="<?php echo $id; ?>">
+                                                <input type="hidden" class="form-control" id="supplier_id" name="supplier_id" value="<?php echo $supplier_info->supplier_master_id; ?>">
 
                                                 <!-- text input -->
                                                 <div class="form-group">
-                                                    <label>Admin Name</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Admin Name" id="fname" name="fname" value="<?php echo $fname; ?>">
+                                                    <label>Supplier Name</label>
+                                                    <input type="text" class="form-control" placeholder="Enter Supplier Name" id="sname" name="sname" value="<?php echo $supplier_info->supplier_master_name; ?>">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label>Admin User Name</label>
-                                                    <input type="text" class="form-control" placeholder="Enter User Name" id="uname" name="uname" value="<?php echo $uname; ?>">
+                                                    <label>Supplier Current Balance</label>
+                                                    <input type="text" class="form-control" placeholder="Enter Supplier Current Balance " id="cb" name="cb" value="<?php echo $supplier_info->supplier_master_current_balance; ?>">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <!-- textarea -->
                                                 <div class="form-group">
-                                                    <label>Email</label>
-                                                    <input type="email" class="form-control"  placeholder="Enter New Email Address" id="email" name="email"value="<?php echo $email; ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Password </label>
-                                                    <input type="text" class="form-control" placeholder="Enter password" id="pwd" name="pwd" value="<?php echo $password; ?>">
-
+                                                    <label>Select Supplier Status</label>
+                                                    <select class="form-control" name="record_status" id="record_status">
+                                                        <option selected><?php echo $supplier_info->record_status; ?></option>
+                                                        <option>0</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                       
+                                        <div class="row">
+                                        </div>
                                         <div class="card-footer" style="background-color:white;">
                                             <center>
                                                 <input type="hidden" name="action" value="update">
@@ -86,7 +68,6 @@ if (mysqli_num_rows($result) > 0) {
                                             </center>
                                         </div>
                                     </form>
-
                                     <!-- /.card-body -->
                                 </div>
                             </div>
@@ -108,39 +89,27 @@ if (mysqli_num_rows($result) > 0) {
             $(document).ready(function(e) {
                 $("form[name='edit']").validate({
                     rules: {
-                        fname: {
-                            required: true,
-                            digits: false,
-                        },
-                        uname: {
+                        sname: {
                             required: true,
                         },
-                        password: {
+                        cb: {
                             required: true,
-                            minlength: 10,
-                            maxlength: 12,
                         },
-                        email: "required",
-                        pwd: {
+                        record_status: {
                             required: true,
-                            minlength: 6,
-                            maxlength: 20,
                         },
                     },
                     messages: {
-                        fname: {
-                            required: 'Enter your  name',
+                        sname: {
+                            required: 'Enter your Supplier Name',
                             digits: "This field can contain only letters",
                         },
-                        uname: {
-                            required: 'Enter your User name',
+                        cb: {
+                            required: 'Enter your Current Balance',
                             text: "Enter only text",
                         },
-                        email: "please enter email",
-                        password: {
-                            required: 'Enter your password',
-                            minlength: 'Enter at least {6} characters',
-                            maxlength: 'Enter no more than {12} characters',
+                        record_status: {
+                            required: 'Enter status',
                         },
                     },
                     invalidHandler: function(event, validator) {
@@ -148,20 +117,13 @@ if (mysqli_num_rows($result) > 0) {
                         alert("Invalid Form Data!!");
                     },
                     submitHandler: function(form) {
-                        var url = "../ajax/admin_edit.php";
+                        var url = "../ajax/form_ajax.php";
                         $.ajax({
-
                             url: url,
                             type: "POST",
                             data: $("#edit").serialize(),
                             success: function(data) {
-                                // console.log(data);
-                                if (data == "success") {
-                                    window.open('./supplier_main.php', "_self");
-                                } else {
-                                    alert(data.msg);
-                                }
-                                $(this)[0].reset();
+                                window.open('./supplier_main.php', "_self");
                             }
                         });
                     }

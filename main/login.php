@@ -73,7 +73,7 @@
                     data:$('#login').serialize(),
                     success:function(data){
                        if(data=="success"){
-                        window.open('./genral-forms.php',"_self");
+                        window.open('./supplier_main.php',"_self");
                     }
                     else{
                         alert(data);

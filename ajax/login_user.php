@@ -15,6 +15,6 @@ if (isset($_POST['action']) && ($_POST['action'] == "login")) {
         echo "success";
     } else {
       echo printf($login_data);
-    }     
+    }
 }
 ?>

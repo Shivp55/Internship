@@ -50,7 +50,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="./supplier.php" class="nav-link">
+          <a href="./supplier_main.php" class="nav-link">
             <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;
             <p>
               Supplier
