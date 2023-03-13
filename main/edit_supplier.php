@@ -56,6 +56,14 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
                                                         <option selected><?php echo $supplier_info->record_status; ?></option>
                                                         <option>0</option>
                                                     </select>
+                                                    <div class="card-body">
+                                                        
+                                                        <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch 
+                                                        <?php if(($supplier_info->record_status)==1){?>
+                                                        data-off-color="danger"<?php }else {?> data-on-color="success"<?php } ?>>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -84,6 +92,10 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
             $(function() {
                 bsCustomFileInput.init();
             });
+
+            $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
         </script>
         <script type="text/javascript">
             $(document).ready(function(e) {

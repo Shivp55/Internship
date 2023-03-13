@@ -134,6 +134,7 @@ include './head.php';
             title: "Action",
             data: ""
           },
+          
         ],
         "columnDefs": [{
             field: "supplier_master_id",

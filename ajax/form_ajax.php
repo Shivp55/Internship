@@ -6,7 +6,7 @@ require '../includes/config.php';
 if (isset($_POST['action']) && $_POST['action'] == "list") {
     header('Content-type: application/json');
     $user_obj = new Supplier();
-    $user_data=$user_obj->GET_ALL_SUPPLIERS();
+    $user_data=$user_obj->GET_ALL_SUPPLIERS_FOR_SWITCH();
     $response_array['data']=array();
     foreach ($user_data as $val) {
         array_push($response_array['data'], $val);
