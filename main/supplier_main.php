@@ -91,6 +91,9 @@ include './head.php';
   <script type="text/javascript">
     $(document).ready(function(e) {
 
+      $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
       var table = $("#kt-datatable").DataTable({
         "responsive": true,
         "paging": true,
@@ -134,6 +137,12 @@ include './head.php';
             title: "Action",
             data: ""
           },
+          {
+            title:"Status",
+            "render":function(data,type,row){
+              return "<input type='checkbox' name=my-checkbox checked data-bootstrap-switch data-off-color='danger' data-on-color='success'>"
+            }
+          }
           
         ],
         "columnDefs": [{
@@ -142,7 +151,7 @@ include './head.php';
             "render": function(data, type, row) {
               return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.supplier_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.supplier_master_id + "'></i>"
             },
-            "targets": -1,
+            "targets": -2,
           },
         ],
       });

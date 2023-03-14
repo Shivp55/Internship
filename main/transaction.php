@@ -2,16 +2,6 @@
 <html lang="en">
 <?php
 include './head.php';
-$supplier_object = new Supplier;
-$supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
-
-$bank_obj = new Bank;
-$bank_info = $bank_obj->GET_ALL_BANK();
-
-// $id = $_GET['id'];
-// $bank_obj = new Bank;
-// $bank_info=$bank_obj->GET_BANK_BY_ID($id);
-
 ?>
 
 <body class="hold-transition sidebar-mini">
@@ -27,12 +17,12 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Transaction</h1>
+                            <h1>Transaction Details</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-                                <li class="breadcrumb-item active">Transaction </li>
+                                <li class="breadcrumb-item active">Transaction Details</li>
                             </ol>
                         </div>
                     </div>
@@ -43,70 +33,17 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                 <div class="container-fluid">
                     <div class="row">
                         <!-- left column -->
-                        <div class="col-md-4">
-                            <!-- general form elements -->
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Transaction Form</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <!-- form start -->
-                                <form method="post" name="edit" id="edit">
-                                    <div class="card-body">
-                                    <div class="form-group">
-                                            <label for="fname">Supplier Name</label>
 
-                                            <select class="form-control select2" style="width: 100%;" name="sname" id="sname">
-
-                                                <?php foreach ($supplier_info as $val) { ?>
-
-                                                    <option value="<?php echo $val->supplier_master_name; ?>"><?php echo $val->supplier_master_name; ?></option>
-
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="lname">Supplier Payment Amount</label>
-                                            <input type="text" class="form-control" placeholder="Enter Supplier Opening Balance" id="op_form" name="op_form" value="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="fname">Bank Name</label>
-
-                                            <select class="form-control select2" style="width: 100%;" name="bname" id="bname">
-
-                                                <?php foreach ($bank_info as $val) { ?>
-
-                                                    <option value="<?php echo $val->bank_master_name; ?>"><?php echo $val->bank_master_name; ?></option>
-
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="fname">Bank Account Number</label>
-
-                                            <select class="form-control select2" style="width: 100%;" name="accnt" id="accnt">
-
-                                                <?php foreach ($bank_info as $val) { ?>
-
-                                                    <option value="<?php echo $val->bank_master_id; ?>"><?php echo $val->bank_master_id; ?></option>
-
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
-                                        <!-- /.card-body -->
-                                        <div class="card-footer" style="background-color:white;">
-                                            <center>
-                                                <input type="hidden" name="action" value="add">
-                                                <button type="submit" class="btn btn-primary mr-4" style="margin-bottom:30px;">Add Payment Detail</button>
-                                            </center>
-                                        </div>
+                        <div class="col-md-11">
+                            <div class="card card-custom">
+                                <div class="card-body">
+                                    <div id="example">
+                                        <table id="kt-datatable" class="table table-striped table-bordered">
+                                        </table>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                     <!-- /.card -->
                     <!-- /.row -->
@@ -126,52 +63,136 @@ $bank_info = $bank_obj->GET_ALL_BANK();
     <!-- script_start -->
     <script type="text/javascript">
         $(document).ready(function(e) {
-            $("form[name='edit']").validate({
-                rules: {
-                    name_form: {
-                        required: true,
+
+            $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
+            var table = $("#kt-datatable").DataTable({
+                "responsive": true,
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                ajax: {
+                    url: '../ajax/transactions_ajax.php',
+                    method: "POST",
+                    data: {
+                        action: 'list',
                     },
-                    op_form: {
-                        required: true,
+                },
+                columns: [{
+                        title: "Transaction Number",
+                        data: "t_id"
                     },
-                    bname: {
-                        required: true,
+                    {
+                        title: "Supplier ID",
+                        data: "supplier_id"
                     },
-                    acc: {
-                        required: true,
+                    {
+                        title: "Supplier Name",
+                        data: "sup_name"
+                    },
+                    {
+                        title: "Bank Name",
+                        data: "bank_name"
+                    },
+                    {
+                        title: "Bank Account Number",
+                        data: "bank_acc"
+                    },
+                    {
+                        title: "Transaction Amount",
+                        data: "trans_amnt"
+                    },
+                    {
+                        title: "Transaction Date",
+                        data: "date"
+                    },
+                    {
+                        title: "Type",
+                        "render": function(data, type, row) {
+                            if (row.trans_type == 1) {
+                                $type = "Debited"
+                            } else {
+                                $type = "Credited"
+                            }
+
+                            return $type
+                        },
                     },
 
-                },
-                messages: {
-                    name_form: {
-                        required: 'Enter your Supplier name',
+                    {
+                        title: "Invoice",
+                        data: "invoice_no"
+                    },
+                    {
+                        title: "Action",
+                        data: ""
+                    }
 
+                ],
+                "columnDefs": [{
+                    field: "supplier_master_id",
+                    title: "Action",
+                    "render": function(data, type, row) {
+                        return "</i> <i class='fa-solid fa-trash' data-delete-id='" + row.t_id + "'></i>"
                     },
-                    op_form: {
-                        required: 'Enter Opening Balance',
-                    },
-                    bname: {
-                        required: 'Enter your Supplier Name',
-                        digits: "This field can contain only letters",
-                    },
-                    acc: {
-                        required: 'Enter Balance',
-                        text: "Enter only text",
-                    },
-                },
-                invalidHandler: function(event, validator) {
-                    //display error alert on form submit
-                    alert("Invalid Form Data!!");
-                },
-                submitHandler: function(form) {
-                    var url = "../ajax/transactions_ajax.php";
+                    "targets": -1,
+                }, ],
+            });
+
+            // $("form[name='frmadd']").validate({
+            //     rules: {
+            //         name_form: {
+            //             required: true,
+            //         },
+            //         op_form: {
+            //             required: true,
+            //         }
+            //     },
+            //     messages: {
+            //         name_form: {
+            //             required: 'Enter your Supplier name',
+
+            //         },
+            //         op_form: {
+            //             required: 'Enter Opening Balance',
+            //         },
+            //     },
+            //     invalidHandler: function(event, validator) {
+            //         alert("Invalid Form Data!!");
+            //     },
+            //     submitHandler: function(form) {
+            //         var url = "../ajax/form_ajax.php";
+            //         $.ajax({
+            //             url: url,
+            //             type: "POST",
+            //             data: $("#frmadd").serialize(),
+            //             success: function(data) {
+            //                 window.location.reload();
+            //                 table.ajax.reload();
+            //             }
+            //         });
+            //     }
+            // });
+            // table.on("click", '[data-record-id]', function() {
+            //     var id = $(this).data("record-id");
+            //     window.open('./edit_transaction.php?id=' + id, "_self");
+            // });
+            table.on("click", '[data-delete-id]', function() {
+                var id = $(this).data("delete-id");
+                if (confirm("Are you sure you want to delete record " + id)) {
+                    var url = "../ajax/transactions_ajax.php?id=" + id;
                     $.ajax({
                         url: url,
                         type: "POST",
-                        data: $("#edit").serialize(),
+                        data: {
+                            action: 'delete',
+                        },
                         success: function(data) {
-                            window.open('./index.php', "_self");
-                            // console.log(data);
+                            table.ajax.reload();
                         }
                     });
                 }

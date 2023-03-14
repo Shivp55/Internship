@@ -1,20 +1,25 @@
 <!DOCTYPE html>
+<html lang="en">
 <?php
 include './head.php';
-
-include('./includes/config.php');
 $supplier_object = new Supplier;
 $supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
 
+$bank_obj = new Bank;
+$bank_info = $bank_obj->GET_ALL_BANK();
+
+// $id = $_GET['id'];
+// $bank_obj = new Bank;
+// $bank_info=$bank_obj->GET_BANK_BY_ID($id);
 
 ?>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <?php include './top-nav.php';
+        <?php
+        include './top-nav.php';
         include './sidenav.php';
         ?>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -22,151 +27,157 @@ $supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Check Payments</h1>
+                            <h1>Payment</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Payments</li>
+                                <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
+                                <li class="breadcrumb-item active">Payment </li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- SELECT2 EXAMPLE -->
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title">Select Supplier For Information</h3>
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-4">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Payment Form</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form method="post" name="edit" id="edit">
+                                    <div class="card-body">
+                                    <div class="form-group">
+                                            <label for="fname">Supplier Name</label>
 
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                        <form name="getsup" id="getsup" method="post">
-                            <div class="row">
-                                
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-
-                                            <label>Choose Supplier</label>
                                             <select class="form-control select2" style="width: 100%;" name="sname" id="sname">
 
                                                 <?php foreach ($supplier_info as $val) { ?>
 
-                                                    <option name="sname1"><?php echo $val->supplier_master_name; ?></option>
+                                                    <option value="<?php echo $val->supplier_master_name; ?>"><?php echo $val->supplier_master_name; ?></option>
 
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label>Date range:</label>
+                                            <label for="lname">Supplier Payment Amount</label>
+                                            <input type="text" class="form-control" placeholder="Enter Supplier Payment Amount" id="op_form" name="op_form" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fname">Bank Name</label>
 
-                                            <div class="input-group">
-                                                <button type="button" class="btn btn-default float-right" name='daterange-btn'id="daterange-btn">
-                                                    <i class="far fa-calendar-alt"></i> Choose Dates
-                                                    <i class="fas fa-caret-down"></i>
-                                                </button>
-                                            </div>
+                                            <select class="form-control select2" style="width: 100%;" name="bname" id="bname">
+
+                                                <?php foreach ($bank_info as $val) { ?>
+
+                                                    <option value="<?php echo $val->bank_master_name; ?>"><?php echo $val->bank_master_name; ?></option>
+
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fname">Bank Account Number</label>
+
+                                            <select class="form-control select2" style="width: 100%;" name="accnt" id="accnt">
+
+                                                <?php foreach ($bank_info as $val) { ?>
+
+                                                    <option value="<?php echo $val->bank_master_id; ?>"><?php echo $val->bank_master_id; ?></option>
+
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <!-- /.card-body -->
+                                        <div class="card-footer" style="background-color:white;">
+                                            <center>
+                                                <input type="hidden" name="action" value="add">
+                                                <button type="submit" class="btn btn-primary mr-4" style="margin-bottom:30px;">Add Payment Detail</button>
+                                            </center>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group" style="padding-top: 11%;">
-                                            <input type="hidden" class="form-control" name="action" value="get_supplier">
-                                            <button type="submit" class="btn btn-primary mr-2">Get Data</button>
-                                        </div>
-                                    </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="card card-custom">
-                                    <div class="card-body">
-                                        <div id="example">
-                                            <table id="kt-datatable" class="table table-striped table-bordered">
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
+                    <!-- /.card -->
+                    <!-- /.row -->
                 </div>
+                <!-- /.container-fluid -->
             </section>
+            <!-- /.content -->
         </div>
+        <!-- /.content-wrapper -->
+        <?php
+        include 'footer.php';
+        ?>
+        <!-- /.control-sidebar -->
     </div>
-    </section>
-    </div>
-    <?php include('./footer.php') ?>
-    </div>
-    <?php include('./js.php') ?>
-
-    <script>
-        $(function() {
-            $('.select2').select2()
-
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
-        });
-        $('#daterange-btn').daterangepicker({
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
-            },
-            function(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-            }
-        )
-    </script>
-
+    <!-- ./wrapper -->
+    <?php include 'js.php'; ?>
+    <!-- script_start -->
     <script type="text/javascript">
-        $(document).ready(function() {
-            console.log(('#sname').val());
-            $("form[name='getsup']").validate({
-                submitHandler: function(form){
+        $(document).ready(function(e) {
+            $("form[name='edit']").validate({
+                rules: {
+                    name_form: {
+                        required: true,
+                    },
+                    op_form: {
+                        required: true,
+                    },
+                    bname: {
+                        required: true,
+                    },
+                    acc: {
+                        required: true,
+                    },
+
+                },
+                messages: {
+                    name_form: {
+                        required: 'Enter your Supplier name',
+
+                    },
+                    op_form: {
+                        required: 'Enter Opening Balance',
+                    },
+                    bname: {
+                        required: 'Enter your Supplier Name',
+                        digits: "This field can contain only letters",
+                    },
+                    acc: {
+                        required: 'Enter Balance',
+                        text: "Enter only text",
+                    },
+                },
+                invalidHandler: function(event, validator) {
+                    //display error alert on form submit
+                    alert("Invalid Form Data!!");
+                },
+                submitHandler: function(form) {
+                    var url = "../ajax/payments_ajax.php";
                     $.ajax({
-                        url:'../ajax/form_ajax.php',
-                        data:$('#getsup').serialize(),
-                        type: 'POST',
-                        success: function(data){
-                            console.log(data);
+                        url: url,
+                        type: "POST",
+                        data: $("#edit").serialize(),
+                        success: function(data) {
+                            window.open('./index.php', "_self");
+                            // console.log(data);
                         }
-                    })
-
-
-
-
+                    });
                 }
-
-
-
             });
         });
     </script>
-
-
 </body>
 
 </html>

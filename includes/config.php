@@ -36,7 +36,9 @@ define("SITE_URL", $site_url);
 require_once(SITE_PATH . "/includes/functions.php");
 require_once(SITE_PATH . "/classes/class.mysqli.php");
 require_once(SITE_PATH . "/classes/class.supplier.php");
+require_once(SITE_PATH . "/classes/class.payments.php");
 require_once(SITE_PATH . "/classes/classes.bank.php");
+require_once(SITE_PATH . "/classes/class.transaction.php");
 
 // define("CLASS_PATH", SITE_PATH . "/classes/");
 
