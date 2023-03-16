@@ -3,6 +3,7 @@
 <?php
 include './head.php';
 ?>
+
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <?php
@@ -92,8 +93,8 @@ include './head.php';
     $(document).ready(function(e) {
 
       $("input[data-bootstrap-switch]").each(function() {
-                $(this).bootstrapSwitch('state', $(this).prop('checked'));
-            })
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      })
       var table = $("#kt-datatable").DataTable({
         "responsive": true,
         "paging": true,
@@ -133,30 +134,35 @@ include './head.php';
             title: "Updated On",
             data: "updated_on"
           },
+
           {
             title: "Action",
             data: ""
           },
           {
-            title:"Status",
-            "render":function(data,type,row){
-              return "<input type='checkbox' name=my-checkbox checked data-bootstrap-switch data-off-color='danger' data-on-color='success'>"
+            title: "Status",
+            "render": function(data, type, row) {
+              if (row.record_status == 0) {
+                $status = "Inactive";
+                return "<button value='Inactive' class='btn btn-danger btn-delete'>Inactive</button>";
+              } else {
+                return "<button value='Active' class='btn btn-success btn-delete'>Active</button>";
+              }
             }
           }
-          
         ],
         "columnDefs": [{
-            field: "supplier_master_id",
-            title: "Action",
-            "render": function(data, type, row) {
-              return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.supplier_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.supplier_master_id + "'></i>"
-            },
-            "targets": -2,
+          field: "supplier_master_id",
+          title: "Action",
+          "render": function(data, type, row) {
+            return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.supplier_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.supplier_master_id + "'></i>"
           },
-        ],
+          "targets": -2,
+        }, ],
       });
 
       $("form[name='frmadd']").validate({
+
         rules: {
           name_form: {
             required: true,
@@ -178,14 +184,54 @@ include './head.php';
           alert("Invalid Form Data!!");
         },
         submitHandler: function(form) {
+          var dataT = $("#frmadd").serialize();
           var url = "../ajax/form_ajax.php";
           $.ajax({
             url: url,
             type: "POST",
-            data: $("#frmadd").serialize(),
+            data: dataT,
             success: function(data) {
-              window.location.reload();
-              table.ajax.reload();
+              // console.log(data);
+              if (data == "supplier_exists") {
+                // console.log(data);
+                if (confirm("Supplier Already Exists; Do you want to add new Supplier?")) {
+                  var name_form = $(this).data("name_form");
+                  var op_form = $(this).data("op_form");
+                  $.ajax({
+                    url: '../ajax/new_supplier_ajax.php',
+                    type: "POST",
+                    data: $("#frmadd").serialize(),
+                    success: function(data) {
+                      // console.log(data);
+                      if (data == "success") {
+                        window.location.reload();
+                        table.ajax.reload();
+                      } else {
+                        alert(data);
+                      }
+                    }
+                  });
+                }
+                else{
+                  $.ajax({
+                    url:"../ajax/activate_old_supplier_ajax.php",
+                    type:'POST',
+                    data:$("#frmadd").serialize(),
+                    success:function(data){
+                      if(data=="success"){
+                      window.location.reload();
+                      }
+                      else if(data=="exists"){
+                        alert("Supplier Already Active");
+                      }
+                    }
+                  });
+                }
+              }
+              if (data == "success") {
+                window.location.reload();
+                table.ajax.reload();
+              }
             }
           });
         }
@@ -213,4 +259,5 @@ include './head.php';
     });
   </script>
 </body>
+
 </html>

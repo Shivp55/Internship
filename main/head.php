@@ -17,7 +17,7 @@ if (!isset($_SESSION['login_id']) && $_SESSION['login_id'] == "") {
   <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/fontawesome-free/css/all.min.css">
  
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.jqueryui.min.css">
-
+  <link rel="stylesheet" href="<?php echo SITE_URL?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/daterangepicker/daterangepicker.css">
   <!-- iCheck for checkboxes and radio inputs -->

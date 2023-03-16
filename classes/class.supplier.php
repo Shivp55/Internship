@@ -9,7 +9,7 @@
         }
         function GET_ALL_SUPPLIERS() {
             global $db;
-            $sql = "SELECT * FROM supplier_master where record_status=1";
+            $sql = "SELECT * FROM supplier_master";
             $db->query($sql);
             return $db->fetch_object();
     }
@@ -41,6 +41,37 @@
         $sql="UPDATE supplier_master SET supplier_master_current_balance=supplier_master_current_balance-'". $balance. "' AND updated_on='". date('d-m-Y H:i A') . "' where supplier_master_id='". $id. "'";
 
         $db->query($sql);
+
+    }
+    function CHECK_SUPPLIER_BY_NAME($name){
+        global $db;
+        $sql="SELECT * FROM supplier_master where supplier_master_name='".$name."'";
+        $db->query($sql);
+        if(mysqli_num_rows($db->query($sql))){
+            return true;
+        }
+        else{
+            return false;
+        } 
+    }
+    function CHECK_SUPPLIER_BY_NAME_TO_ACTIVATE($name){
+        global $db;
+        $check=0;
+        $sql="SELECT * from supplier_master where supplier_master_name='".$name."' and record_status=$check";
+        $db->query($sql);
+        if(mysqli_num_rows($db->query($sql))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    function CHECK_SUPPLIER_BY_NAME_RECORD_STATUS($name){
+        global $db;
+        $check=0;
+        $sql="SELECT * from supplier_master where supplier_master_name='".$name."' and record_status=$check";
+        $db->query($sql);
+        return $db->fetch_object(MYSQL_FETCH_SINGLE);
 
     }
 

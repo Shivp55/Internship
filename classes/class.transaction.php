@@ -15,9 +15,9 @@ class Transaction{
     }
     function GET_TRANSACTION_BY_ID($id){
         global $db;
-        $sql="SELECT * from transaction_master where t_id=$id";
+        $sql="SELECT * FROM transaction_master WHERE supplier_id=$id";
         $db->query($sql);
-        return $db->fetch_object(MYSQL_FETCH_SINGLE);
+        return $db->fetch_object();
     }
 }
 ?>

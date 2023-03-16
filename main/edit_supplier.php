@@ -54,7 +54,12 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
                                                     <label>Select Supplier Status</label>
                                                     <select class="form-control" name="record_status" id="record_status">
                                                         <option selected><?php echo $supplier_info->record_status; ?></option>
-                                                        <option>0</option>
+                                                        <?php if($supplier_info->record_status==1){?>
+                                                            <option>0</option>
+                                                        <?php }
+                                                          if($supplier_info->record_status==0) {?>
+                                                            <option>1</option>
+                                                        <?php } ?>
                                                     </select>
                                                     <div class="card-body">
                                                         
