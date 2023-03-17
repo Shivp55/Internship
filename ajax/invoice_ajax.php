@@ -56,11 +56,11 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     } else {
         echo "error";
     }
-    if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
-        $id = $_REQUEST['id'];
-        echo $id;
-        $inv_obj=new Invoice;
-        $inv_obj->DELETE_INVOICE($id);
-        echo "success";
-    }
+}
+if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
+    $id = $_REQUEST['id'];
+    echo $id;
+    $inv_obj=new Invoice;
+    $inv_obj->DELETE_INVOICE($id);
+    echo "success";
 }

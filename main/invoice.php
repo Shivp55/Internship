@@ -162,7 +162,7 @@ $bank_info = $bank_obj->GET_ALL_BANK();
           field: "supplier_master_id",
           title: "Action",
           "render": function(data, type, row) {
-            return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.invoice_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.invoice_master_id + "'></i>"
+            return "<i class='fa-solid fa-trash' data-delete-id='" + row.id + "'></i>"
           },
           "targets": -1,
         }, ],
@@ -212,9 +212,16 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                         type: "POST",
                         data: $("#edit").serialize(),
                         success: function(data) {
-                            // window.open('./index.php', "_self");
-                            console.log(data);
+                            if(data=="success"){
+                                table.ajax.reload();
+                            }
+                            else{
+                                alert(data);
+                            }
+                            $("#edit")[0].reset();
+
                         }
+
                     });
                 }
             });

@@ -218,7 +218,14 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                         type: "POST",
                         data: $("#edit").serialize(),
                         success: function(data) {
-                            window.open('./index.php', "_self");
+                            if(data=="success"){
+                                table.ajax.reload();
+                            }
+                            else{
+                                alert(data);
+                            }
+                            $("#edit")[0].reset();
+                            // window.open('./index.php', "_self");
                             // console.log(data);
                         }
                     });

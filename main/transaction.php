@@ -75,7 +75,7 @@ include './head.php';
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,
-                "order":[6,"desc"],
+                "order":[5,"desc"],
                 ajax: {
                     url: '../ajax/transactions_ajax.php',
                     method: "POST",
@@ -86,10 +86,6 @@ include './head.php';
                 columns: [{
                         title: "Transaction Number",
                         data: "t_id"
-                    },
-                    {
-                        title: "Supplier ID",
-                        data: "supplier_id"
                     },
                     {
                         title: "Supplier Name",

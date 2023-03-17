@@ -207,6 +207,7 @@ include './head.php';
                       } else {
                         alert(data);
                       }
+                      $("#frmadd")[0].reset();
                     }
                   });
                 } else {
@@ -220,7 +221,9 @@ include './head.php';
                       } else if (data == "exists") {
                         alert("Supplier Already Active");
                       }
+                      $("#frmadd")[0].reset();
                     }
+                    
                   });
                 }
               }

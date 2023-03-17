@@ -12,13 +12,13 @@ if (isset($_POST['action']) && $_POST['action'] == "list") {
     echo json_encode($response_array);
 }
 if (isset($_POST['action']) && $_POST['action'] == "add") {
-    echo $sname = $_REQUEST['sname'];
+    $sname = $_REQUEST['sname'];
     $supplier_obj = new Supplier;
     $supplier_data = $supplier_obj->GET_SUPPLIER_BY_NAME($sname);
-    echo $supplier_id = $supplier_data->supplier_master_id;
+    $supplier_id = $supplier_data->supplier_master_id;
     $supplier_current_balance = $supplier_data->supplier_master_current_balance;
     $op = $_REQUEST['op_form'];
-    echo $bacc = $_REQUEST['bname'];
+    $bacc = $_REQUEST['bname'];
     $bnk_obj=new Payments;
     $bnk_name_info=$bnk_obj->GET_BANK_NAME_BY_ID($bacc);
     $bname=$bnk_name_info->bank_master_name;
@@ -36,9 +36,9 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
         "amount" => $op,
 
     );
-    echo $query = InsertData($arr, "payment_master");
-    $sql1 = "INSERT INTO transaction_master(supplier_id,bank_acc,sup_name,bank_name,trans_amnt,date,trans_type) VALUES('" . $supplier_id . "','" . $bac . "','" . $sname . "','" . $bname . "','" . $op . "','" . $date . "','" . $trans_type . "' )";
-    echo $result2 = mysqli_query($conn, $sql1);
+    $query = InsertData($arr, "payment_master");
+    $sql1 = "INSERT INTO transaction_master(supplier_id,bank_acc,sup_name,bank_name,trans_amnt,date,trans_type,created_on) VALUES('" . $supplier_id . "','" . $bacc . "','" . $sname . "','" . $bname . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $date1 . "' )";
+    $result2 = mysqli_query($conn, $sql1);
      // echo $query1=InsertData($arr1,"transaction_master");
     $update = array(
         "supplier_master_current_balance" => ($supplier_current_balance - $op),
