@@ -25,6 +25,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     // $date = date("d-m-Y H:i A");
     $dt= $_REQUEST['date_form'];
     $date=date("d-m-Y", strtotime($dt));
+    $date1=date("d-m-Y H:i A");
     $trans_type = 1;
     $arr = array(
         "supplier_id" => $supplier_id,
@@ -58,4 +59,11 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     } else {
         echo "error";
     }
+   
+}
+if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
+    $id = $_REQUEST['id'];
+    $pay_obj=new Payments;
+    $pay_obj->DELETE_PAYMENT($id);
+    echo "success";
 }

@@ -6,6 +6,12 @@ class Invoice{
         $db->query($sql);
         return $db->fetch_object();
     }
+    function DELETE_INVOICE($id){
+        global $db;
+        $sql="DELETE FROM invoice_master where id=$id";
+        $db->query($sql);
+        
+    }
 
 
 

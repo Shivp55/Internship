@@ -66,7 +66,7 @@ include './head.php';
               <div class="card card-custom">
                 <div class="card-body">
                   <div id="example">
-                    <table id="kt-datatable" class="table table-striped table-bordered" width="100%" >
+                    <table id="kt-datatable" class="table table-striped table-bordered" width="100%">
                     </table>
                   </div>
                 </div>
@@ -103,7 +103,7 @@ include './head.php';
         "ordering": true,
         "info": true,
         "autoWidth": true,
-        
+
         ajax: {
           url: '../ajax/form_ajax.php',
           method: "POST",
@@ -111,8 +111,7 @@ include './head.php';
             action: 'list',
           },
         },
-        columns: [
-          {
+        columns: [{
             title: "Supplier Name",
             data: "supplier_master_name"
           },
@@ -157,7 +156,7 @@ include './head.php';
           },
           "targets": -2,
         }, ],
-        
+
       });
 
       $("form[name='frmadd']").validate({
@@ -210,17 +209,15 @@ include './head.php';
                       }
                     }
                   });
-                }
-                else{
+                } else {
                   $.ajax({
-                    url:"../ajax/activate_old_supplier_ajax.php",
-                    type:'POST',
-                    data:$("#frmadd").serialize(),
-                    success:function(data){
-                      if(data=="success"){
-                      window.location.reload();
-                      }
-                      else if(data=="exists"){
+                    url: "../ajax/activate_old_supplier_ajax.php",
+                    type: 'POST',
+                    data: $("#frmadd").serialize(),
+                    success: function(data) {
+                      if (data == "success") {
+                        window.location.reload();
+                      } else if (data == "exists") {
                         alert("Supplier Already Active");
                       }
                     }
@@ -228,13 +225,16 @@ include './head.php';
                 }
               }
               if (data == "success") {
-                window.location.reload();
+
                 table.ajax.reload();
+                // window.location.reload();
               }
+              $("#frmadd")[0].reset();
             }
           });
         }
       });
+
       table.on("click", '[data-record-id]', function() {
         var id = $(this).data("record-id");
         window.open('./edit_supplier.php?id=' + id, "_self");

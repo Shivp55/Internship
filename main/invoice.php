@@ -180,7 +180,6 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                     bname: {
                         required: true,
                     },
-                    
                     date_form: {
                         required: true,
                     },
@@ -215,6 +214,22 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                         success: function(data) {
                             // window.open('./index.php', "_self");
                             console.log(data);
+                        }
+                    });
+                }
+            });
+            table.on("click", '[data-delete-id]', function() {
+                var id = $(this).data("delete-id");
+                if (confirm("Are you sure you want to delete record " + id)) {
+                    var url = "../ajax/invoice_ajax.php?id=" + id;
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: {
+                            action: 'delete',
+                        },
+                        success: function(data) {
+                            table.ajax.reload();
                         }
                     });
                 }

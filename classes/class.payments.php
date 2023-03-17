@@ -21,6 +21,15 @@ class Payments{
         $db->query($sql);
         return $db->fetch_object(MYSQL_FETCH_SINGLE);
     }
+    function DELETE_PAYMENT($id){
+        global $db;
+        $sql="DELETE FROM payment_master where id=$id";
+        $db->query($sql);
+        
+
+
+
+    }
 
 
 

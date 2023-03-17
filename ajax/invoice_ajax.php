@@ -23,6 +23,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     // $bac = $_REQUEST['accnt'];
     $dt= $_REQUEST['date_form'];
     $date=date("d-m-Y", strtotime($dt));
+    $date1=date("d-m-Y H:i A");
     $trans_type = 2;
     $arr = array(
         "invoice_number"=>$invoice,
@@ -33,7 +34,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
 
     );
     $query = InsertData($arr, "invoice_master");
-    $sql1 = "INSERT INTO transaction_master(supplier_id,sup_name,trans_amnt,date,trans_type,invoice_no) VALUES('" . $supplier_id . "','" . $sname . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $invoice. "' )";
+    $sql1 = "INSERT INTO transaction_master(supplier_id,sup_name,trans_amnt,date,trans_type,invoice_no,created_on) VALUES('" . $supplier_id . "','" . $sname . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $invoice. "','" . $date1. "' )";
     $result2 = mysqli_query($conn, $sql1);
      // echo $query1=InsertData($arr1,"transaction_master");
     $update = array(
@@ -55,5 +56,11 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     } else {
         echo "error";
     }
-    
+    if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
+        $id = $_REQUEST['id'];
+        echo $id;
+        $inv_obj=new Invoice;
+        $inv_obj->DELETE_INVOICE($id);
+        echo "success";
+    }
 }
