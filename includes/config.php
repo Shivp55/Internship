@@ -39,6 +39,8 @@ require_once(SITE_PATH . "/classes/class.supplier.php");
 require_once(SITE_PATH . "/classes/class.payments.php");
 require_once(SITE_PATH . "/classes/classes.bank.php");
 require_once(SITE_PATH . "/classes/class.transaction.php");
+require_once(SITE_PATH . "/classes/class.invoice.php");
+
 
 // define("CLASS_PATH", SITE_PATH . "/classes/");
 

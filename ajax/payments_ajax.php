@@ -1,24 +1,37 @@
 <?php
 require '../includes/config.php';
 global $conn;
+if (isset($_POST['action']) && $_POST['action'] == "list") {
+    header('Content-type: application/json');
+    $pay_obj = new Payments;
+    $pay_data = $pay_obj->GET_ALL_PAYMENTS();
+    $response_array['data'] = array();
+    foreach ($pay_data as $val) {
+        array_push($response_array['data'], $val);
+    }
+    echo json_encode($response_array);
+}
 if (isset($_POST['action']) && $_POST['action'] == "add") {
-
-    $sname = $_REQUEST['sname'];
+    echo $sname = $_REQUEST['sname'];
     $supplier_obj = new Supplier;
     $supplier_data = $supplier_obj->GET_SUPPLIER_BY_NAME($sname);
-    $supplier_id = $supplier_data->supplier_master_id;
+    echo $supplier_id = $supplier_data->supplier_master_id;
     $supplier_current_balance = $supplier_data->supplier_master_current_balance;
     $op = $_REQUEST['op_form'];
-    $bname = $_REQUEST['bname'];
-    $bac = $_REQUEST['accnt'];
-    $date = date("d-m-Y H:i A");
+    echo $bacc = $_REQUEST['bname'];
+    $bnk_obj=new Payments;
+    $bnk_name_info=$bnk_obj->GET_BANK_NAME_BY_ID($bacc);
+    $bname=$bnk_name_info->bank_master_name;
+    // $date = date("d-m-Y H:i A");
+    $dt= $_REQUEST['date_form'];
+    $date=date("d-m-Y", strtotime($dt));
     $trans_type = 1;
     $arr = array(
         "supplier_id" => $supplier_id,
         "supplier" => $sname,
-        "bank_acc" => $bac,
+        "bank_acc" => $bacc,
         "bank_name" => $bname,
-        "date" => date("d-m-Y"),
+        "date" => $date,
         "amount" => $op,
 
     );

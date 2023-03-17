@@ -33,7 +33,7 @@ include './head.php';
         <div class="container-fluid">
           <div class="row">
             <!-- left column -->
-            <div class="col-md-4">
+            <div class="col-md-3">
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
@@ -62,11 +62,11 @@ include './head.php';
                 </form>
               </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
               <div class="card card-custom">
                 <div class="card-body">
                   <div id="example">
-                    <table id="kt-datatable" class="table table-striped table-bordered">
+                    <table id="kt-datatable" class="table table-striped table-bordered" width="100%" >
                     </table>
                   </div>
                 </div>
@@ -103,6 +103,7 @@ include './head.php';
         "ordering": true,
         "info": true,
         "autoWidth": true,
+        
         ajax: {
           url: '../ajax/form_ajax.php',
           method: "POST",
@@ -110,10 +111,7 @@ include './head.php';
             action: 'list',
           },
         },
-        columns: [{
-            title: "ID",
-            data: "supplier_master_id"
-          },
+        columns: [
           {
             title: "Supplier Name",
             data: "supplier_master_name"
@@ -159,6 +157,7 @@ include './head.php';
           },
           "targets": -2,
         }, ],
+        
       });
 
       $("form[name='frmadd']").validate({

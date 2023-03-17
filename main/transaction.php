@@ -34,15 +34,15 @@ include './head.php';
                     <div class="row">
                         <!-- left column -->
 
-                        <div class="col-md-11">
+                        
                             <div class="card card-custom">
                                 <div class="card-body">
                                     <div id="example">
-                                        <table id="kt-datatable" class="table table-striped table-bordered">
+                                        <table id="kt-datatable" class="table table-striped table-bordered" width="100%">
                                         </table>
                                     </div>
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <!-- /.card -->
@@ -75,6 +75,7 @@ include './head.php';
                 "ordering": true,
                 "info": true,
                 "autoWidth": true,
+                "order":[6,"desc"],
                 ajax: {
                     url: '../ajax/transactions_ajax.php',
                     method: "POST",

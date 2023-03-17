@@ -1,6 +1,16 @@
 <?php
 require '../includes/config.php';
 global $conn;
+if (isset($_POST['action']) && $_POST['action'] == "list") {
+    header('Content-type: application/json');
+    $inv_obj = new Invoice;
+    $inv_data = $inv_obj->GET_ALL_INVOICES();
+    $response_array['data'] = array();
+    foreach ($inv_data as $val) {
+        array_push($response_array['data'], $val);
+    }
+    echo json_encode($response_array);
+}
 if (isset($_POST['action']) && $_POST['action'] == "add") {
     $invoice=$_REQUEST['invoice'];
     $sname = $_REQUEST['sname'];
@@ -11,13 +21,14 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $op = $_REQUEST['op_form'];
     // $bname = $_REQUEST['bname'];
     // $bac = $_REQUEST['accnt'];
-    $date = date("d-m-Y H:i A");
+    $dt= $_REQUEST['date_form'];
+    $date=date("d-m-Y", strtotime($dt));
     $trans_type = 2;
     $arr = array(
         "invoice_number"=>$invoice,
         "supplier_id" => $supplier_id,
         "supplier_name" => $sname,
-        "date" => date("d-m-Y"),
+        "date" => $date,
         "amount" => $op,
 
     );
@@ -44,4 +55,5 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     } else {
         echo "error";
     }
+    
 }

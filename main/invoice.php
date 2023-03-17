@@ -53,11 +53,11 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                                 <!-- form start -->
                                 <form method="post" name="edit" id="edit">
                                     <div class="card-body">
-                                    <div class="form-group">
+                                        <div class="form-group">
                                             <label for="lname">Invoice Number</label>
                                             <input type="text" class="form-control" placeholder="Enter Invoice Number" name="invoice" id="invoice" value="">
                                         </div>
-                                    <div class="form-group">
+                                        <div class="form-group">
                                             <label for="fname">Supplier Name</label>
 
                                             <select class="form-control select2" style="width: 100%;" name="sname" id="sname">
@@ -70,33 +70,14 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="lname">Supplier Payment Amount</label>
-                                            <input type="text" class="form-control" placeholder="Enter Supplier Opening Balance" id="op_form" name="op_form" value="">
+                                            <label for="lname">Amount</label>
+                                            <input type="text" class="form-control" placeholder="Enter Amount" id="op_form" name="op_form" value="">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="fname">Bank Name</label>
-
-                                            <select class="form-control select2" style="width: 100%;" name="bname" id="bname">
-
-                                                <?php foreach ($bank_info as $val) { ?>
-
-                                                    <option value="<?php echo $val->bank_master_name; ?>"><?php echo $val->bank_master_name; ?></option>
-
-                                                <?php } ?>
-                                            </select>
-                                        </div>
+                                        
 
                                         <div class="form-group">
-                                            <label for="fname">Bank Account Number</label>
-
-                                            <select class="form-control select2" style="width: 100%;" name="accnt" id="accnt">
-
-                                                <?php foreach ($bank_info as $val) { ?>
-
-                                                    <option value="<?php echo $val->bank_master_id; ?>"><?php echo $val->bank_master_id; ?></option>
-
-                                                <?php } ?>
-                                            </select>
+                                            <label for="date">Select Date</label>
+                                            <input type="date" class="form-control" placeholder="Date" id="date_form" name="date_form" value="">
                                         </div>
 
                                         <!-- /.card-body -->
@@ -108,6 +89,16 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card card-custom">
+                                <div class="card-body">
+                                    <div id="example">
+                                        <table id="kt-datatable" class="table table-striped table-bordered">
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -130,9 +121,56 @@ $bank_info = $bank_obj->GET_ALL_BANK();
     <!-- script_start -->
     <script type="text/javascript">
         $(document).ready(function(e) {
+            var table = $("#kt-datatable").DataTable({
+        "responsive": true,
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        ajax: {
+          url: '../ajax/invoice_ajax.php',
+          method: "POST",
+          data: {
+            action: 'list',
+          },
+        },
+        columns: [{
+            title: "Invoice Number",
+            data: "invoice_number"
+          },
+          
+          {
+            title: "Supplier Name",
+            data: "supplier_name"
+          },
+          {
+            title: "Date",
+            data: "date"
+          },
+          {
+            title: "Invoice Amount",
+            data: "amount"
+          },
+          {
+            title: "Action",
+            data: ""
+          },
+        ],
+        "columnDefs": [{
+          field: "supplier_master_id",
+          title: "Action",
+          "render": function(data, type, row) {
+            return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.invoice_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.invoice_master_id + "'></i>"
+          },
+          "targets": -1,
+        }, ],
+      });
+
             $("form[name='edit']").validate({
                 rules: {
-                    
+
                     sname: {
                         required: true,
                     },
@@ -142,7 +180,8 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                     bname: {
                         required: true,
                     },
-                    accnt: {
+                    
+                    date_form: {
                         required: true,
                     },
 
@@ -159,9 +198,8 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                         required: 'Enter your Supplier Name',
                         digits: "This field can contain only letters",
                     },
-                    accnt: {
-                        required: 'Enter Balance',
-                        text: "Enter only text",
+                    date_form: {
+                        required: 'Enter Opening Balance',
                     },
                 },
                 invalidHandler: function(event, validator) {
@@ -175,8 +213,8 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                         type: "POST",
                         data: $("#edit").serialize(),
                         success: function(data) {
-                            window.open('./index.php', "_self");
-                            // console.log(data);
+                            // window.open('./index.php', "_self");
+                            console.log(data);
                         }
                     });
                 }

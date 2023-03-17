@@ -9,9 +9,20 @@ class Payments{
     }
 
 
+    function GET_ALL_PAYMENTS(){
+        global $db;
+        $sql="SELECT * FROM payment_master";
+        $db->query($sql);
+        return $db->fetch_object();
+    }
+    function GET_BANK_NAME_BY_ID($id){
+        global $db;
+        $sql="SELECT * FROM bank_master where bank_master_id = $id";
+        $db->query($sql);
+        return $db->fetch_object(MYSQL_FETCH_SINGLE);
+    }
+
 
 
 
 }
-
-?>

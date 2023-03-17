@@ -19,5 +19,11 @@ class Transaction{
         $db->query($sql);
         return $db->fetch_object();
     }
+    function GET_ALL_TRANSACTIONS_BY_NAME($name){
+        global $db;
+        $sql="SELECT * FROM transaction_master WHERE sup_name='".$name."'";
+        $db->query($sql);
+        return $db->fetch_object();
+    }
 }
 ?>
