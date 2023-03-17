@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 include './head.php';
+include('./style_table.php');
 ?>
 
 <body class="hold-transition sidebar-mini">
@@ -34,15 +35,36 @@ include './head.php';
                     <div class="row">
                         <!-- left column -->
 
-                        
-                            <div class="card card-custom">
-                                <div class="card-body">
-                                    <div id="example">
-                                        <table id="kt-datatable" class="table table-striped table-bordered" width="100%">
-                                        </table>
-                                    </div>
+
+                        <div class="card card-custom">
+                            <div class="card-body">
+                                <div id="example">
+                                    <table id="kt-datatable" class="table table-striped table-bordered" width="100%">
+                                        <thead>
+                                            <th>Transaction Number</th>
+                                            <th>Supplier Name</th>
+                                            <th>Bank Name</th>
+                                            <th>Bank Account Number</th>
+                                            <th>Transaction Amount</th>
+                                            <th>Transaction Date</th>
+                                            <th>Type</th>
+                                            <th>Invoice Number</th>
+                                            <th>Action</th>
+
+                                        </thead>
+
+
+
+                                    <tfoot>
+                                    <tr class="table-row">
+                                        <th>Total Amount</th>
+                                        <td></td>
+                                    </tr>
+                                    </tfoot>
+                                    </table>
                                 </div>
-                            
+                            </div>
+
                         </div>
                     </div>
                     <!-- /.card -->
@@ -74,8 +96,9 @@ include './head.php';
                 "searching": true,
                 "ordering": true,
                 "info": true,
+                "background": true,
                 "autoWidth": true,
-                "order":[5,"desc"],
+                "order": [5, "desc"],
                 ajax: {
                     url: '../ajax/transactions_ajax.php',
                     method: "POST",
@@ -83,9 +106,10 @@ include './head.php';
                         action: 'list',
                     },
                 },
-                columns: [{
+                columns: [
+                    {
                         title: "Transaction Number",
-                        data: "t_id"
+                        data: "t_id",
                     },
                     {
                         title: "Supplier Name",
@@ -107,6 +131,11 @@ include './head.php';
                         title: "Transaction Date",
                         data: "date"
                     },
+                    // {
+                    //     "render": function(data, type, row) {
+                    //         $(row).addClass("table-row");
+                    //     },
+                    // },
                     {
                         title: "Type",
                         "render": function(data, type, row) {
@@ -116,10 +145,9 @@ include './head.php';
                                 $type = "Credited"
                             }
 
-                            return $type
+                            return $type;
                         },
                     },
-
                     {
                         title: "Invoice",
                         data: "invoice_no"
@@ -127,8 +155,7 @@ include './head.php';
                     {
                         title: "Action",
                         data: ""
-                    }
-
+                    },
                 ],
                 "columnDefs": [{
                     field: "supplier_master_id",

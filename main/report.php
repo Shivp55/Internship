@@ -2,10 +2,11 @@
 <html lang="en">
 <?php
 include './head.php';
+
 $supplier_object = new Supplier;
 $supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
+include('./style_table.php');
 ?>
-
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <?php
@@ -90,9 +91,7 @@ $supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
                                             <th>Transaction Type</th>
                                             <th>Invoice Number</th>
                                         </thead>
-                                        <tbody>
-
-                                        </tbody>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -128,8 +127,8 @@ $supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
             "info": true,
             "autoWidth": true,
             "order": [
-            [4, "desc"]
-        ],
+                [4, "desc"]
+            ],
             columns: [{
                     title: "Supplier Name",
                     data: "sup_name"
@@ -178,60 +177,61 @@ $supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
 
 
         $(document).ready(function(e) {
-        $("#supplier_btn").click(function() {
-            var id = $("#sname").val();
-            console.log(id);
+            $("#supplier_btn").click(function() {
+                var id = $("#sname").val();
+                console.log(id);
 
-            // console.log(data);
+                // console.log(data);
 
-            table.ajax.url('../ajax/report_supplier_ajax.php?id='+id).load();
+                table.ajax.url('../ajax/report_supplier_ajax.php?id=' + id).load();
+                $("#frmadd")[0].reset();
 
-        });
+            });
 
-        // });
-        // $("form[name='frmadd']").validate({
-        //     rules: {
-        //         sname: {
-        //             required: true,
-        //         },
-        //     },
-        //     messages: {
-        //         sname: {
-        //             required: 'Enter your Supplier name',
+            // });
+            // $("form[name='frmadd']").validate({
+            //     rules: {
+            //         sname: {
+            //             required: true,
+            //         },
+            //     },
+            //     messages: {
+            //         sname: {
+            //             required: 'Enter your Supplier name',
 
-        //         },
-        //     },
-        //     invalidHandler: function(event, validator) {
-        //         alert("Invalid Form Data!!");
-        //     },
-        //     submitHandler: function(form) {
-        //         var url = "../ajax/report_ajax.php";
+            //         },
+            //     },
+            //     invalidHandler: function(event, validator) {
+            //         alert("Invalid Form Data!!");
+            //     },
+            //     submitHandler: function(form) {
+            //         var url = "../ajax/report_ajax.php";
 
-        //     }
-        // });
+            //     }
+            // });
 
 
 
-        // // table.on("click", '[data-record-id]', function() {
-        // //     var id = $(this).data("record-id");
-        // //     window.open('./edit_supplier.php?id=' + id, "_self");
-        // // });
-        // // table.on("click", '[data-delete-id]', function() {
-        // //     var id = $(this).data("delete-id");
-        // //     if (confirm("Are you sure you want to delete record " + id)) {
-        // //         var url = "../ajax/form_ajax.php?id=" + id;
-        // //         $.ajax({
-        // //             url: url,
-        // //             type: "POST",
-        // //             data: {
-        // //                 action: 'delete',
-        // //             },
-        // //             success: function(data) {
-        // //                 table.ajax.reload();
-        // //             }
-        // //         });
-        //     }
-        // });
+            // // table.on("click", '[data-record-id]', function() {
+            // //     var id = $(this).data("record-id");
+            // //     window.open('./edit_supplier.php?id=' + id, "_self");
+            // // });
+            // // table.on("click", '[data-delete-id]', function() {
+            // //     var id = $(this).data("delete-id");
+            // //     if (confirm("Are you sure you want to delete record " + id)) {
+            // //         var url = "../ajax/form_ajax.php?id=" + id;
+            // //         $.ajax({
+            // //             url: url,
+            // //             type: "POST",
+            // //             data: {
+            // //                 action: 'delete',
+            // //             },
+            // //             success: function(data) {
+            // //                 table.ajax.reload();
+            // //             }
+            // //         });
+            //     }
+            // });
         });
     </script>
 </body>

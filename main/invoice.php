@@ -11,7 +11,7 @@ $bank_info = $bank_obj->GET_ALL_BANK();
 // $id = $_GET['id'];
 // $bank_obj = new Bank;
 // $bank_info=$bank_obj->GET_BANK_BY_ID($id);
-
+include('./style_table.php');
 ?>
 
 <body class="hold-transition sidebar-mini">
@@ -73,7 +73,7 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                                             <label for="lname">Amount</label>
                                             <input type="text" class="form-control" placeholder="Enter Amount" id="op_form" name="op_form" value="">
                                         </div>
-                                        
+
 
                                         <div class="form-group">
                                             <label for="date">Select Date</label>
@@ -96,6 +96,17 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                                 <div class="card-body">
                                     <div id="example">
                                         <table id="kt-datatable" class="table table-striped table-bordered">
+                                            <thead>
+                                                <th>Invoice Number</th>
+                                                <th>Supplier Name</th>
+                                                <th>Date</th>
+                                                <th>Invoice Amount</th>
+                                                <th>Action</th>
+                                            </thead>
+
+
+
+
                                         </table>
                                     </div>
                                 </div>
@@ -122,51 +133,53 @@ $bank_info = $bank_obj->GET_ALL_BANK();
     <script type="text/javascript">
         $(document).ready(function(e) {
             var table = $("#kt-datatable").DataTable({
-        "responsive": true,
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        ajax: {
-          url: '../ajax/invoice_ajax.php',
-          method: "POST",
-          data: {
-            action: 'list',
-          },
-        },
-        columns: [{
-            title: "Invoice Number",
-            data: "invoice_number"
-          },
-          
-          {
-            title: "Supplier Name",
-            data: "supplier_name"
-          },
-          {
-            title: "Date",
-            data: "date"
-          },
-          {
-            title: "Invoice Amount",
-            data: "amount"
-          },
-          {
-            title: "Action",
-            data: ""
-          },
-        ],
-        "columnDefs": [{
-          field: "supplier_master_id",
-          title: "Action",
-          "render": function(data, type, row) {
-            return "<i class='fa-solid fa-trash' data-delete-id='" + row.id + "'></i>"
-          },
-          "targets": -1,
-        }, ],
-      });
+                "responsive": true,
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "hover": true,
+                "order": [2, "desc"],
+                ajax: {
+                    url: '../ajax/invoice_ajax.php',
+                    method: "POST",
+                    data: {
+                        action: 'list',
+                    },
+                },
+                columns: [{
+                        title: "Invoice Number",
+                        data: "invoice_number"
+                    },
+
+                    {
+                        title: "Supplier Name",
+                        data: "supplier_name"
+                    },
+                    {
+                        title: "Date",
+                        data: "date"
+                    },
+                    {
+                        title: "Invoice Amount",
+                        data: "amount"
+                    },
+                    {
+                        title: "Action",
+                        data: ""
+                    },
+                ],
+                "columnDefs": [{
+                    field: "supplier_master_id",
+                    title: "Action",
+                    "render": function(data, type, row) {
+                        return "<i class='fa-solid fa-trash' data-delete-id='" + row.id + "'></i>"
+                    },
+                    "targets": -1,
+                }, ],
+            });
 
             $("form[name='edit']").validate({
                 rules: {
@@ -212,10 +225,9 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                         type: "POST",
                         data: $("#edit").serialize(),
                         success: function(data) {
-                            if(data=="success"){
+                            if (data == "success") {
                                 table.ajax.reload();
-                            }
-                            else{
+                            } else {
                                 alert(data);
                             }
                             $("#edit")[0].reset();

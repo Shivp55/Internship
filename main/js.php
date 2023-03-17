@@ -17,7 +17,7 @@
 <!-- <script src="<?php echo SITE_URL?>assets/plugins/datatables/jquery.dataTables.min.js"></script> -->
 <!-- <script src="<?php echo SITE_URL?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script> -->
  <!-- <script src="<?php echo SITE_URL?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script> -->
-<script src="<?php echo SITE_URL?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- <script src="<?php echo SITE_URL?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script> -->
 <script src="<?php echo SITE_URL?>assets/plugins/select2/js/select2.full.min.js"></script>
 <script src="<?php echo SITE_URL?>assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <!-- Bootstrap 4 -->

@@ -25,5 +25,11 @@ class Transaction{
         $db->query($sql);
         return $db->fetch_object();
     }
+//     function GET_SUM_OF_ALL_TRANSACTIONS(){
+//         global $db;
+//         $sql="SELECT * FROM transaction_master";
+//         $db->query($sql);
+//         $myresult=mysqli_num_rows($db->query($sql));
+        
 }
 ?>

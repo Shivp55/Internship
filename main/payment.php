@@ -11,6 +11,7 @@ $bank_info = $bank_obj->GET_ALL_BANK();
 // $id = $_GET['id'];
 // $bank_obj = new Bank;
 // $bank_info=$bank_obj->GET_BANK_BY_ID($id);
+include('./style_table.php');
 
 ?>
 
@@ -104,6 +105,14 @@ $bank_info = $bank_obj->GET_ALL_BANK();
                                 <div class="card-body">
                                     <div id="example">
                                         <table id="kt-datatable" class="table table-striped table-bordered">
+                                        <thead>
+                                            <th>Supplier Name</th>
+                                            <th>Bank Name</th>
+                                            <th>Date</th>
+                                            <th>Pay Amount</th>
+                                            <th>Action</th>
+
+                                        </thead>
                                         </table>
                                     </div>
                                 </div>
@@ -136,6 +145,7 @@ $bank_info = $bank_obj->GET_ALL_BANK();
         "ordering": true,
         "info": true,
         "autoWidth": true,
+        "order":[2,"desc"],
         ajax: {
           url: '../ajax/payments_ajax.php',
           method: "POST",
@@ -150,7 +160,7 @@ $bank_info = $bank_obj->GET_ALL_BANK();
           },
           {
             title: "Bank Account",
-            data: "bank_acc"
+            data: "bank_name"
           },
           
           {

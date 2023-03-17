@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 include './head.php';
+include('./style_table.php');
 ?>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -68,6 +69,14 @@ include './head.php';
                 <div class="card-body">
                   <div id="example">
                     <table id="kt-datatable" class="table table-striped table-bordered">
+                    <thead>
+                    <th>Account Number</th>
+                        <th>Bank Name</th>
+                        <th>Created On</th>
+                        <th>Updated On</th>
+                        <th>Action</th>
+                      </thead>
+
                     </table>
                   </div>
                 </div>

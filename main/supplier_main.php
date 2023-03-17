@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 include './head.php';
+include('./style_table.php');
 ?>
 
 <body class="hold-transition sidebar-mini">
@@ -67,6 +68,16 @@ include './head.php';
                 <div class="card-body">
                   <div id="example">
                     <table id="kt-datatable" class="table table-striped table-bordered" width="100%">
+                      <thead>
+                        <th>Supplier Name</th>
+                        <th>Opening Balance</th>
+                        <th>Current Balance</th>
+
+                        <th>Created On</th>
+                        <th>Updated On</th>
+                        <th>Action</th>
+                        <th>Status</th>
+                      </thead>
                     </table>
                   </div>
                 </div>
@@ -103,6 +114,7 @@ include './head.php';
         "ordering": true,
         "info": true,
         "autoWidth": true,
+        "hover": true,
 
         ajax: {
           url: '../ajax/form_ajax.php',
@@ -223,7 +235,7 @@ include './head.php';
                       }
                       $("#frmadd")[0].reset();
                     }
-                    
+
                   });
                 }
               }
