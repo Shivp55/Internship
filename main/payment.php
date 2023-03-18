@@ -48,7 +48,7 @@ include('./style_table.php');
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Payment Form</h3>
+                                    <h3 class="card-title">Add Payment</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -155,7 +155,7 @@ include('./style_table.php');
         },
         columns: [
           {
-            title: "Supplier Name",
+            title: "Name",
             data: "supplier"
           },
           {

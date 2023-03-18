@@ -15,12 +15,12 @@ if (!isset($_SESSION['login_id']) && $_SESSION['login_id'] == "") {
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,600&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/fontawesome-free/css/all.min.css">
   <!-- Data Tables -->
   <link rel="stylesheet" href="<?php echo SITE_URL?>assets/dist/css/datatable.css">
-  <!-- <link rel="stylesheet/scss" type="text/css" href="<?php echo SITE_URL?>assets/dist/css/datatable.scss"> -->
+  <link rel="stylesheet/scss" type="text/css" href="<?php echo SITE_URL?>assets/dist/css/datatable.scss">
 
   <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.jqueryui.min.css"> -->
   <link rel="stylesheet" href="<?php echo SITE_URL?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -46,7 +46,16 @@ if (!isset($_SESSION['login_id']) && $_SESSION['login_id'] == "") {
 
 
 
-
+<style type="text/css">
+  table.dataTable tbody tr {
+  background-color: #b3afaf;
+}
+th{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+}
+</style>
 
 
 

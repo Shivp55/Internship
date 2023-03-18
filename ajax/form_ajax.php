@@ -27,7 +27,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
             "supplier_master_name" => $name,
             "supplier_master_opening_balance" => $op,
             "supplier_master_current_balance" => $op,
-            "created_on" => date("d-m-Y"),
+            "created_on" => date("d-m-Y h:i A"),
             "updated_on" => date("d-m-Y h:i A"),
         );
         $result = InsertData($arr, "supplier_master");

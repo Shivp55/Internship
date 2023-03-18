@@ -20,7 +20,7 @@
     }
 
     .current-col {
-        background-color: cyan;
+        /* background-color: cyan; */
     }
 </style>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>

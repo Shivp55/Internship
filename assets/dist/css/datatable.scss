@@ -35,7 +35,7 @@
  
 // Row background colour (hover, striping etc are all based on this colour and
 // calculated automatically)
-$table-row-background: #ebb77b !default;
+$table-row-background: #b3afaf !default;
  
 // Border between the header (and footer) and the table body
 $table-header-border: 1px solid shade($table-row-background, 30%) !default;
@@ -45,7 +45,7 @@ $table-body-border: 1px solid shade($table-row-background, 15%) !default;
  
 // Row colour, when selected (tr.selected) and used for processing display
 // These are SCSS lists in `r g b` format
-$table-row-selected: 209 100 135 !default;
+$table-row-selected: 171 197 235 !default;
 $table-row-selected-text: 255 255 255 !default;
 $table-row-selected-link: 9 10 11 !default;
  
@@ -56,7 +56,7 @@ $table-control-color: inherit !default;
 $table-paging-button-active: rgba(0, 0, 0, 0.1) !default;
  
 // Hover colour of paging buttons on mouse over
-$table-paging-button-hover: #a36060 !default;
+$table-paging-button-hover: #590b0b !default;
  
 // Colour to use when shading
 $table-shade: black !default;

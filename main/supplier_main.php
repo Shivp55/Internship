@@ -5,6 +5,7 @@ include './head.php';
 include('./style_table.php');
 ?>
 
+
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <?php
@@ -18,12 +19,12 @@ include('./style_table.php');
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Supplier Details</h1>
+              <h1>Supplier</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-                <li class="breadcrumb-item active">Supplier Details</li>
+                <li class="breadcrumb-item active">Supplier</li>
               </ol>
             </div>
           </div>
@@ -38,18 +39,18 @@ include('./style_table.php');
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Supplier Details Form</h3>
+                  <h3 class="card-title">Supplier Add</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form method="post" name="frmadd" id="frmadd">
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="fname">Supplier Name</label>
+                      <label for="fname">Name</label>
                       <input type="text" class="form-control" placeholder="Enter Supplier Name" id="name_form" name="name_form">
                     </div>
                     <div class="form-group">
-                      <label for="lname">Supplier Opening Balance</label>
+                      <label for="lname">Opening Balance</label>
                       <input type="text" class="form-control" placeholder="Enter Supplier Opening Balance" id="op_form" name="op_form">
                     </div>
                   </div>
@@ -124,7 +125,7 @@ include('./style_table.php');
           },
         },
         columns: [{
-            title: "Supplier Name",
+            title: "Name",
             data: "supplier_master_name"
           },
           {
@@ -144,10 +145,7 @@ include('./style_table.php');
             data: "updated_on"
           },
 
-          {
-            title: "Action",
-            data: ""
-          },
+
           {
             title: "Status",
             "render": function(data, type, row) {
@@ -158,7 +156,11 @@ include('./style_table.php');
                 return "<button value='Active' class='btn btn-success btn-delete'>Active</button>";
               }
             }
-          }
+          },
+          {
+            title: "Action",
+            data: ""
+          },
         ],
         "columnDefs": [{
           field: "supplier_master_id",
@@ -166,7 +168,7 @@ include('./style_table.php');
           "render": function(data, type, row) {
             return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.supplier_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.supplier_master_id + "'></i>"
           },
-          "targets": -2,
+          "targets": -1,
         }, ],
 
       });

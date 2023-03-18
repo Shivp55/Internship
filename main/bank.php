@@ -4,6 +4,7 @@
 include './head.php';
 include('./style_table.php');
 ?>
+
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <?php
@@ -33,7 +34,7 @@ include('./style_table.php');
         <div class="container-fluid">
           <div class="row">
             <!-- left column -->
-            <div class="col-md-4">
+            <div class="col-md-3">
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
@@ -47,30 +48,31 @@ include('./style_table.php');
                       <label for="fname">Bank Name</label>
                       <input type="text" class="form-control" placeholder="Enter Bank Name" id="bname_form" name="bname_form">
                     </div>
-                  </div>
-                  <div class="card-body">
+
+
                     <div class="form-group">
-                      <label for="fname">Bank Account Number</label>
+                      <label for="fname">Account Number</label>
                       <input type="text" class="form-control" placeholder="Enter Bank Account Number" id="bacc_form" name="bacc_form">
+
                     </div>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer" style="background-color:white;">
-                    <center>
-                      <input type="hidden" name="action" value="add">
-                      <button type="submit" class="btn btn-primary mr-4" style="margin-bottom:30px;">Submit</button>
-                    </center>
+                    <!-- /.card-body -->
+                    <div class="card-footer" style="background-color:white;">
+                      <center>
+                        <input type="hidden" name="action" value="add">
+                        <button type="submit" class="btn btn-primary mr-4" style="margin-bottom:30px;">Submit</button>
+                      </center>
+                    </div>
                   </div>
                 </form>
               </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
               <div class="card card-custom">
                 <div class="card-body">
                   <div id="example">
                     <table id="kt-datatable" class="table table-striped table-bordered">
-                    <thead>
-                    <th>Account Number</th>
+                      <thead>
+                        <th>Account Number</th>
                         <th>Bank Name</th>
                         <th>Created On</th>
                         <th>Updated On</th>
@@ -125,7 +127,7 @@ include('./style_table.php');
             title: "Bank Name",
             data: "bank_master_name",
           },
-          
+
           {
             title: "Created On",
             data: "created_on"
@@ -140,14 +142,17 @@ include('./style_table.php');
           },
         ],
         "columnDefs": [{
-            field: "supplier_master_id",
-            title: "Action",
-            "render": function(data, type, row) {
-              return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.bank_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.bank_master_id + "'></i>"
-            },
-            "targets": -1,
+          field: "supplier_master_id",
+          title: "Action",
+          "render": function(data, type, row) {
+            return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.bank_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.bank_master_id + "'></i>"
           },
-        ],
+          "targets": -1,
+        }, ],
+        rowCallback: function(row, data) {
+          $(row).addClass('table-row');
+
+        }
       });
 
       $("form[name='frmadd']").validate({
@@ -179,10 +184,10 @@ include('./style_table.php');
             data: $("#frmadd").serialize(),
             success: function(data) {
               window.location.reload();
-              
+
               table.ajax.reload();
             }
-            
+
           });
         }
 
@@ -210,4 +215,5 @@ include('./style_table.php');
     });
   </script>
 </body>
+
 </html>
