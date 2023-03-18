@@ -55,7 +55,7 @@ include('./style_table.php');
                                 <form method="post" name="edit" id="edit">
                                     <div class="card-body">
                                     <div class="form-group">
-                                            <label for="fname">Supplier Name</label>
+                                            <label for="fname">Name</label>
 
                                             <select class="form-control select2" style="width: 100%;" name="sname" id="sname">
 
@@ -67,7 +67,7 @@ include('./style_table.php');
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="lname">Supplier Payment Amount</label>
+                                            <label for="lname">Pay Amount</label>
                                             <input type="text" class="form-control" placeholder="Enter Supplier Payment Amount" id="op_form" name="op_form" value="">
                                         </div>
                                         <div class="form-group">
@@ -83,7 +83,7 @@ include('./style_table.php');
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="date">Select Date</label>
+                                            <label for="date">Date</label>
                                             <input type="date" class="form-control" placeholder="Date" id="date_form" name="date_form" value="">
                                         </div>
 

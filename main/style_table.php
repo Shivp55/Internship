@@ -6,7 +6,7 @@
     }
 
     th {
-        background:darkslategrey;
+        background:#007bff;
         padding: 10px;
         color:white;
     }

@@ -43,7 +43,7 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Supplier Edit</h3>
+                                    <h3 class="card-title"> Edit Supplier</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -61,12 +61,19 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
                                         <div class="form-group">
                                             <label>Status</label>
                                             <select class="form-control" name="record_status" id="record_status">
-                                                <option selected><?php echo $supplier_info->record_status; ?></option>
+                                                <option selected><?php if ($supplier_info->record_status == 1) {
+                                                                        echo "active";
+                                                                    } else {
+                                                                        echo "Inactive";
+                                                                    }
+
+
+                                                                    ?></option>
                                                 <?php if ($supplier_info->record_status == 1) { ?>
-                                                    <option>0</option>
+                                                    <option value="0">Inactive</option>
                                                 <?php }
                                                 if ($supplier_info->record_status == 0) { ?>
-                                                    <option>1</option>
+                                                    <option value="1">Active</option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -124,70 +131,70 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
         <script type="text/javascript">
             $(document).ready(function(e) {
                 var table = $("#kt-datatable").DataTable({
-        "responsive": true,
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "hover": true,
+                    "responsive": true,
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "hover": true,
 
-        ajax: {
-          url: '../ajax/form_ajax.php',
-          method: "POST",
-          data: {
-            action: 'list',
-          },
-        },
-        columns: [{
-            title: "Supplier Name",
-            data: "supplier_master_name"
-          },
-          {
-            title: "Opening Balance",
-            data: "supplier_master_opening_balance"
-          },
-          {
-            title: "Current Balance",
-            data: "supplier_master_current_balance"
-          },
-          {
-            title: "Created On",
-            data: "created_on"
-          },
-          {
-            title: "Updated On",
-            data: "updated_on"
-          },
+                    ajax: {
+                        url: '../ajax/form_ajax.php',
+                        method: "POST",
+                        data: {
+                            action: 'list',
+                        },
+                    },
+                    columns: [{
+                            title: "Supplier",
+                            data: "supplier_master_name"
+                        },
+                        {
+                            title: "Opening Balance",
+                            data: "supplier_master_opening_balance"
+                        },
+                        {
+                            title: "Current Balance",
+                            data: "supplier_master_current_balance"
+                        },
+                        {
+                            title: "Created On",
+                            data: "created_on"
+                        },
+                        {
+                            title: "Updated On",
+                            data: "updated_on"
+                        },
 
-          
-          {
-            title: "Status",
-            "render": function(data, type, row) {
-              if (row.record_status == 0) {
-                $status = "Inactive";
-                return "<button value='Inactive' class='btn btn-danger btn-delete'>Inactive</button>";
-              } else {
-                return "<button value='Active' class='btn btn-success btn-delete'>Active</button>";
-              }
-            }
-          },
-          {
-            title: "Action",
-            data: ""
-          },
-        ],
-        "columnDefs": [{
-          field: "supplier_master_id",
-          title: "Action",
-          "render": function(data, type, row) {
-            return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.supplier_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.supplier_master_id + "'></i>"
-          },
-          "targets": -1,
-        }, ],
 
-      });
+                        {
+                            title: "Status",
+                            "render": function(data, type, row) {
+                                if (row.record_status == 0) {
+                                    $status = "Inactive";
+                                    return "<button value='Inactive' class='btn btn-danger btn-delete'>Inactive</button>";
+                                } else {
+                                    return "<button value='Active' class='btn btn-success btn-delete'>Active</button>";
+                                }
+                            }
+                        },
+                        {
+                            title: "Action",
+                            data: ""
+                        },
+                    ],
+                    "columnDefs": [{
+                        field: "supplier_master_id",
+                        title: "Action",
+                        "render": function(data, type, row) {
+                            return "<i class='fa-solid fa-pen-to-square' data-record-id='" + row.supplier_master_id + "'> &nbsp;</i> <i class='fa-solid fa-trash' data-delete-id='" + row.supplier_master_id + "'></i>"
+                        },
+                        "targets": -1,
+                    }, ],
+
+                });
 
                 $("form[name='edit']").validate({
                     rules: {
@@ -231,25 +238,25 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
                     }
                 });
                 table.on("click", '[data-record-id]', function() {
-        var id = $(this).data("record-id");
-        window.open('./edit_supplier.php?id=' + id, "_self");
-      });
-      table.on("click", '[data-delete-id]', function() {
-        var id = $(this).data("delete-id");
-        if (confirm("Are you sure you want to delete record " + id)) {
-          var url = "../ajax/form_ajax.php?id=" + id;
-          $.ajax({
-            url: url,
-            type: "POST",
-            data: {
-              action: 'delete',
-            },
-            success: function(data) {
-              table.ajax.reload();
-            }
-          });
-        }
-      });
+                    var id = $(this).data("record-id");
+                    window.open('./edit_supplier.php?id=' + id, "_self");
+                });
+                table.on("click", '[data-delete-id]', function() {
+                    var id = $(this).data("delete-id");
+                    if (confirm("Are you sure you want to delete record " + id)) {
+                        var url = "../ajax/form_ajax.php?id=" + id;
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: {
+                                action: 'delete',
+                            },
+                            success: function(data) {
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                });
             });
         </script>
 </body>

@@ -9,7 +9,8 @@
         }
         function GET_ALL_SUPPLIERS() {
             global $db;
-            $sql = "SELECT * FROM supplier_master";
+            $rd=1;
+            $sql = "SELECT * FROM supplier_master where record_status=$rd";
             $db->query($sql);
             return $db->fetch_object();
     }

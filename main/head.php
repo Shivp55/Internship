@@ -48,13 +48,25 @@ if (!isset($_SESSION['login_id']) && $_SESSION['login_id'] == "") {
 
 <style type="text/css">
   table.dataTable tbody tr {
-  background-color: #b3afaf;
+  background-color: lightcyan;
 }
 th{
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 15px;
 }
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color:mintcream;
+}
+td{
+  font-size: 13px;
+  font-weight: 300;
+  
+}
+/* td.hover{
+  background-color: green;
+} */
+
 </style>
 
 

@@ -7,6 +7,7 @@ $supplier_object = new Supplier;
 $supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
 include('./style_table.php');
 ?>
+
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <?php
@@ -20,12 +21,12 @@ include('./style_table.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Supplier Report Details</h1>
+                            <h1>Supplier</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
-                                <li class="breadcrumb-item active">Supplier Report Details</li>
+                                <li class="breadcrumb-item active">Supplier Report</li>
                             </ol>
                         </div>
                     </div>
@@ -40,14 +41,14 @@ include('./style_table.php');
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Supplier Report Form</h3>
+                                    <h3 class="card-title">Supplier Report</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form method="post" name="frmadd" id="frmadd">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="fname">Supplier Name</label>
+                                            <label for="fname">Name</label>
 
                                             <select class="form-control select2" style="width: 100%;" name="sname" id="sname">
 
@@ -58,10 +59,10 @@ include('./style_table.php');
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="lname">Supplier Opening Balance</label>
                                             <input type="text" class="form-control" placeholder="Enter Supplier Opening Balance" id="op_form" name="op_form">
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer" style="background-color:white;">
@@ -76,35 +77,30 @@ include('./style_table.php');
 
                     </div>
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-custom">
+                                <div class="card-body">
+                                    <div id="example">
+                                        <table id="kt-datatable" class="table table-striped table-bordered" width="100%">
+                                            <thead>
+                                                <th>Transaction ID</th>
+                                                <th>BanK Account</th>
+                                                <th>Bank Name</th>
+                                                <th>Transaction Amount</th>
+                                                <th>Transaction Date</th>
+                                                <th>Transaction Type</th>
+                                                <th>Invoice Number</th>
+                                            </thead>
 
-
-                        <div class="card card-custom">
-                            <div class="card-body">
-                                <div id="example">
-                                    <table id="kt-datatable" class="table table-striped table-bordered" style="width: 100%;">
-                                        <thead>
-                                            <th>Transaction ID</th>
-                                            <th>BanK Account</th>
-                                            <th>Bank Name</th>
-                                            <th>Transaction Amount</th>
-                                            <th>Transaction Date</th>
-                                            <th>Transaction Type</th>
-                                            <th>Invoice Number</th>
-                                        </thead>
-                                        
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
+                        <!-- /.card -->
+                        <!-- /.row -->
                     </div>
-
-
-
-                    <!-- /.card -->
-                    <!-- /.row -->
-                </div>
-                <!-- /.container-fluid -->
+                    <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
         </div>
@@ -130,7 +126,7 @@ include('./style_table.php');
                 [4, "desc"]
             ],
             columns: [{
-                    title: "Supplier Name",
+                    title: "Name",
                     data: "sup_name"
                 },
                 {
@@ -138,15 +134,15 @@ include('./style_table.php');
                     data: "bank_name"
                 },
                 {
-                    title: "Bank Account Number",
+                    title: "Account Number",
                     data: "bank_acc"
                 },
                 {
-                    title: "Transaction Amount",
+                    title: "Amount",
                     data: "trans_amnt"
                 },
                 {
-                    title: "Transaction Date",
+                    title: "Date",
                     data: "date"
                 },
                 {

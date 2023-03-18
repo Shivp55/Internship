@@ -23,6 +23,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
         echo "supplier_exists";
     } else {
         $op = $_REQUEST['op_form'];
+        
         $arr = array(
             "supplier_master_name" => $name,
             "supplier_master_opening_balance" => $op,

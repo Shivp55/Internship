@@ -39,7 +39,7 @@ include('./style_table.php');
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Supplier Add</h3>
+                  <h3 class="card-title">Add Supplier</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->

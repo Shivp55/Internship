@@ -47,18 +47,14 @@ include('./style_table.php');
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Invoice Form</h3>
+                                    <h3 class="card-title">Add Invoice</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form method="post" name="edit" id="edit">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="lname">Invoice Number</label>
-                                            <input type="text" class="form-control" placeholder="Enter Invoice Number" name="invoice" id="invoice" value="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="fname">Supplier Name</label>
+                                            <label for="fname">Name</label>
 
                                             <select class="form-control select2" style="width: 100%;" name="sname" id="sname">
 
@@ -70,13 +66,18 @@ include('./style_table.php');
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label for="lname">Invoice Number</label>
+                                            <input type="text" class="form-control" placeholder="Enter Invoice Number" name="invoice" id="invoice" value="">
+                                        </div>
+
+                                        <div class="form-group">
                                             <label for="lname">Amount</label>
                                             <input type="text" class="form-control" placeholder="Enter Amount" id="op_form" name="op_form" value="">
                                         </div>
 
 
                                         <div class="form-group">
-                                            <label for="date">Select Date</label>
+                                            <label for="date">Date</label>
                                             <input type="date" class="form-control" placeholder="Date" id="date_form" name="date_form" value="">
                                         </div>
 
@@ -155,7 +156,7 @@ include('./style_table.php');
                     },
 
                     {
-                        title: "Supplier Name",
+                        title: "Name",
                         data: "supplier_name"
                     },
                     {
