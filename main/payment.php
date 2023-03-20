@@ -54,7 +54,7 @@ include('./style_table.php');
                                 <!-- form start -->
                                 <form method="post" name="edit" id="edit">
                                     <div class="card-body">
-                                    <div class="form-group">
+                                        <div class="form-group">
                                             <label for="fname">Name</label>
 
                                             <select class="form-control select2" style="width: 100%;" name="sname" id="sname">
@@ -68,7 +68,7 @@ include('./style_table.php');
                                         </div>
                                         <div class="form-group">
                                             <label for="lname">Pay Amount</label>
-                                            <input type="text" class="form-control" placeholder="Enter Supplier Payment Amount" id="op_form" name="op_form" value="">
+                                            <input type="text" class="form-control" placeholder="Payment Amount" id="op_form" name="op_form" value="">
                                         </div>
                                         <div class="form-group">
                                             <label for="fname">Bank Name</label>
@@ -87,7 +87,7 @@ include('./style_table.php');
                                             <input type="date" class="form-control" placeholder="Date" id="date_form" name="date_form" value="">
                                         </div>
 
-                                        
+
 
                                         <!-- /.card-body -->
                                         <div class="card-footer" style="background-color:white;">
@@ -105,14 +105,14 @@ include('./style_table.php');
                                 <div class="card-body">
                                     <div id="example">
                                         <table id="kt-datatable" class="table table-striped table-bordered">
-                                        <thead>
-                                            <th>Supplier Name</th>
-                                            <th>Bank Name</th>
-                                            <th>Date</th>
-                                            <th>Pay Amount</th>
-                                            <th>Action</th>
+                                            <thead>
+                                                <th>Supplier Name</th>
+                                                <th>Bank Name</th>
+                                                <th>Date</th>
+                                                <th>Pay Amount</th>
+                                                <th>Action</th>
 
-                                        </thead>
+                                            </thead>
                                         </table>
                                     </div>
                                 </div>
@@ -138,53 +138,57 @@ include('./style_table.php');
     <script type="text/javascript">
         $(document).ready(function(e) {
             var table = $("#kt-datatable").DataTable({
-        "responsive": true,
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "order":[2,"desc"],
-        ajax: {
-          url: '../ajax/payments_ajax.php',
-          method: "POST",
-          data: {
-            action: 'list',
-          },
-        },
-        columns: [
-          {
-            title: "Name",
-            data: "supplier"
-          },
-          {
-            title: "Bank Account",
-            data: "bank_name"
-          },
-          
-          {
-            title: "Date",
-            data: "date"
-          },
-          {
-            title: "Pay Amount",
-            data: "amount"
-          },
-          {
-            title: "Action",
-            data: ""
-          },
-        ],
-        "columnDefs": [{
-          field: "id",
-          title: "Action",
-          "render": function(data, type, row) {
-            return " <i class='fa-solid fa-trash' data-delete-id='" + row.id + "'></i>"
-          },
-          "targets": -1,
-        }, ],
-      });
+                "responsive": true,
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "order": [2, "desc"],
+                ajax: {
+                    url: '../ajax/payments_ajax.php',
+                    method: "POST",
+                    data: {
+                        action: 'list',
+                    },
+                },
+                columns: [{
+                        title: "Name",
+                        data: "supplier"
+                    },
+                    {
+                        title: "Bank Account",
+                        data: "bank_name"
+                    },
+
+                    {
+                        title: "Date",
+                        data: "date"
+                    },
+                    {
+                        title: "Pay Amount",
+                        "render": function(data, type, row) {
+
+                            var amnt = row.amount;
+                            var amount = new Intl.NumberFormat('en-IN').format(amnt)
+                            return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> ' + amount;
+                        },
+                    },
+                    {
+                        title: "Action",
+                        data: ""
+                    },
+                ],
+                "columnDefs": [{
+                    field: "id",
+                    title: "Action",
+                    "render": function(data, type, row) {
+                        return " <i class='fa-solid fa-trash' data-delete-id='" + row.id + "'></i>"
+                    },
+                    "targets": -1,
+                }, ],
+            });
             $("form[name='edit']").validate({
                 rules: {
                     name_form: {
@@ -228,10 +232,9 @@ include('./style_table.php');
                         type: "POST",
                         data: $("#edit").serialize(),
                         success: function(data) {
-                            if(data=="success"){
+                            if (data == "success") {
                                 table.ajax.reload();
-                            }
-                            else{
+                            } else {
                                 alert(data);
                             }
                             $("#edit")[0].reset();
@@ -245,7 +248,7 @@ include('./style_table.php');
                 var id = $(this).data("delete-id");
                 console.log(id);
                 if (confirm("Are you sure you want to delete record " + id)) {
-                    var url = "../ajax/payments_ajax.php?id="+ id;
+                    var url = "../ajax/payments_ajax.php?id=" + id;
                     $.ajax({
                         url: url,
                         type: "POST",

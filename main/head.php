@@ -61,8 +61,10 @@ th{
 td{
   font-size: 13px;
   font-weight: 300;
-  
 }
+
+
+
 /* td.hover{
   background-color: green;
 } */

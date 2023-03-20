@@ -47,11 +47,11 @@ include('./style_table.php');
                   <div class="card-body">
                     <div class="form-group">
                       <label for="fname">Name</label>
-                      <input type="text" class="form-control" placeholder="Enter Supplier Name" id="name_form" name="name_form">
+                      <input type="text" class="form-control" placeholder="Name" id="name_form" name="name_form">
                     </div>
                     <div class="form-group">
                       <label for="lname">Opening Balance</label>
-                      <input type="text" class="form-control" placeholder="Enter Supplier Opening Balance" id="op_form" name="op_form">
+                      <input type="text" class="form-control" placeholder="Opening Balance" id="op_form" name="op_form">
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -130,11 +130,24 @@ include('./style_table.php');
           },
           {
             title: "Opening Balance",
-            data: "supplier_master_opening_balance"
+            "render": function(data, type, row) {
+
+              var amnt = row.supplier_master_opening_balance;
+              var amount = new Intl.NumberFormat('en-IN').format(amnt)
+              return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> ' + amount;
+            },
           },
           {
             title: "Current Balance",
-            data: "supplier_master_current_balance"
+            "render": function(data, type, row) {
+
+              var amnt = row.supplier_master_current_balance;
+              var amount = new Intl.NumberFormat('en-IN').format(amnt)
+              return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> ' + amount;
+
+            },
+
+
           },
           {
             title: "Created On",

@@ -129,8 +129,8 @@ include('./style_table.php');
             ],
             columns: [{
                     title: "Date",
-                    "render":function(data,type,row){
-                        var dt=row.created_on;
+                    "render": function(data, type, row) {
+                        var dt = row.created_on;
                         return dt
 
                     },
@@ -148,7 +148,9 @@ include('./style_table.php');
                     title: "Debit",
                     "render": function(data, type, row) {
                         if (row.trans_type == 1) {
-                            return row.trans_amnt;
+                            var amnt = row.trans_amnt;
+                            var amount = new Intl.NumberFormat('en-IN').format(amnt)
+                            return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> '+amount;
                         } else {
                             return null;
                         }
@@ -158,7 +160,9 @@ include('./style_table.php');
                     title: "Credit",
                     "render": function(data, type, row) {
                         if (row.trans_type == 2) {
-                            return row.trans_amnt;
+                            var amnt = row.trans_amnt;
+                            var amount = new Intl.NumberFormat('en-IN').format(amnt)
+                            return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> '+ amount;
                         } else {
                             return null;
                         }
@@ -166,7 +170,13 @@ include('./style_table.php');
                 },
                 {
                     title: "Balance",
-                    data:"balance",
+                    "render": function(data, type, row) {
+
+                        var amnt = row.balance;
+                        var amount = new Intl.NumberFormat('en-IN').format(amnt)
+                        return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> '+amount;
+
+                    },
                 },
                 // {
                 //     title:"Balance",

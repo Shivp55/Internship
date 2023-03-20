@@ -1,2 +1,2 @@
-var myDate = new Date('01/10/2010 12:00 AM');
-console.log(myDate.getDate()+"-"+myDate.getMonth()+"-"+myDate.getFullYear());
+const price = 14340;
+console.log(new Intl.NumberFormat().format(price)); 

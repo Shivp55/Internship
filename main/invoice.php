@@ -67,12 +67,12 @@ include('./style_table.php');
                                         </div>
                                         <div class="form-group">
                                             <label for="lname">Invoice Number</label>
-                                            <input type="text" class="form-control" placeholder="Enter Invoice Number" name="invoice" id="invoice" value="">
+                                            <input type="text" class="form-control" placeholder="Invoice Number" name="invoice" id="invoice" value="">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="lname">Amount</label>
-                                            <input type="text" class="form-control" placeholder="Enter Amount" id="op_form" name="op_form" value="">
+                                            <input type="text" class="form-control" placeholder="Amount" id="op_form" name="op_form" value="">
                                         </div>
 
 
@@ -165,7 +165,13 @@ include('./style_table.php');
                     },
                     {
                         title: "Invoice Amount",
-                        data: "amount"
+                        "render": function(data, type, row) {
+
+                            var amnt = row.amount;
+                            var amount = new Intl.NumberFormat('en-IN').format(amnt)
+                            return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> ' + amount;
+
+                        },
                     },
                     {
                         title: "Action",
