@@ -205,7 +205,6 @@ include('./style_table.php');
             success: function(data) {
               // console.log(data);
               if (data == "supplier_exists") {
-                // console.log(data);
                 if (confirm("Supplier Already Exists; Do you want to add new Supplier?")) {
                   var name_form = $(this).data("name_form");
                   var op_form = $(this).data("op_form");
@@ -214,7 +213,6 @@ include('./style_table.php');
                     type: "POST",
                     data: $("#frmadd").serialize(),
                     success: function(data) {
-                      // console.log(data);
                       if (data == "success") {
                         window.location.reload();
                         table.ajax.reload();
@@ -237,12 +235,10 @@ include('./style_table.php');
                       }
                       $("#frmadd")[0].reset();
                     }
-
                   });
                 }
               }
               if (data == "success") {
-
                 table.ajax.reload();
                 // window.location.reload();
               }

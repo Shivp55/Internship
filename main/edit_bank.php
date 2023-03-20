@@ -54,8 +54,8 @@ include('./style_table.php');
 
                       <input type="text" class="form-control" placeholder="Enter Bank Name" id="bname_form" name="bname_form" value="<?php echo $bank_info->bank_master_name; ?>">
                     </div>
-                  </div>
-                  <div class="card-body">
+                 
+                  
                     <div class="form-group">
                       <label for="fname">Bank Account Number</label>
                       <input type="text" class="form-control" placeholder="Enter Bank Account Number" id="bacc_form" name="bacc_form" value="<?php echo $bank_info->bank_master_id; ?>">
@@ -202,7 +202,7 @@ include('./style_table.php');
       });
       table.on("click", '[data-delete-id]', function() {
         var id = $(this).data("delete-id");
-        if (confirm("Are you sure you want to delete record " + id)) {
+        if (confirm("Are you sure you want to delete this bank " + id)) {
           var url = "../ajax/bank_ajax.php?id=" + id;
           $.ajax({
             url: url,

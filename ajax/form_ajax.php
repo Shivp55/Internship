@@ -19,11 +19,14 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $fetch_obj = new Supplier;
     $fetch_supplier = $fetch_obj->CHECK_SUPPLIER_BY_NAME($name);
     // echo $fetch_supplier;
+    $date = date("d-m-Y");
+    $date1 = date("d-m-Y H:i A");
+    $trans_type = 2;
     if ($fetch_supplier == 1) {
         echo "supplier_exists";
     } else {
         $op = $_REQUEST['op_form'];
-        
+
         $arr = array(
             "supplier_master_name" => $name,
             "supplier_master_opening_balance" => $op,
@@ -35,28 +38,25 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
         if ($result == 0) {
             echo "Error";
         } else if ($result == 1) {
+            $sql = "INSERT INTO transaction_master(sup_name,trans_amnt,date,created_on,balance) VALUES ('" . $name . "','" . $op . "','" . $date . "','" . $date1 . "',$op )";
+            $result2 = mysqli_query($conn, $sql);
+            $sql2 = "SELECT * from supplier_master where supplier_master_name='" . $name . "' AND created_on='" . $date1 . "'";
+            $result3 = mysqli_query($conn, $sql2);
+            if (mysqli_num_rows($result3) > 0) {
+                while ($row = mysqli_fetch_assoc($result3)) {
+                    $id = $row['supplier_master_id'];
+                }
+            }
+            $sql4 = "UPDATE transaction_master SET supplier_id=$id where sup_name='" . $name . "'";
+            $result4 = mysqli_query($conn, $sql4);
             echo "success";
         }
     }
 }
-if (isset($_POST['action'])&& $_POST['action'] == "ins_sup") {
 
-    echo $name = $_GET['name_form'];
-    echo $op = $_GET['op_form'];
-    // $arr = array(
-    //     "supplier_master_name" => $name,
-    //     "supplier_master_opening_balance" => $op,
-    //     "supplier_master_current_balance" => $op,
-    //     "created_on" => date("d-m-Y"),
-    //     "updated_on" => date("d-m-Y h:i A"),
-    // );
-    // echo $result = InsertData($arr, "supplier_master");
-    // if ($result == 0) {
-    //     echo "Error";
-    // } else if ($result == 1) {
-    //     echo "success";
-    // }
-}
+
+
+
 if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
     $id = $_REQUEST['id'];
     echo $id;

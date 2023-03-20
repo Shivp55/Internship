@@ -56,7 +56,7 @@ th{
   font-size: 15px;
 }
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color:mintcream;
+    background-color:white;
 }
 td{
   font-size: 13px;

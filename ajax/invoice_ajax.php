@@ -19,11 +19,12 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $supplier_id = $supplier_data->supplier_master_id;
     $supplier_current_balance = $supplier_data->supplier_master_current_balance;
     $op = $_REQUEST['op_form'];
+    $total=$supplier_current_balance+$op;
     // $bname = $_REQUEST['bname'];
     // $bac = $_REQUEST['accnt'];
     $dt= $_REQUEST['date_form'];
     $date=date("d-m-Y", strtotime($dt));
-    $date1=date("d-m-Y H:i A");
+    $date1=date("d-m-Y H:i:s A");
     $trans_type = 2;
     $arr = array(
         "invoice_number"=>$invoice,
@@ -34,17 +35,10 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
 
     );
     $query = InsertData($arr, "invoice_master");
-    $sql1 = "INSERT INTO transaction_master(supplier_id,sup_name,trans_amnt,date,trans_type,invoice_no,created_on) VALUES('" . $supplier_id . "','" . $sname . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $invoice. "','" . $date1. "' )";
+    $sql1 = "INSERT INTO transaction_master(supplier_id,sup_name,trans_amnt,date,trans_type,invoice_no,created_on,balance) VALUES('" . $supplier_id . "','" . $sname . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $invoice. "','" . $date1. "',$total)";
     $result2 = mysqli_query($conn, $sql1);
      // echo $query1=InsertData($arr1,"transaction_master");
-    $update = array(
-        "supplier_master_current_balance" => ($supplier_current_balance - $op),
-        "updated_on" => date("d-m-Y h:i A"),
-    );
-    $where_upd = array(
-        "supplier_master_id" => $supplier_id,
-        "record_status" => "1",
-    );
+    
 
     if ($query == 1 && $result2 == 1) {
         // $result = UpdateData($update, "supplier_master", $where_upd);

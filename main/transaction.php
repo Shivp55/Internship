@@ -3,6 +3,7 @@
 <?php
 include './head.php';
 include('./style_table.php');
+// require('datatables.net-plugins/api/sum().js');
 ?>
 
 <body class="hold-transition sidebar-mini">
@@ -55,12 +56,12 @@ include('./style_table.php');
 
 
 
-                                    <tfoot>
-                                    <tr class="table-row">
-                                        <th>Total Amount</th>
-                                        <td></td>
-                                    </tr>
-                                    </tfoot>
+                                        <tfoot>
+                                            <tr class="table-row">
+                                                <th>Total Amount</th>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -106,8 +107,7 @@ include('./style_table.php');
                         action: 'list',
                     },
                 },
-                columns: [
-                    {
+                columns: [{
                         title: "Transaction Number",
                         data: "t_id",
                     },
@@ -165,6 +165,7 @@ include('./style_table.php');
                     },
                     "targets": -1,
                 }, ],
+               
             });
 
             // $("form[name='frmadd']").validate({

@@ -31,5 +31,26 @@ class Transaction{
 //         $db->query($sql);
 //         $myresult=mysqli_num_rows($db->query($sql));
         
+    function TOTAL_TRANSACTIONS(){
+        global $db;
+        $sql="SELECT * FROM transaction_master";
+        $total_amnt=0;
+        $result=$db->query($sql);
+        // $result=mysqli_num_rows($db->query($sql));
+        if(mysqli_num_rows($db->query($sql))>0) {
+            while($row=mysqli_fetch_assoc($result)){
+                if($row[6]==2){
+                    $total_amnt+=$row[4];
+
+                }
+                else if($row[6]==1){
+                    $total_amnt-=$row[4];
+                }
+
+            }
+
+        }
+        return $total_amnt;
+    }
 }
 ?>

@@ -12,6 +12,11 @@ class Invoice{
         $db->query($sql);
         
     }
+    // function UPDATE_SUPPLIER_BALANCE($id,$amnt){
+    //     global $db;
+    //     $sql="UPDATE transaction_master SET balance=balance+$amnt WHERE supplier_id=$id";
+    //     $db->query($sql);
+    // }
 
 
 

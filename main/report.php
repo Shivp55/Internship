@@ -37,7 +37,8 @@ include('./style_table.php');
                 <div class="container-fluid">
                     <div class="row">
                         <!-- left column -->
-                        <div class="col-md-3">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
@@ -74,6 +75,7 @@ include('./style_table.php');
                                 </form>
                             </div>
                         </div>
+                        <div class="col-md-4"></div>
 
                     </div>
                     <div class="row">
@@ -83,13 +85,13 @@ include('./style_table.php');
                                     <div id="example">
                                         <table id="kt-datatable" class="table table-striped table-bordered" width="100%">
                                             <thead>
-                                                <th>Transaction ID</th>
-                                                <th>BanK Account</th>
-                                                <th>Bank Name</th>
-                                                <th>Transaction Amount</th>
-                                                <th>Transaction Date</th>
-                                                <th>Transaction Type</th>
-                                                <th>Invoice Number</th>
+                                                <th>Date</th>
+                                                <th> Invoice No.</th>
+                                                <th>Bank</th>
+                                                <th>Debit</th>
+                                                <th>Credit</th>
+                                                <th>Balance </th>
+
                                             </thead>
 
                                         </table>
@@ -123,48 +125,53 @@ include('./style_table.php');
             "info": true,
             "autoWidth": true,
             "order": [
-                [4, "desc"]
+                [0, "desc"]
             ],
             columns: [{
-                    title: "Name",
-                    data: "sup_name"
+                    title: "Date",
+                    "render":function(data,type,row){
+                        var dt=row.created_on;
+                        return dt
+
+                    },
+                    // data: "created_on",
                 },
                 {
-                    title: "Bank Name",
+                    title: "Invoice No.",
+                    data: "invoice_no"
+                },
+                {
+                    title: "Bank",
                     data: "bank_name"
                 },
                 {
-                    title: "Account Number",
-                    data: "bank_acc"
-                },
-                {
-                    title: "Amount",
-                    data: "trans_amnt"
-                },
-                {
-                    title: "Date",
-                    data: "date"
-                },
-                {
-                    title: "Type",
+                    title: "Debit",
                     "render": function(data, type, row) {
                         if (row.trans_type == 1) {
-                            $type = "Debited"
+                            return row.trans_amnt;
                         } else {
-                            $type = "Credited"
+                            return null;
                         }
-
-                        return $type
                     },
                 },
                 {
-                    title: "Invoice",
-                    data: "invoice_no"
+                    title: "Credit",
+                    "render": function(data, type, row) {
+                        if (row.trans_type == 2) {
+                            return row.trans_amnt;
+                        } else {
+                            return null;
+                        }
+                    },
+                },
+                {
+                    title: "Balance",
+                    data:"balance",
                 },
                 // {
                 //     title:"Balance",
                 //     "render": function(data,type,row){
-                //         return 
+                //         return
                 //     }
 
                 // },

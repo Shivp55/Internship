@@ -86,7 +86,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="./transaction.php" class="nav-link">
             <i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;
             <p>
@@ -94,7 +94,7 @@
 
             </p>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a href="./report.php" class="nav-link">
             <i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -104,7 +104,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="./genral-forms.php" class="nav-link">
             <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;
             <p>
@@ -112,7 +112,7 @@
 
             </p>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a href="./logout.php" class="nav-link">
             <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;
