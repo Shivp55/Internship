@@ -60,6 +60,19 @@ include('./style_table.php');
                                                 <?php } ?>
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Date range:</label>
+
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="far fa-calendar-alt"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control float-right" id="reservation">
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
                                         <!-- <div class="form-group">
                                             <label for="lname">Supplier Opening Balance</label>
                                             <input type="text" class="form-control" placeholder="Enter Supplier Opening Balance" id="op_form" name="op_form">
@@ -91,6 +104,8 @@ include('./style_table.php');
                                                 <th>Debit</th>
                                                 <th>Credit</th>
                                                 <th>Balance </th>
+                                                <!-- <th>Date ID </th> -->
+
 
                                             </thead>
 
@@ -116,135 +131,61 @@ include('./style_table.php');
     <?php include 'js.php'; ?>
     <!-- script_start -->
     <script type="text/javascript">
-        var table = $("#kt-datatable").DataTable({
-            "responsive": true,
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "order": [
-                [0, "desc"]
-            ],
-            columns: [{
-                    title: "Date",
-                    "render": function(data, type, row) {
-                        var dt = row.created_on;
-                        return dt
-
-                    },
-                    // data: "created_on",
-                },
-                {
-                    title: "Invoice No.",
-                    data: "invoice_no"
-                },
-                {
-                    title: "Bank",
-                    data: "bank_name"
-                },
-                {
-                    title: "Debit",
-                    "render": function(data, type, row) {
-                        if (row.trans_type == 1) {
-                            var amnt = row.trans_amnt;
-                            var amount = new Intl.NumberFormat('en-IN').format(amnt)
-                            return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> '+amount;
-                        } else {
-                            return null;
-                        }
-                    },
-                },
-                {
-                    title: "Credit",
-                    "render": function(data, type, row) {
-                        if (row.trans_type == 2) {
-                            var amnt = row.trans_amnt;
-                            var amount = new Intl.NumberFormat('en-IN').format(amnt)
-                            return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> '+ amount;
-                        } else {
-                            return null;
-                        }
-                    },
-                },
-                {
-                    title: "Balance",
-                    "render": function(data, type, row) {
-
-                        var amnt = row.balance;
-                        var amount = new Intl.NumberFormat('en-IN').format(amnt)
-                        return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> '+amount;
-
-                    },
-                },
-                // {
-                //     title:"Balance",
-                //     "render": function(data,type,row){
-                //         return
-                //     }
-
-                // },
-            ],
-        });
-
-
+        $('#reservation').daterangepicker()
+    </script>
+    <script type="text/javascript">
         $(document).ready(function(e) {
             $("#supplier_btn").click(function() {
                 var id = $("#sname").val();
-                console.log(id);
+                var date = $("#reservation").val();
+                var url="../ajax/report_supplier_ajax.php";
+                $.ajax({
+                    url:url,
+                    type: "POST",
+                    data:{
+                        "id":id,
+                        "date":date,
+                    }
 
-                // console.log(data);
 
-                table.ajax.url('../ajax/report_supplier_ajax.php?id=' + id).load();
-                $("#frmadd")[0].reset();
+                }).done(function(data){
+                    table.clear().draw();
+                    table.rows.add(data).draw();
+
+                });
+
 
             });
+            var table = $("#kt-datatable").DataTable({
+                "responsive": true,
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                // "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "data":[],
+                "columns": [{
+                        data: "date",
+                    },
+                    {
+                        data: "invoice",
+                    },
+                    {
+                        data: "bank",
+                    },
+                    {
+                        data: "debit",
+                    },
+                    {
+                        data: "credit",
+                    },
+                    {
+                        data: "balance",
+                    },
+                ],
+            });
 
-            // });
-            // $("form[name='frmadd']").validate({
-            //     rules: {
-            //         sname: {
-            //             required: true,
-            //         },
-            //     },
-            //     messages: {
-            //         sname: {
-            //             required: 'Enter your Supplier name',
-
-            //         },
-            //     },
-            //     invalidHandler: function(event, validator) {
-            //         alert("Invalid Form Data!!");
-            //     },
-            //     submitHandler: function(form) {
-            //         var url = "../ajax/report_ajax.php";
-
-            //     }
-            // });
-
-
-
-            // // table.on("click", '[data-record-id]', function() {
-            // //     var id = $(this).data("record-id");
-            // //     window.open('./edit_supplier.php?id=' + id, "_self");
-            // // });
-            // // table.on("click", '[data-delete-id]', function() {
-            // //     var id = $(this).data("delete-id");
-            // //     if (confirm("Are you sure you want to delete record " + id)) {
-            // //         var url = "../ajax/form_ajax.php?id=" + id;
-            // //         $.ajax({
-            // //             url: url,
-            // //             type: "POST",
-            // //             data: {
-            // //                 action: 'delete',
-            // //             },
-            // //             success: function(data) {
-            // //                 table.ajax.reload();
-            // //             }
-            // //         });
-            //     }
-            // });
         });
     </script>
 </body>

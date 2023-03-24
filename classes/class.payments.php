@@ -11,7 +11,7 @@ class Payments{
 
     function GET_ALL_PAYMENTS(){
         global $db;
-        $sql="SELECT * FROM payment_master";
+        $sql="SELECT * FROM payment_master JOIN supplier_master JOIN bank_master ON payment_master.supplier_id = supplier_master.supplier_master_id AND payment_master.bank_id=bank_master.bank_master_id";
         $db->query($sql);
         return $db->fetch_object();
     }

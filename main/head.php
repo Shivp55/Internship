@@ -62,6 +62,9 @@ td{
   font-size: 13px;
   font-weight: 300;
 }
+table.dataTable tr td {
+  border:1px solid black;
+}
 
 
 

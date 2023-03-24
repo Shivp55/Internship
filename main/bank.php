@@ -121,7 +121,7 @@ include('./style_table.php');
         },
         columns: [{
             title: "Account Number",
-            data: "bank_master_id",
+            data: "bank_account",
           },
           {
             title: "Bank Name",
@@ -183,11 +183,9 @@ include('./style_table.php');
             type: "POST",
             data: $("#frmadd").serialize(),
             success: function(data) {
-              window.location.reload();
-
               table.ajax.reload();
+              $("#frmadd")[0].reset();
             }
-
           });
         }
 

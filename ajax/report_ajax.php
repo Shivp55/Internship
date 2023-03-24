@@ -7,7 +7,6 @@ if (isset($_POST['action']) && $_POST['action'] == "list") {
     $sup_obj=new Supplier;
     $sup_data=$sup_obj->GET_SUPPLIER_BY_NAME($name);
     $id=$sup_data->supplier_master_id;
-    
     $trans_obj = new Transaction;
     $trans_data = $trans_obj->GET_TRANSACTION_BY_ID($id);
     $response_array['data'] = array();
@@ -15,9 +14,6 @@ if (isset($_POST['action']) && $_POST['action'] == "list") {
         array_push($response_array['data'], $val);
     }
     echo json_encode($response_array);
-    
 
-    // global $id;
-    // echo  $id = $trans_data->supplier_id;
 }
 

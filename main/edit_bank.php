@@ -50,7 +50,7 @@ include('./style_table.php');
                   <div class="card-body">
                     <div class="form-group">
                       <label for="fname">Bank Name</label>
-                      <input type="hidden" class="form-control" id="bnk_id" name="bnk_id" value="<?php echo $bank_info->bank_master_id; ?>">
+                      <input type="hidden" class="form-control" id="bnk_id" name="bnk_id" value="<?php echo $id ?>">
 
                       <input type="text" class="form-control" placeholder="Enter Bank Name" id="bname_form" name="bname_form" value="<?php echo $bank_info->bank_master_name; ?>">
                     </div>
@@ -58,7 +58,7 @@ include('./style_table.php');
                   
                     <div class="form-group">
                       <label for="fname">Bank Account Number</label>
-                      <input type="text" class="form-control" placeholder="Enter Bank Account Number" id="bacc_form" name="bacc_form" value="<?php echo $bank_info->bank_master_id; ?>">
+                      <input type="text" class="form-control" placeholder="Enter Bank Account Number" id="bacc_form" name="bacc_form" value="<?php echo $bank_info->bank_account; ?>">
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -126,7 +126,7 @@ include('./style_table.php');
         },
         columns: [{
             title: "Account Number",
-            data: "bank_master_id",
+            data: "bank_account",
           },
           {
             title: "Bank Name",
@@ -191,7 +191,8 @@ include('./style_table.php');
             type: "POST",
             data: $("#edit").serialize(),
             success: function(data) {
-              window.open('./bank.php', "_self");
+              // window.open('./bank.php', "_self");
+              console.log(data);
             }
           });
         }

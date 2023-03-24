@@ -61,7 +61,7 @@ include('./style_table.php');
 
                                                 <?php foreach ($supplier_info as $val) { ?>
 
-                                                    <option value="<?php echo $val->supplier_master_name; ?>"><?php echo $val->supplier_master_name; ?></option>
+                                                    <option value="<?php echo $val->supplier_master_id; ?>"><?php echo $val->supplier_master_name; ?></option>
 
                                                 <?php } ?>
                                             </select>
@@ -155,11 +155,11 @@ include('./style_table.php');
                 },
                 columns: [{
                         title: "Name",
-                        data: "supplier"
+                        data: "supplier_master_name"
                     },
                     {
                         title: "Bank Account",
-                        data: "bank_name"
+                        data: "bank_master_name"
                     },
 
                     {

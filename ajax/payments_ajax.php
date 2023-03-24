@@ -14,14 +14,14 @@ if (isset($_POST['action']) && $_POST['action'] == "list") {
 if (isset($_POST['action']) && $_POST['action'] == "add") {
     $sname = $_REQUEST['sname'];
     $supplier_obj = new Supplier;
-    $supplier_data = $supplier_obj->GET_SUPPLIER_BY_NAME($sname);
-    $supplier_id = $supplier_data->supplier_master_id;
+    $supplier_data = $supplier_obj->GET_SUPPLIER_BY_ID($sname);
+    // $supplier_id = $supplier_data->supplier_master_id;
     $supplier_current_balance = $supplier_data->supplier_master_current_balance;
     $op = $_REQUEST['op_form'];
     $total = $supplier_current_balance - $op;
-    $bacc = $_REQUEST['bname'];
+    $b_id = $_REQUEST['bname'];
     $bnk_obj = new Payments;
-    $bnk_name_info = $bnk_obj->GET_BANK_NAME_BY_ID($bacc);
+    $bnk_name_info = $bnk_obj->GET_BANK_NAME_BY_ID($b_id);
     $bname = $bnk_name_info->bank_master_name;
     // $date = date("d-m-Y H:i A");
     $dt = $_REQUEST['date_form'];
@@ -29,21 +29,19 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $date1 = date("d-m-Y H:i:s A");
     $trans_type = 1;
     $arr = array(
-        "supplier_id" => $supplier_id,
-        "supplier" => $sname,
-        "bank_acc" => $bacc,
-        "bank_name" => $bname,
+        "supplier_id" => $sname,
+        "bank_id" => $b_id,
         "date" => $date,
         "amount" => $op,
 
     );
     $query = InsertData($arr, "payment_master");
-    $sql1 = "INSERT INTO transaction_master(supplier_id,bank_acc,sup_name,bank_name,trans_amnt,date,trans_type,created_on,balance) VALUES('" . $supplier_id . "','" . $bacc . "','" . $sname . "','" . $bname . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $date1 . "',$total )";
+    $sql1 = "INSERT INTO transaction_master(supplier_id , bank_id , trans_amnt , date , trans_type , create_on , updated_on) VALUES('" . $sname . "','" . $b_id . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $date1 . "','" . $date1 . "' )";
     $result2 = mysqli_query($conn, $sql1);
 
 
     if ($query == 1 && $result2 == 1) {
-        $sql = "UPDATE supplier_master SET supplier_master_current_balance = supplier_master_current_balance - $op , updated_on='" . date('d-m-y H:i A') . "' WHERE supplier_master_id= $supplier_id";
+        $sql = "UPDATE supplier_master SET supplier_master_current_balance = supplier_master_current_balance - $op , updated_on='" . date('d-m-y H:i A') . "' WHERE supplier_master_id= $sname";
         $result = mysqli_query($conn, $sql);
 
         echo "success";

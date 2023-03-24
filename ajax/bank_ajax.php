@@ -18,7 +18,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
 $name = $_REQUEST['bname_form'];
 $bac = $_REQUEST['bacc_form'];
 $arr = array(
-    "bank_master_id" =>$bac,
+    "bank_account" =>$bac,
     "bank_master_name" => $name,
     "created_on" => date("d-m-Y h:i A"),
     "updated_on" => date("d-m-Y h:i A"),
@@ -39,7 +39,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
 }
 if (isset($_POST['action']) && ($_POST['action'] == 'update')) {
     $wh_id=$_REQUEST['bnk_id'];
-    $id = $_REQUEST['bacc_form'];
+    $accnt = $_REQUEST['bacc_form'];
     $name = $_REQUEST['bname_form'];
     // $cb = $_REQUEST['cb'];
     // $record=$_REQUEST['record_status'];
@@ -48,7 +48,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'update')) {
     // }
     // $delete=1;/
     $arr = array(
-        "bank_master_id"=>$id,
+        "bank_account"=>$accnt,
         "bank_master_name" => $name,
        
     );

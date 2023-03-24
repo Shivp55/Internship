@@ -29,13 +29,12 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $arr = array(
         "invoice_number"=>$invoice,
         "supplier_id" => $supplier_id,
-        "supplier_name" => $sname,
         "date" => $date,
         "amount" => $op,
 
     );
     $query = InsertData($arr, "invoice_master");
-    $sql1 = "INSERT INTO transaction_master(supplier_id,sup_name,trans_amnt,date,trans_type,invoice_no,created_on,balance) VALUES('" . $supplier_id . "','" . $sname . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $invoice. "','" . $date1. "',$total)";
+    $sql1 = "INSERT INTO transaction_master(supplier_id,trans_amnt,date,trans_type,invoice_no,create_on,updated_on) VALUES('" . $supplier_id . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $invoice. "','" . $date1. "','" . $date1. "')";
     $result2 = mysqli_query($conn, $sql1);
      // echo $query1=InsertData($arr1,"transaction_master");
     

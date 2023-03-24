@@ -157,7 +157,7 @@ include('./style_table.php');
 
                     {
                         title: "Name",
-                        data: "supplier_name"
+                        data:"supplier_master_name",  
                     },
                     {
                         title: "Date",

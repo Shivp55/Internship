@@ -251,8 +251,9 @@ include('./style_table.php');
                   });
                 }
               }
-              if (data == "success") {
+              if (data == "Success") {
                 table.ajax.reload();
+                // console.log(data);
                 // window.location.reload();
               }
               $("#frmadd")[0].reset();

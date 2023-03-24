@@ -75,5 +75,12 @@
         return $db->fetch_object(MYSQL_FETCH_SINGLE);
 
     }
+    function GET_SUPPLIER_NAME_AND_DATE($name,$date){
+        global $db;
+        $sql="SELECT * from supplier_master where supplier_master_name=$name AND created_on='".$date."' and record_status=1";
+        $db->query($sql);
+        return $db->fetch_object(MYSQL_FETCH_SINGLE);
+
+    }
 
 }

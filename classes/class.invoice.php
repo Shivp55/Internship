@@ -2,7 +2,7 @@
 class Invoice{
     function GET_ALL_INVOICES(){
         global $db;
-        $sql="SELECT * FROM invoice_master";
+        $sql="SELECT * FROM invoice_master  JOIN supplier_master ON supplier_master.supplier_master_id=invoice_master.supplier_id";
         $db->query($sql);
         return $db->fetch_object();
     }
@@ -23,8 +23,3 @@ class Invoice{
 
 
 }
-
-
-
-
-?>

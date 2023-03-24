@@ -13,9 +13,9 @@ class Transaction{
         $sql="DELETE FROM transaction_master where t_id=$id";
         $db->query($sql);
     }
-    function GET_TRANSACTION_BY_ID($id){
+    function GET_TRANSACTION_BY_ID($id,$stdt,$endt){
         global $db;
-        $sql="SELECT * FROM transaction_master WHERE supplier_id=$id";
+        $sql="SELECT * FROM supplier_master JOIN transaction_master ON supplier_master.supplier_master_id = transaction_master.supplier_id LEFT JOIN bank_master ON  transaction_master.bank_id=bank_master.bank_master_id WHERE  date BETWEEN '".$stdt."' AND '".$endt."' and supplier_master_id = $id";
         $db->query($sql);
         return $db->fetch_object();
     }
@@ -52,5 +52,14 @@ class Transaction{
         }
         return $total_amnt;
     }
+    function FETCH_TOTAL_FOR_TYPE($id,$trans_type){
+        global $db;
+        $sql="SELECT SUM(trans_amnt) as total from transaction_master where supplier_id=$id AND trans_type =$trans_type";
+        $db->query($sql);
+        return $db->fetch_object();
+
+
+    }
+
 }
 ?>
