@@ -135,36 +135,15 @@ include('./style_table.php');
     </script>
     <script type="text/javascript">
         $(document).ready(function(e) {
-            $("#supplier_btn").click(function() {
-                var id = $("#sname").val();
-                var date = $("#reservation").val();
-                var url="../ajax/report_supplier_ajax.php";
-                $.ajax({
-                    url:url,
-                    type: "POST",
-                    data:{
-                        "id":id,
-                        "date":date,
-                    }
-
-
-                }).done(function(data){
-                    table.clear().draw();
-                    table.rows.add(data).draw();
-
-                });
-
-
-            });
             var table = $("#kt-datatable").DataTable({
                 "responsive": true,
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,
-                // "ordering": true,
+                "ordering": false,
                 "info": true,
                 "autoWidth": true,
-                "data":[],
+                // "data":[],
                 "columns": [{
                         data: "date",
                     },
@@ -185,7 +164,22 @@ include('./style_table.php');
                     },
                 ],
             });
-
+            $("#supplier_btn").click(function() {
+                var id = $("#sname").val();
+                var date = $("#reservation").val();
+                var url="../ajax/report_supplier_ajax.php";
+                $.ajax({
+                    url:url,
+                    type: "POST",
+                    data:{
+                        "id":id,
+                        "date":date,
+                    }
+                }).done(function(data){
+                    table.clear().draw();
+                    table.rows.add(data).draw();
+                });
+            });
         });
     </script>
 </body>

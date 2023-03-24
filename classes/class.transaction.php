@@ -61,5 +61,11 @@ class Transaction{
 
     }
 
+    function DELETE_TRANSACTION_FOR_INVOICE($inv){
+        global $db;
+        $sql="DELETE FROM transaction_master WHERE invoice_no=$inv";
+        $db->query($sql);
+    }
+
 }
 ?>

@@ -12,6 +12,12 @@ class Invoice{
         $db->query($sql);
         
     }
+    function GET_INVOICE_BY_ID($id){
+        global $db;
+        $sql="SELECT * FROM invoice_master where id=$id";
+        $db->query($sql);
+        return $db->fetch_object();
+    }
     // function UPDATE_SUPPLIER_BALANCE($id,$amnt){
     //     global $db;
     //     $sql="UPDATE transaction_master SET balance=balance+$amnt WHERE supplier_id=$id";

@@ -53,5 +53,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
     $id = $_REQUEST['id'];
     $pay_obj = new Payments;
     $pay_obj->DELETE_PAYMENT($id);
+
+    
     echo "success";
 }

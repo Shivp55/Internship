@@ -11,26 +11,19 @@
         <div class="form-box">
             <div class="form-value">
                 <form method="post" name="login" id="login">
-                    <h2>Login</h2>
+                    <h2>OTP</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" id="email" name="email" required>
-                        <label for="">Email</label>
+                        <input type="text" id="opt" name="otp" required>
+                        <label for="">OTP</label>
                     </div>
                     <div class="inputbox">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" name="password" id="password" required>
-                        <label for="">Password</label>
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="text" id="ver_otp" name="ver_otp" required>
+                        <label for="">VERIFY OTP</label>
                     </div>
-                    <div class="forget">
-                        <label for=""><input type="checkbox">Remember Me <a href="./admin_forgot_password.php">Forgot Password</a></label>
-                    </div>
-                    <input type="hidden"  name="action" value="login">
-                    <button type="submit">Login</button>
-                    <div class="register">
-                        <p>Don't have a account <a href="#">Register</a></p>
-                    </div>
-
+                    <input type="hidden"  name="action" value="verify-otp">
+                    <button type="submit">GET OTP</button>
                 </form>
             </div>
         </div>
@@ -44,24 +37,23 @@
     $(document).ready(function(e) {
         $("form[name='login']").validate({
             rules: {
-                email: {
+                otp: {
                     required: true,
                     email: true
                 },
-                password: {
+                ver_otp: {
                     required: true,
-                    minlength: 6
-                }
+                    email: true
+                },
+                
             },
             messages: {
-                email: {
-                    required: 'The email field is required.',
-                    email: 'The email must be a valid email address.'
+                otp: {
+                    required: 'The otp field is required.',          
                 },
-                password: {
-                    required: 'The password field is required.',
-                    minlength: 'The password must be at least 6 characters.'
-                }
+                ver_otp: {
+                    required: 'Please verify otp',
+                },
             },
             invalidHandler: function(event,validator){
                 alert("Please Enter All the required fields");
@@ -73,15 +65,14 @@
                     type:"POST",
                     data:$('#login').serialize(),
                     success:function(data){
-                       if(data=="success"){
-                        window.open('./supplier_main.php',"_self");
-                    }
-                    else{
-                        alert(data);
+                        console.log(data);
+                        if(data=="true"){
+                        window.open('./login.php',"_self");
 
-                    }
-                        //
-                        // }
+                        }
+                        else{
+                            alert("Plase Try again");
+                        }
                     }
                 });
             }

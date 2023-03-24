@@ -1,5 +1,6 @@
 <?php
 require '../includes/config.php';
+header('Content-type: application/json');
 $id = $_POST['id'];
 $date=$_POST['date'];
 $supplier_obj=new Supplier;
@@ -11,23 +12,21 @@ $supplier_obj=new Supplier;
             $start_date = date("d-m-Y", strtotime($dates[0]));
             $end_date = date("d-m-Y", strtotime($dates[1]));
 
-            header('Content-type: application/json');
+            
             $data_obj=new Transaction;
             $data =  $data_obj->GET_TRANSACTION_BY_ID($id,$start_date,$end_date);
             $debit_balance =  $data_obj->FETCH_TOTAL_FOR_TYPE($id,1);
             $credit_balance =  $data_obj->FETCH_TOTAL_FOR_TYPE($id,2);
 
             $dataArray = array();
-    
-            // $record["date"] = "";
-            // $record["invoice"] = "";
-            // $record["bank"] = "";
-            // $record["debit"] = "";
-            // $record["credit"] = "Opening Balance";
-            // $record["balance"] = number_format($opening_balance, 2, ".", ",");
-
-
-            // array_push($dataArray, $record);
+            $record=array();
+            $record["date"] = "";
+            $record["invoice"] = "";
+            $record["bank"] = "";
+            $record["debit"] = "";
+            $record["credit"] = "Opening Balance";
+            $record["balance"] = number_format($opening_balance, 2, ".", ",");
+            array_push($dataArray, $record);
 
             foreach ($data as $val) {
 
@@ -61,24 +60,19 @@ $supplier_obj=new Supplier;
                 } else {
                     $record["credit"] = "";
                 }
-
-               
-
+                
                 $record["balance"] = number_format($opening_balance, 2, ".", ",");
 
                 array_push($dataArray, $record);
             }
-            if($data){
-            $record=array();
-            $record["date"] = "";
-            $record["invoice"] = "";
-            $record["bank"] = "";
-            $record["debit"] = "";
-            $record["credit"] = "closing Balance";
-            $record["balance"] = number_format($opening_balance, 2, ".", ",");
+            
+            $record1=array();
+            $record1["date"] = "";
+            $record1["invoice"] = "";
+            $record1["bank"] = "";
+            $record1["debit"] = "";
+            $record1["credit"] = "closing Balance";
+            $record1["balance"] = number_format($opening_balance, 2, ".", ",");
 
-            array_push($dataArray, $record);
-            }
+            array_push($dataArray, $record1);
             echo json_encode($dataArray);
-
-?>

@@ -17,4 +17,14 @@ if (isset($_POST['action']) && ($_POST['action'] == "login")) {
       echo printf($login_data);
     }
 }
+if (isset($_POST['action']) && ($_POST['action'] == "verify")) {
+  $email = $_REQUEST['email'];
+  $sql = "SELECT * FROM admin WHERE email='".$email."'";
+  $result = mysqli_query($conn,$sql);
+  if (mysqli_num_rows($result) > 0) {
+    echo "true";
+  } else {
+    echo "false";
+  }
+}
 ?>
