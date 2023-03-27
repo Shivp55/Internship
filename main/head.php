@@ -4,6 +4,8 @@ if (!isset($_SESSION['login_id']) && $_SESSION['login_id'] == "") {
   header("Location: http://localhost/banking/main/login.php");
   exit(0);
 }
+
+
 ?>
 
 <head>
@@ -14,16 +16,16 @@ if (!isset($_SESSION['login_id']) && $_SESSION['login_id'] == "") {
   <!-- Google Font: Source Sans Pro -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,600&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/fontawesome-free/css/all.min.css">
   <!-- Data Tables -->
-  <link rel="stylesheet" href="<?php echo SITE_URL?>assets/dist/css/datatable.css">
-  <link rel="stylesheet/scss" type="text/css" href="<?php echo SITE_URL?>assets/dist/css/datatable.scss">
+  <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/dist/css/datatable.css">
+  <link rel="stylesheet/scss" type="text/css" href="<?php echo SITE_URL ?>assets/dist/css/datatable.scss">
 
   <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.jqueryui.min.css"> -->
-  <link rel="stylesheet" href="<?php echo SITE_URL?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/daterangepicker/daterangepicker.css">
   <!-- iCheck for checkboxes and radio inputs -->
@@ -41,38 +43,41 @@ if (!isset($_SESSION['login_id']) && $_SESSION['login_id'] == "") {
   <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- dropzonejs -->
   <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/dropzone/min/dropzone.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="<?php echo SITE_URL ?>assets/dist/css/adminlte.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/dist/css/adminlte.min.css">
 
 
 
-<style type="text/css">
-  table.dataTable tbody tr {
-  background-color: lightcyan;
-}
-th{
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-}
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color:white;
-}
-td{
-  font-size: 13px;
-  font-weight: 300;
-}
-table.dataTable tr td {
-  border:1px solid black;
-}
+  <style type="text/css">
+    table.dataTable tbody tr {
+      background-color: lightcyan;
+    }
+
+    th {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: white;
+    }
+
+    td {
+      font-size: 13px;
+      font-weight: 300;
+    }
+
+    table.dataTable tr td {
+      border: 1px solid black;
+    }
 
 
 
-/* td.hover{
+    /* td.hover{
   background-color: green;
 } */
-
-</style>
+  </style>
 
 
 
