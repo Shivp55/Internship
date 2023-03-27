@@ -24,7 +24,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     // $bac = $_REQUEST['accnt'];
     $dt = $_REQUEST['date_form'];
     $date = date("d-m-Y", strtotime($dt));
-    $date1 = date("d-m-Y H:i:s A");
+    $date1 = date("d-m-Y h:i A");
     $trans_type = 2;
     $arr = array(
         "invoice_number" => $invoice,
@@ -42,7 +42,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     if ($query == 1 && $result2 == 1) {
         // $result = UpdateData($update, "supplier_master", $where_upd);
         // if ($result == 1) {
-        $sql = "UPDATE supplier_master SET supplier_master_current_balance = supplier_master_current_balance + $op , updated_on='" . date('d-m-y H:i A') . "' WHERE supplier_master_id= $supplier_id";
+        $sql = "UPDATE supplier_master SET supplier_master_current_balance = supplier_master_current_balance + $op , updated_on='" . date('d-m-y h:i A') . "' WHERE supplier_master_id= $supplier_id";
         $result = mysqli_query($conn, $sql);
         echo "success";
         // }
@@ -72,32 +72,14 @@ if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
             $sup_bal = $row['supplier_master_current_balance'];
         }
     }
+    $sup_bal;
+    $sql1 = "DELETE FROM transaction_master where invoice_no=$invoice_no";
+    $result1 = mysqli_query($conn, $sql1);
+    echo $bal = $sup_bal - $amnt;
 
-    // $sup_obj = new Supplier;
-    // $sup_data = $sup_obj->GET_SUPPLIER_BY_ID($sup_id);
-    // echo $sup_bal = $sup_data->supplier_master_current_balance;
-    echo $sup_bal;
-
-    $trans_obj = new Transaction;
-    $trans_data = $trans_obj->DELETE_TRANSACTION_FOR_INVOICE($invoice_no);
-
-    $arr = array(
-        'supplier_master_current_balance' => $sup_bal - $inv_amnt,
-        'updated_on' => date('d-m-Y H:i A'),
-
-    );
-
-    $where_arr = array(
-        'supplier_master_id' => $sup_id,
-    );
-
-    $result = UpdateData($arr, "supplier_master", $where_arr);
-
-    if ($result == 1) {
+    $sql2 = "UPDATE supplier_master SET supplier_master_current_balance = $bal , updated_on='" . date('d-m-y h:i A') . "' WHERE supplier_master_id= $sup_id";
+    $result2 = mysqli_query($conn, $sql2);
+    if ($result == 1 && $result2 == 1 && $result1 == 1) {
         echo "success";
     }
-
-    // $sql="SELECT * FROM invoice_master where id=$id";
-
-
 }

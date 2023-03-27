@@ -55,10 +55,6 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
                                             <input type="text" class="form-control" placeholder="Enter Supplier Name" id="sname" name="sname" value="<?php echo $supplier_info->supplier_master_name; ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="lname">Current Balance</label>
-                                            <input type="text" class="form-control" placeholder="Enter Supplier Current Balance " id="cb" name="cb" value="<?php echo $supplier_info->supplier_master_current_balance; ?>">
-                                        </div>
-                                        <div class="form-group">
                                             <label>Status</label>
                                             <select class="form-control" name="record_status" id="record_status">
                                                 <option selected><?php if ($supplier_info->record_status == 1) {
@@ -201,9 +197,6 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
                         sname: {
                             required: true,
                         },
-                        cb: {
-                            required: true,
-                        },
                         record_status: {
                             required: true,
                         },
@@ -212,10 +205,6 @@ $supplier_info = $supplier_data->GET_SUPPLIER_BY_ID($id);
                         sname: {
                             required: 'Enter your Supplier Name',
                             digits: "This field can contain only letters",
-                        },
-                        cb: {
-                            required: 'Enter your Current Balance',
-                            text: "Enter only text",
                         },
                         record_status: {
                             required: 'Enter status',

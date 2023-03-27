@@ -26,7 +26,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     // $date = date("d-m-Y H:i A");
     $dt = $_REQUEST['date_form'];
     $date = date("d-m-Y", strtotime($dt));
-    $date1 = date("d-m-Y H:i:s A");
+    $date1 = date("d-m-Y h:i A");
     $trans_type = 1;
     $arr = array(
         "supplier_id" => $sname,
@@ -41,7 +41,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
 
 
     if ($query == 1 && $result2 == 1) {
-        $sql = "UPDATE supplier_master SET supplier_master_current_balance = supplier_master_current_balance - $op , updated_on='" . date('d-m-y H:i A') . "' WHERE supplier_master_id= $sname";
+        $sql = "UPDATE supplier_master SET supplier_master_current_balance = supplier_master_current_balance - $op , updated_on='" . date('d-m-y h:i A') . "' WHERE supplier_master_id= $sname";
         $result = mysqli_query($conn, $sql);
 
         echo "success";
@@ -51,9 +51,34 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
 }
 if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
     $id = $_REQUEST['id'];
+    echo $id;
+    echo "\n";
     $pay_obj = new Payments;
+    $pay_data = $pay_obj->GET_PAYMENT_BY_ID($id);
+
+
+    echo $sup_id = $pay_data->supplier_id;
+    echo "\n";
+    echo $amnt = $pay_data->amount;
+    echo "\n";
     $pay_obj->DELETE_PAYMENT($id);
 
-    
-    echo "success";
+
+    $sql = "SELECT * FROM supplier_master where supplier_master_id =$sup_id";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $sup_bal = $row['supplier_master_current_balance'];
+        }
+    }
+    $sup_bal;
+    $sql1 = "DELETE FROM transaction_master where supplier_id=$id and trans_amnt=$amnt";
+    $result1 = mysqli_query($conn, $sql1);
+    echo $bal = $sup_bal + $amnt;
+
+    $sql2 = "UPDATE supplier_master SET supplier_master_current_balance = $bal , updated_on='" . date('d-m-y h:i A') . "' WHERE supplier_master_id= $sup_id";
+    $result2 = mysqli_query($conn, $sql2);
+    if ($result == 1 && $result2 == 1 && $result1 == 1) {
+        echo "success";
+    }
 }

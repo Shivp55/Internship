@@ -43,7 +43,6 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
             $result2 = mysqli_query($conn, $sql);
             echo "Success";
         }
-           
 
 
 
@@ -52,21 +51,22 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
 
 
 
-            // $user=new Supplier;
-            // $user_data=$user->GET_SUPPLIER_NAME_AND_DATE($name,$date1);
-            // $id=$user_data->supplier_master_id;
-            // $sql = "INSERT INTO transaction_master(supplier_id,trans_amnt,date,created_on,updated_on) VALUES ('" . $id . "','" . $op . "','" . $date . "','" . $date1 . "','" . $date1 . "' )";
-            // $result2 = mysqli_query($conn, $sql);
-            // // $sql2 = "SELECT * from supplier_master where supplier_master_name='" . $name . "' AND created_on='" . $date1 . "'";
-            // // $result3 = mysqli_query($conn, $sql2);
-            // // if (mysqli_num_rows($result3) > 0) {
-            // //     while ($row = mysqli_fetch_assoc($result3)) {
-            // //         $id = $row['supplier_master_id'];
-            // //     }
-            // // }
-            // // $sql4 = "UPDATE transaction_master SET supplier_id=$id where sup_name='" . $name . "'";
-            // // $result4 = mysqli_query($conn, $sql4);
-            // echo "success";
+
+        // $user=new Supplier;
+        // $user_data=$user->GET_SUPPLIER_NAME_AND_DATE($name,$date1);
+        // $id=$user_data->supplier_master_id;
+        // $sql = "INSERT INTO transaction_master(supplier_id,trans_amnt,date,created_on,updated_on) VALUES ('" . $id . "','" . $op . "','" . $date . "','" . $date1 . "','" . $date1 . "' )";
+        // $result2 = mysqli_query($conn, $sql);
+        // // $sql2 = "SELECT * from supplier_master where supplier_master_name='" . $name . "' AND created_on='" . $date1 . "'";
+        // // $result3 = mysqli_query($conn, $sql2);
+        // // if (mysqli_num_rows($result3) > 0) {
+        // //     while ($row = mysqli_fetch_assoc($result3)) {
+        // //         $id = $row['supplier_master_id'];
+        // //     }
+        // // }
+        // // $sql4 = "UPDATE transaction_master SET supplier_id=$id where sup_name='" . $name . "'";
+        // // $result4 = mysqli_query($conn, $sql4);
+        // echo "success";
         // }
     }
 }
@@ -79,12 +79,17 @@ if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
     echo $id;
     $supplier_obj = new Supplier;
     $supplier_obj->DELETE_SUPPLIER($id);
+
+    $arr = array(
+        "updated_on" => date("Y-m-d h:i A"),
+    );
+    $where_id = array("supplier_master_id" => $id);
+    $result = UpdateData($arr, "supplier_master", $where_id);
     echo "success";
 }
 if (isset($_POST['action']) && ($_POST['action'] == 'update')) {
     $id = $_REQUEST['supplier_id'];
     $name = $_REQUEST['sname'];
-    $cb = $_REQUEST['cb'];
     $record = $_REQUEST['record_status'];
     if ($record == 0) {
         $delete = 1;
@@ -92,7 +97,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'update')) {
     // $delete=1;/
     $arr = array(
         "supplier_master_name" => $name,
-        "supplier_master_current_balance" => $cb,
+        "updated_on" => date("Y-m-d h:i A"),
         "record_status" => $record,
         "delete_status" => $delete,
     );
