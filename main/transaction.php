@@ -53,9 +53,6 @@ include('./style_table.php');
                                             <th>Action</th>
 
                                         </thead>
-
-
-
                                         <tfoot>
                                             <tr class="table-row">
                                                 <th>Total Amount</th>

@@ -16,7 +16,7 @@ class Invoice{
         global $db;
         $sql="SELECT * FROM invoice_master where id=$id";
         $db->query($sql);
-        return $db->fetch_object();
+        return $db->fetch_object(MYSQL_FETCH_SINGLE);
     }
     // function UPDATE_SUPPLIER_BALANCE($id,$amnt){
     //     global $db;

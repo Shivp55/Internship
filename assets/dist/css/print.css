@@ -1,0 +1,93 @@
+@media print {
+    table {
+        /* text-align: center; */
+        border: 1px solid black;
+        font-size: 9px;
+        font-weight: 500;
+        /* -webkit-column-width: 100px; */
+        
+        font-family: Arial;
+    }
+    
+    th {
+        background:#007bff;
+        padding: 10px;
+        color:white;
+        
+    }
+    th td{
+        border:1px solid black;
+    }
+
+    table.dataTable tbody tr {
+        background-color: lightcyan;
+        height: 30px !important;
+    }
+  
+    table.dataTable tbody tr td{
+        width: 400px !important;
+        padding: 0 4px;
+        /* column-width: 100px !important; */
+    }
+
+    th {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        /* column-width: 1000px; */
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: white;
+    }
+
+    
+
+}
+
+@media screen {
+
+    table {
+        text-align: center;
+        border: 1px solid black;
+        font-size: 12px;
+        column-width: 100px;
+        
+        font-family: Arial;
+    }
+    th td{
+        border:1px solid black;
+    }
+
+    th {
+        background:#007bff;
+        padding: 10px;
+        color:white;
+    }
+
+    table.dataTable tbody tr {
+        background-color: lightcyan;
+        height: 30px;
+    }
+
+    th {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: white;
+    }
+
+    td {
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+    table.dataTable tr td {
+        display: table-cell;
+        /* border: 1px solid black; */
+    }
+
+}

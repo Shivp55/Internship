@@ -45,5 +45,4 @@
 
 <!-- AdminLTE App -->
 <script src="<?php echo SITE_URL?>assets/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo SITE_URL?>assets/dist/js/demo.js"></script>
+

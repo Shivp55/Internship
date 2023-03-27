@@ -6,7 +6,78 @@ include './head.php';
 $supplier_object = new Supplier;
 $supplier_info = $supplier_object->GET_ALL_SUPPLIERS();
 include('./style_table.php');
+
+
 ?>
+
+<style type="text/css">
+    @media print {
+        table {
+            border: 1px solid black;
+        }
+
+        table.dataTable tbody tr {
+            background-color: lightcyan;
+        }
+
+        th {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: white;
+        }
+
+        td {
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        table.dataTable tr td {
+            border: 1px solid black;
+        }
+
+    }
+
+    @media screen {
+        table {
+            border: 1px solid black;
+        }
+
+        table.dataTable tbody tr {
+            background-color: lightcyan;
+        }
+
+        th {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: white;
+        }
+
+        td {
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        table.dataTable tr td {
+            border: 1px solid black;
+        }
+
+    }
+</style>
+
+
+<!-- <style media="print">
+  .noPrint{ display: none; }
+  .kt-datatable.table.table-striped.table-bordered.dataTable.no-footer{ display: block !important; }
+</style> -->
+
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -17,7 +88,7 @@ include('./style_table.php');
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <section class="content-header">
+            <section class="content-header noPrint">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -35,7 +106,7 @@ include('./style_table.php');
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="row">
+                    <div class="row noPrint">
                         <!-- left column -->
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
@@ -46,7 +117,7 @@ include('./style_table.php');
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form method="post" name="frmadd" id="frmadd">
+                                <form method="post" name="frmadd" id="frmadd" class="noPrint">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="fname">Name</label>
@@ -95,22 +166,26 @@ include('./style_table.php');
                         <div class="col-md-12">
                             <div class="card card-custom">
                                 <div class="card-body">
-                                    <div id="example">
+                                    <div class="example noPrint">
                                         <table id="kt-datatable" class="table table-striped table-bordered" width="100%">
                                             <thead>
-                                                <th>Date</th>
-                                                <th> Invoice No.</th>
+                                                <th id="date_css">Date</th>
+                                                <th>Invoice No.</th>
                                                 <th>Bank</th>
                                                 <th>Debit</th>
                                                 <th>Credit</th>
                                                 <th>Balance </th>
                                                 <!-- <th>Date ID </th> -->
-
-
                                             </thead>
 
                                         </table>
                                     </div>
+                                </div>
+                                <div class="card-footer" style="background-color:white;">
+                                    <center>
+                                        <input type="hidden" name="action" value="print">
+                                        <button type="button" id="print_btn" class="btn btn-primary mr-4" style="margin-bottom:30px;">Print Details</button>
+                                    </center>
                                 </div>
                             </div>
                         </div>
@@ -122,16 +197,18 @@ include('./style_table.php');
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <?php
-        include 'footer.php';
-        ?>
+        <div class="noPrint">
+            <?php
+            include 'footer.php';
+            ?>
+        </div>
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
     <?php include 'js.php'; ?>
     <!-- script_start -->
     <script type="text/javascript">
-        $('#reservation').daterangepicker()
+        $('#reservation').daterangepicker();
     </script>
     <script type="text/javascript">
         $(document).ready(function(e) {
@@ -167,19 +244,43 @@ include('./style_table.php');
             $("#supplier_btn").click(function() {
                 var id = $("#sname").val();
                 var date = $("#reservation").val();
-                var url="../ajax/report_supplier_ajax.php";
+                var url = "../ajax/report_supplier_ajax.php";
                 $.ajax({
-                    url:url,
+                    url: url,
                     type: "POST",
-                    data:{
-                        "id":id,
-                        "date":date,
+                    data: {
+                        "id": id,
+                        "date": date,
                     }
-                }).done(function(data){
+                }).done(function(data) {
                     table.clear().draw();
                     table.rows.add(data).draw();
                 });
             });
+        });
+
+        function printData() {
+            var divToPrint = document.getElementById("kt-datatable");
+            mywindow = window.open("");
+            mywindow.document.write('<html><head><title></title>');
+            mywindow.document.write('<link rel="stylesheet" href="../assets/dist/css/print.css" type="text/css" />');
+            mywindow.document.write('</head><body >');
+            // mywindow.document.write("<link rel=\"stylesheet\" href=\"../assets/dist/css/print.css\" type=\"text/css\" media=\"print\"/>");
+            mywindow.document.write(divToPrint.outerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close();
+            mywindow.focus();
+
+            setTimeout(function() {
+                mywindow.print();
+
+            }, 1000);
+            mywindow.document.close();
+            return true;
+        }
+        $("#print_btn").on("click", function() {
+            printData();
         });
     </script>
 </body>
