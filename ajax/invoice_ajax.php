@@ -37,7 +37,8 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $sql1 = "INSERT INTO transaction_master(supplier_id,trans_amnt,date,trans_type,invoice_no,create_on,updated_on) VALUES('" . $supplier_id . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $invoice . "','" . $date1 . "','" . $date1 . "')";
     $result2 = mysqli_query($conn, $sql1);
     // echo $query1=InsertData($arr1,"transaction_master");
-
+    $sql4 = "INSERT INTO updates(sup_id,trans_type,trans_amount) VALUES ($supplier_id,$trans_type,$op)";
+    $result4 = mysqli_query($conn, $sql4);
 
     if ($query == 1 && $result2 == 1) {
         // $result = UpdateData($update, "supplier_master", $where_upd);

@@ -271,10 +271,8 @@ include('./style_table.php');
 
             mywindow.document.close();
             mywindow.focus();
-
             setTimeout(function() {
                 mywindow.print();
-
             }, 1000);
             mywindow.document.close();
             return true;

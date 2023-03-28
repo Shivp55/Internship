@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+ <head> 
+ <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+ <script >
+window.onload = function () 
+{
+ var chart = new CanvasJS.Chart("chartContainer",
+ {
+title:{text: "Fruits sold in First & Second Quarter"},
+axisX:{title: "Fruits"},
+axisY:{ title: "Sale",
+ prefix: "$",
+ suffix: "K"},
+data: [{
+ type: "column", //bar, line
+ showInLegend: true,
+ legendText: "First Quarter",
+ dataPoints: [
+{ label: "Banana", y: 58 },
+{ label: "Orange", y: 69 },
+{ label: "Apple", y: 80 },
+{ label: "Mango", y: 74 },
+{ label: "Grape", y: 64 }]
+},
+{
+ type: "column", //bar, line
+ showInLegend: true,
+ legendText: "Second Quarter",
+ dataPoints: [
+{ label: "Banana", y: 63 },
+{ label: "Orange", y: 73 },
+{ label: "Apple", y: 88 },
+{ label: "Mango", y: 77 },
+{ label: "Grape", y: 60 }]
+}]
+});
+chart.render();
+}
+ </script>
+ </head>
+ <body>
+<div id="chartContainer" style="height: 100%; width: 800px;"></div>
+ </body>
+</html>

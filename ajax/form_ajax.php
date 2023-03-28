@@ -22,6 +22,8 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $date = date("d-m-Y");
     $date1 = date("d-m-Y H:i A");
     $trans_type = 2;
+    $trans_type1 = 0;
+
     if ($fetch_supplier == 1) {
         echo "supplier_exists";
     } else {
@@ -36,6 +38,10 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
         );
         $result = InsertData($arr, "supplier_master");
         $sup_id = $db->sql_inserted_id();
+        $sql4 = "INSERT INTO updates(sup_id,trans_type,trans_amount) VALUES ($sup_id,$trans_type1,$op)";
+        $result4 = mysqli_query($conn, $sql4);
+
+
         if ($result == 0) {
             echo "Error";
         } else if ($result == 1) {
@@ -43,36 +49,8 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
             $result2 = mysqli_query($conn, $sql);
             echo "Success";
         }
-
-
-
-
-
-
-
-
-
-        // $user=new Supplier;
-        // $user_data=$user->GET_SUPPLIER_NAME_AND_DATE($name,$date1);
-        // $id=$user_data->supplier_master_id;
-        // $sql = "INSERT INTO transaction_master(supplier_id,trans_amnt,date,created_on,updated_on) VALUES ('" . $id . "','" . $op . "','" . $date . "','" . $date1 . "','" . $date1 . "' )";
-        // $result2 = mysqli_query($conn, $sql);
-        // // $sql2 = "SELECT * from supplier_master where supplier_master_name='" . $name . "' AND created_on='" . $date1 . "'";
-        // // $result3 = mysqli_query($conn, $sql2);
-        // // if (mysqli_num_rows($result3) > 0) {
-        // //     while ($row = mysqli_fetch_assoc($result3)) {
-        // //         $id = $row['supplier_master_id'];
-        // //     }
-        // // }
-        // // $sql4 = "UPDATE transaction_master SET supplier_id=$id where sup_name='" . $name . "'";
-        // // $result4 = mysqli_query($conn, $sql4);
-        // echo "success";
-        // }
     }
 }
-
-
-
 
 if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
     $id = $_REQUEST['id'];

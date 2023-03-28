@@ -39,6 +39,9 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $sql1 = "INSERT INTO transaction_master(supplier_id , bank_id , trans_amnt , date , trans_type , create_on , updated_on) VALUES('" . $sname . "','" . $b_id . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $date1 . "','" . $date1 . "' )";
     $result2 = mysqli_query($conn, $sql1);
 
+    $sql4 = "INSERT INTO updates(sup_id,trans_type,trans_amount) VALUES ($sname,$trans_type,$op)";
+    $result4 = mysqli_query($conn, $sql4);
+
 
     if ($query == 1 && $result2 == 1) {
         $sql = "UPDATE supplier_master SET supplier_master_current_balance = supplier_master_current_balance - $op , updated_on='" . date('d-m-y h:i A') . "' WHERE supplier_master_id= $sname";
@@ -78,6 +81,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'delete')) {
 
     $sql2 = "UPDATE supplier_master SET supplier_master_current_balance = $bal , updated_on='" . date('d-m-y h:i A') . "' WHERE supplier_master_id= $sup_id";
     $result2 = mysqli_query($conn, $sql2);
+
     if ($result == 1 && $result2 == 1 && $result1 == 1) {
         echo "success";
     }

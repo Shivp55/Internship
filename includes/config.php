@@ -40,6 +40,7 @@ require_once(SITE_PATH . "/classes/class.payments.php");
 require_once(SITE_PATH . "/classes/classes.bank.php");
 require_once(SITE_PATH . "/classes/class.transaction.php");
 require_once(SITE_PATH . "/classes/class.invoice.php");
+require_once(SITE_PATH . "/classes/class.admin.php");
 
 
 // define("CLASS_PATH", SITE_PATH . "/classes/");
@@ -62,7 +63,3 @@ $conn = $db->CONNECTION($host_name, $db_name, $user_name, $password, false);
 // }
 
 // echo "Connected successfully";
-
-
-
-?>
