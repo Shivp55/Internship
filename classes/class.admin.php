@@ -166,4 +166,11 @@ class Admin
         $total_amount1 = $row['current_bal'];
         return $total_amount1;
     }
+    function GET_DATA_BY_WEEK_INVOICE()
+    {
+        global $db;
+        $sql = "SELECT CASE WHEN day < 8 THEN 'Week 1' WHEN day < 15 THEN 'Week 2' WHEN day < 22 THEN 'Week 3' ELSE 'Week 4' END AS week_of_month, case WHEN trans_type=1 THEN SUM(trans_amount) END AS invoice, case WHEN trans_type=2 THEN SUM(trans_amount) END AS payments FROM(SELECT * ,EXTRACT(day from date) as day from updates)a GROUP BY week_of_month";
+        $db->query($sql);
+        return $db->fetch_object();
+    }
 }

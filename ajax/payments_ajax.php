@@ -25,8 +25,9 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $bname = $bnk_name_info->bank_master_name;
     // $date = date("d-m-Y H:i A");
     $dt = $_REQUEST['date_form'];
-    $date = date("d-m-Y", strtotime($dt));
+    $date = date("Y-m-d", strtotime($dt));
     $date1 = date("d-m-Y h:i A");
+    $date2 = date("Y-m-d", strtotime($dt));
     $trans_type = 1;
     $arr = array(
         "supplier_id" => $sname,
@@ -38,11 +39,6 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $query = InsertData($arr, "payment_master");
     $sql1 = "INSERT INTO transaction_master(supplier_id , bank_id , trans_amnt , date , trans_type , create_on , updated_on) VALUES('" . $sname . "','" . $b_id . "','" . $op . "','" . $date . "','" . $trans_type . "','" . $date1 . "','" . $date1 . "' )";
     $result2 = mysqli_query($conn, $sql1);
-
-    $sql4 = "INSERT INTO updates(sup_id,trans_type,trans_amount) VALUES ($sname,$trans_type,$op)";
-    $result4 = mysqli_query($conn, $sql4);
-
-
     if ($query == 1 && $result2 == 1) {
         $sql = "UPDATE supplier_master SET supplier_master_current_balance = supplier_master_current_balance - $op , updated_on='" . date('d-m-y h:i A') . "' WHERE supplier_master_id= $sname";
         $result = mysqli_query($conn, $sql);

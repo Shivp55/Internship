@@ -38,9 +38,6 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
         );
         $result = InsertData($arr, "supplier_master");
         $sup_id = $db->sql_inserted_id();
-        $sql4 = "INSERT INTO updates(sup_id,trans_type,trans_amount) VALUES ($sup_id,$trans_type1,$op)";
-        $result4 = mysqli_query($conn, $sql4);
-
 
         if ($result == 0) {
             echo "Error";

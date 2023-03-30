@@ -100,7 +100,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
   </script>
-
+  <?php $date = date('m'); ?>
   <script type="text/javascript">
     google.charts.load('current', {
       packages: ['corechart']
@@ -233,16 +233,40 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     google.setOnLoadCallback(drawChart);
 
     function drawChart() {
+      $.ajax({
+        url: '../ajax/admin_ajax.php',
+        type: 'POST',
+        data: {
+          action: 'list'
+        },
+        success: function(data) {
+
+        }
+      });
+
+
+
       var data = google.visualization.arrayToDataTable([
         ['product', 'Invoices', 'Payments'],
-        ['Shoes', 40, 50],
-        ['Hats', 50, 55],
-        ['Coats', 35, 40],
-        ['Scarves', 40, 30]
+
+
+
+        <?php
+        $data_obj = new Admin;
+        $data = $data_obj->GET_DATA_BY_WEEK_INVOICE();
+        foreach ($data as $val) { ?>['<?php echo $val->week_of_month ?>', <?php if ($val->invoice > 0) {
+                                                                            echo $val->invoice;
+                                                                          } else {
+                                                                            echo "0";
+                                                                          }  ?>, <?php if ($val->payments > 0) {
+                                                                                    echo $val->payments;
+                                                                                  } else {
+                                                                                    echo "0";
+                                                                                  } ?>],
+        <?php } ?>
       ]);
 
       var options = {
-        duration: 2000,
         title: "Sales",
         legend: "bottom",
         hAxis: {
@@ -253,7 +277,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         },
         animation: {
           startup: true,
-          duration: 5000,
+          duration: 2000,
           easing: 'inAndOut'
         }
       };
@@ -346,7 +370,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="content-top-1">
               <div class="col-md-6 top-content">
                 <h5>Sales</h5>
-                <label style="font-size:22px;"><i class="fa-sharp fa-solid fa-indian-rupee-sign"></i><?php echo $ad_data3 = $ad_obj->TOTAL_SALES() ?></label>
+                <label style="font-size:22px;"><i class="fa-sharp fa-solid fa-indian-rupee-sign"></i><?php echo number_format($ad_obj->TOTAL_SALES()); ?></label>
               </div>
               <div class="col-md-6 top-content1">
                 <div id="demo-pie-1" class="pie-title-center" data-percent=<?php echo ($ad_data3 = $ad_obj->TOTAL_SALES() * 100) / 1000000 ?>> <span class="pie-value"></span> </div>
@@ -356,11 +380,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="content-top-1">
               <div class="col-md-6 top-content">
                 <h5>Total Balance</h5>
-                <label style="font-size:22px;"><i class="fa-sharp fa-solid fa-indian-rupee-sign"></i><?php echo $ad_data4 = $ad_obj->GET_ALL_BALANCEs(); ?></label>
+                <label style="font-size:22px;"><i class="fa-sharp fa-solid fa-indian-rupee-sign"></i><?php echo  number_format($ad_obj->GET_ALL_BALANCEs()); ?></label>
 
               </div>
               <div class="col-md-6 top-content1">
-                <div id="demo-pie-2" class="pie-title-center" data-percent="<?php echo ($ad_obj->GET_ALL_INVOICES() / $ad_obj->TOTAL_SALES() * 100) ?><"> <span class="pie-value"></span> </div>
+                <div id="demo-pie-2" class="pie-title-center" data-percent="<?php echo ($ad_obj->GET_ALL_BALANCEs() / 1000000 * 100) ?><"> <span class="pie-value"></span> </div>
               </div>
               <div class="clearfix"> </div>
             </div>
@@ -495,7 +519,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
               <h2>Inbox</h2>
               <div class="scrollbar" id="style-1">
                 <?php
-                $sql = "SELECT * FROM updates ORDER BY id DESC LIMIT 0,5";
+                $sql = "SELECT * FROM transaction_master ORDER BY t_id DESC LIMIT 0,5";
                 $result = mysqli_query($conn, $sql);
                 $result1 = mysqli_num_rows($result);
                 for ($i = 0; $i < 5; $i++) {
@@ -508,7 +532,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                       <div class="col-xs-7 activity-desc">
                         <h5><a href="#"><?php echo $_SESSION['name']; ?></a></h5>
                         <p>Hey ! I just Updated <?php
-                                                $id = $rows['sup_id'];
+                                                $id = $rows['supplier_id'];
                                                 $sup_obj = new Supplier;
                                                 $sup_data = $sup_obj->GET_SUPPLIER_BY_ID($id);
                                                 echo "<p style='font-weight:bold'>" . $sp_id = $sup_data->supplier_master_name . "</p>";
@@ -520,7 +544,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             } else {
                               echo "<p style='color:blue;'>Added New Supplier</p>";
                             } ?></p>
-                        <p><?php echo $rows['trans_amount']; ?></p>
+                        <p><?php echo $rows['trans_amnt']; ?></p>
                       </div>
                       <div class="col-xs-2 activity-desc1">
                         <h6><?php $date = $sup_data->updated_on;

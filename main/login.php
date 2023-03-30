@@ -25,7 +25,7 @@
                     <div class="forget">
                         <label for=""><input type="checkbox">Remember Me <a href="./admin_forgot_password.php">Forgot Password</a></label>
                     </div>
-                    <input type="hidden"  name="action" value="login">
+                    <input type="hidden" name="action" value="login">
                     <button type="submit">Login</button>
                     <div class="register">
                         <p>Don't have a account <a href="#">Register</a></p>
@@ -40,61 +40,60 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(e) {
-        $("form[name='login']").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
+    <script type="text/javascript">
+        $(document).ready(function(e) {
+            $("form[name='login']").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    }
                 },
-                password: {
-                    required: true,
-                    minlength: 6
-                }
-            },
-            messages: {
-                email: {
-                    required: 'The email field is required.',
-                    email: 'The email must be a valid email address.'
+                messages: {
+                    email: {
+                        required: 'The email field is required.',
+                        email: 'The email must be a valid email address.'
+                    },
+                    password: {
+                        required: 'The password field is required.',
+                        minlength: 'The password must be at least 6 characters.'
+                    }
                 },
-                password: {
-                    required: 'The password field is required.',
-                    minlength: 'The password must be at least 6 characters.'
+                invalidHandler: function(event, validator) {
+                    alert("Please Enter All the required fields");
+                },
+                submitHandler: function(form) {
+                    var url = "../ajax/login_user.php";
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: $('#login').serialize(),
+                        success: function(data) {
+                            if (data == "success") {
+                                window.open('./index.php', "_self");
+                            } else {
+                                alert(data);
+
+                            }
+                            //
+                            // }
+                        }
+                    });
                 }
-            },
-            invalidHandler: function(event,validator){
-                alert("Please Enter All the required fields");
-            },
-            submitHandler:function(form){
-                var url="../ajax/login_user.php";
-                $.ajax({
-                    url:url,
-                    type:"POST",
-                    data:$('#login').serialize(),
-                    success:function(data){
-                       if(data=="success"){
-                        window.open('./supplier_main.php',"_self");
-                    }
-                    else{
-                        alert(data);
-
-                    }
-                        //
-                        // }
-                    }
-                });
-            }
 
 
 
 
+
+            });
 
         });
-
-    });
-</script>
+    </script>
 
 </body>
 
-</html> 
+</html>
