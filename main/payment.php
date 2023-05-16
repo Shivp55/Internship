@@ -142,7 +142,7 @@ include('./style_table.php');
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,
-                "ordering": true,
+                "ordering": false,
                 "info": true,
                 "autoWidth": true,
                 "order": [2, "desc"],
@@ -165,6 +165,7 @@ include('./style_table.php');
                     {
                         title: "Date",
                         data: "date"
+                        
                     },
                     {
                         title: "Pay Amount",

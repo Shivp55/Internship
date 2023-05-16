@@ -4,8 +4,6 @@
 include './head.php';
 include('./style_table.php');
 ?>
-
-
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <?php
@@ -73,7 +71,6 @@ include('./style_table.php');
                         <th>Supplier Name</th>
                         <th>Opening Balance</th>
                         <th>Current Balance</th>
-
                         <th>Created On</th>
                         <th>Updated On</th>
                         <th>Action</th>
@@ -112,11 +109,10 @@ include('./style_table.php');
         "paging": true,
         "lengthChange": true,
         "searching": true,
-        "ordering": true,
+        "ordering": false,
         "info": true,
         "autoWidth": true,
         "hover": true,
-
         ajax: {
           url: '../ajax/form_ajax.php',
           method: "POST",
@@ -131,7 +127,6 @@ include('./style_table.php');
           {
             title: "Opening Balance",
             "render": function(data, type, row) {
-
               var amnt = row.supplier_master_opening_balance;
               var amount = new Intl.NumberFormat('en-IN').format(amnt)
               return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> ' + amount;
@@ -140,14 +135,10 @@ include('./style_table.php');
           {
             title: "Current Balance",
             "render": function(data, type, row) {
-
               var amnt = row.supplier_master_current_balance;
               var amount = new Intl.NumberFormat('en-IN').format(amnt)
               return '<i class="fa-sharp fa-solid fa-indian-rupee-sign"></i> ' + amount;
-
             },
-
-
           },
           {
             title: "Created On",
@@ -157,8 +148,6 @@ include('./style_table.php');
             title: "Updated On",
             data: "updated_on"
           },
-
-
           {
             title: "Status",
             "render": function(data, type, row) {
@@ -183,11 +172,8 @@ include('./style_table.php');
           },
           "targets": -1,
         }, ],
-
       });
-
       $("form[name='frmadd']").validate({
-
         rules: {
           name_form: {
             required: true,
@@ -199,7 +185,6 @@ include('./style_table.php');
         messages: {
           name_form: {
             required: 'Enter your Supplier name',
-
           },
           op_form: {
             required: 'Enter Opening Balance',
@@ -261,7 +246,6 @@ include('./style_table.php');
           });
         }
       });
-
       table.on("click", '[data-record-id]', function() {
         var id = $(this).data("record-id");
         window.open('./edit_supplier.php?id=' + id, "_self");

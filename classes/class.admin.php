@@ -173,4 +173,10 @@ class Admin
         $db->query($sql);
         return $db->fetch_object();
     }
+    public function GET_SALES_FOR_MONTH(){
+        global $db;
+        $sql="SELECT MONTHNAME(date) as month , SUM(trans_amnt) as total FROM transaction_master GROUP BY YEAR(date), MONTH(date)";
+        $db->query($sql);
+        return $db->fetch_object();   
+     }
 }

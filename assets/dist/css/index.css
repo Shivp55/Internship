@@ -50,16 +50,16 @@ h2{
 }
 input:focus ~ label,
 input:valid ~ label{
-top: -5px;
+top: -15px;
 }
 .inputbox input {
-    width: 100%;
+    width: 310px;
     height: 50px;
     background: transparent;
     border: none;
     outline: none;
     font-size: 1em;
-    padding:0 35px 0 5px;
+    /* padding:0 35px 0 5px; */
     color: #fff;
 }
 .inputbox ion-icon{

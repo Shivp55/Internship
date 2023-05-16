@@ -5,7 +5,6 @@ error_reporting(1);
 $server_name = strtoupper($_SERVER['SERVER_NAME']);
 date_default_timezone_set("Asia/Kolkata");
 
-
 switch ($server_name) {
 
     case "LOCALHOST":
@@ -26,13 +25,10 @@ switch ($server_name) {
         $password = "";
         $db_name = "banking";
         break;
-
-
 }
 
 define("SITE_PATH", $physical_path);
 define("SITE_URL", $site_url);
-
 require_once(SITE_PATH . "/includes/functions.php");
 require_once(SITE_PATH . "/classes/class.mysqli.php");
 require_once(SITE_PATH . "/classes/class.supplier.php");

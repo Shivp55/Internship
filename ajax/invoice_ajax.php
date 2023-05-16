@@ -23,7 +23,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     // $bname = $_REQUEST['bname'];
     // $bac = $_REQUEST['accnt'];
     $dt = $_REQUEST['date_form'];
-    $date = date("d-m-Y", strtotime($dt));
+    $date = date("Y-m-d", strtotime($dt));
     $date1 = date("d-m-Y h:i A");
     $date2 = date('Y-m-d', strtotime($dt));
     $trans_type = 2;

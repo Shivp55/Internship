@@ -22,7 +22,8 @@ if (isset($_POST['action']) && ($_POST['action'] == "verify")) {
   $sql = "SELECT * FROM admin WHERE email='".$email."'";
   $result = mysqli_query($conn,$sql);
   if (mysqli_num_rows($result) > 0) {
-    echo "true";
+    
+
   } else {
     echo "false";
   }

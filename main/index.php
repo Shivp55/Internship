@@ -26,8 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
   ?>
 
-  <title>Glance Design Dashboard an Admin Panel Category Flat Bootstrap Responsive Website Template | Home ::
-    w3layouts</title>
+  <title> Dashboard </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -247,22 +246,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 
       var data = google.visualization.arrayToDataTable([
-        ['product', 'Invoices', 'Payments'],
+        ['Month', 'Total Sales'],
 
 
 
         <?php
         $data_obj = new Admin;
-        $data = $data_obj->GET_DATA_BY_WEEK_INVOICE();
-        foreach ($data as $val) { ?>['<?php echo $val->week_of_month ?>', <?php if ($val->invoice > 0) {
-                                                                            echo $val->invoice;
-                                                                          } else {
-                                                                            echo "0";
-                                                                          }  ?>, <?php if ($val->payments > 0) {
-                                                                                    echo $val->payments;
-                                                                                  } else {
-                                                                                    echo "0";
-                                                                                  } ?>],
+        $data = $data_obj->GET_SALES_FOR_MONTH();
+        foreach ($data as $val) { ?>['<?php echo $val->month ?>', <?php echo $val->total ?>],
         <?php } ?>
       ]);
 
@@ -538,9 +529,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 echo "<p style='font-weight:bold'>" . $sp_id = $sup_data->supplier_master_name . "</p>";
                                                 ?></p>
                         <p><?php if ($rows['trans_type'] == 1) {
-                              echo "<p style='color:red;'>Debited</p>";
+                              echo "<p style='color:red;'>Paid</p>";
                             } else if ($rows['trans_type'] == 2) {
-                              echo "<p style='color:green;'>Credited</p>";
+                              echo "<p style='color:green;'>Added an Invoice</p>";
                             } else {
                               echo "<p style='color:blue;'>Added New Supplier</p>";
                             } ?></p>

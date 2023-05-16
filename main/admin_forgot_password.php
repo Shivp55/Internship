@@ -18,7 +18,7 @@
                         <label for="">Email</label>
                     </div>
                     <input type="hidden"  name="action" value="verify">
-                    <button type="submit">GET OTP</button>
+                    <button type="submit" onClick="sendOTP();">GET OTP</button>
                 </form>
             </div>
         </div>
@@ -55,11 +55,10 @@
                     url:url,
                     type:"POST",
                     data:$('#login').serialize(),
-                    success:function(data){ 
+                    success:function(data){
                         console.log(data);
                         if(data=="true"){
                         window.open('./admin_verify_otp.php?email='+email,"_self");
-
                         }
                         else{
                             alert("Email Not Found!! Please Register");

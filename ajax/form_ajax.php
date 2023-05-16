@@ -19,7 +19,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     $fetch_obj = new Supplier;
     $fetch_supplier = $fetch_obj->CHECK_SUPPLIER_BY_NAME($name);
     // echo $fetch_supplier;
-    $date = date("d-m-Y");
+    $date = date("Y-m-d");
     $date1 = date("d-m-Y H:i A");
     $trans_type = 2;
     $trans_type1 = 0;

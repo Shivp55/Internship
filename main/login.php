@@ -76,7 +76,7 @@
                             if (data == "success") {
                                 window.open('./index.php', "_self");
                             } else {
-                                alert(data);
+                                alert("Incorrect Email or Password");
 
                             }
                             //
