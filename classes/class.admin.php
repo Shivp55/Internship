@@ -141,22 +141,22 @@ class Admin
         $rows = mysqli_num_rows($result);
         return $rows;
     }
-    function GET_UPDATES()
-    {
-        global $db;
-        $sql = "SELECT * FROM updates";
-        $result = $db->query($sql);
-        $rows = mysqli_num_rows($result);
-        return $rows;
-    }
-    function GET_UPDATES_DATA()
-    {
-        global $db;
-        $sql = "SELECT * FROM updates";
-        $db->query($sql);
-        // $rows = mysqli_num_rows($result);
-        return $db->fetch_object();
-    }
+    // function GET_UPDATES()
+    // {
+    //     global $db;
+    //     $sql = "SELECT * FROM updates";
+    //     $result = $db->query($sql);
+    //     $rows = mysqli_num_rows($result);
+    //     return $rows;
+    // }
+    // function GET_UPDATES_DATA()
+    // {
+    //     global $db;
+    //     $sql = "SELECT * FROM updates";
+    //     $db->query($sql);
+    //     // $rows = mysqli_num_rows($result);
+    //     return $db->fetch_object();
+    // }
     function GET_ALL_BALANCEs()
     {
         global $db;
@@ -166,17 +166,39 @@ class Admin
         $total_amount1 = $row['current_bal'];
         return $total_amount1;
     }
-    function GET_DATA_BY_WEEK_INVOICE()
+    // function GET_DATA_BY_WEEK_INVOICE()
+    // {
+    //     global $db;
+    //     $sql = "SELECT CASE WHEN day < 8 THEN 'Week 1' WHEN day < 15 THEN 'Week 2' WHEN day < 22 THEN 'Week 3' ELSE 'Week 4' END AS week_of_month, case WHEN trans_type=1 THEN SUM(trans_amount) END AS invoice, case WHEN trans_type=2 THEN SUM(trans_amount) END AS payments FROM(SELECT * ,EXTRACT(day from date) as day from updates)a GROUP BY week_of_month";
+    //     $db->query($sql);
+    //     return $db->fetch_object();
+    // }
+    public function GET_SALES_FOR_MONTH()
     {
         global $db;
-        $sql = "SELECT CASE WHEN day < 8 THEN 'Week 1' WHEN day < 15 THEN 'Week 2' WHEN day < 22 THEN 'Week 3' ELSE 'Week 4' END AS week_of_month, case WHEN trans_type=1 THEN SUM(trans_amount) END AS invoice, case WHEN trans_type=2 THEN SUM(trans_amount) END AS payments FROM(SELECT * ,EXTRACT(day from date) as day from updates)a GROUP BY week_of_month";
+        $sql = "SELECT MONTHNAME(date) as month , SUM(trans_amnt) as total FROM transaction_master GROUP BY YEAR(date), MONTH(date)";
         $db->query($sql);
         return $db->fetch_object();
     }
-    public function GET_SALES_FOR_MONTH(){
+    public function total_entries()
+    {
         global $db;
-        $sql="SELECT MONTHNAME(date) as month , SUM(trans_amnt) as total FROM transaction_master GROUP BY YEAR(date), MONTH(date)";
+        $sql = "SELECT COUNT(id) as TOTAL_INVOICES FROM invoice_master";
+        $result=$db->query($sql);
+        $row=mysqli_fetch_assoc($result);
+        $total1=$row['TOTAL_INVOICES'];
+        $sql1 = "SELECT COUNT(id) as TOTAL_PAYMENTS FROM payment_master";
+        $result1=$db->query($sql1);
+        $row1=mysqli_fetch_assoc($result1);
+        $total2=$row1['TOTAL_INVOICES'];
+        return $total1+$total2 ;
+        
+    }
+    public function GET_PAYMENTS_FOR_MONTH()
+    {
+        global $db;
+        $sql = "SELECT MONTHNAME(date) as month , SUM(trans_amnt) as total FROM transaction_master WHERE trans_type=1 GROUP BY YEAR(date), MONTH(date)";
         $db->query($sql);
-        return $db->fetch_object();   
-     }
+        return $db->fetch_object();
+    }
 }

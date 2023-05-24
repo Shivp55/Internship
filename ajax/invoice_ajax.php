@@ -24,7 +24,7 @@ if (isset($_POST['action']) && $_POST['action'] == "add") {
     // $bac = $_REQUEST['accnt'];
     $dt = $_REQUEST['date_form'];
     $date = date("Y-m-d", strtotime($dt));
-    $date1 = date("d-m-Y h:i A");
+    $date1 = date("d-m-Y H:i A");
     $date2 = date('Y-m-d', strtotime($dt));
     $trans_type = 2;
     $arr = array(

@@ -19,11 +19,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   $mon = "Apr";
   $ad_obj->TOTAL_INVOICES_FOR_MONTH($mon);
   // echo $ad_data1 = $ad_obj->GET_ALL_ADMIN();
-
+  
   // echo $amnt = $ad_data2->amount;
-
-  $update = $ad_obj->GET_UPDATES();
-
+  
+  // $update = $ad_obj->GET_UPDATES();
+  
   ?>
 
   <title> Dashboard </title>
@@ -34,7 +34,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
   <!-- Google Font: Source Sans Pro -->
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo SITE_URL ?>assets/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -52,35 +53,36 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 
   <!-- Bootstrap Core CSS -->
-  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+  <link href="<?php echo SITE_URL ?>assets/admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
 
   <!-- Custom CSS -->
-  <link href="css/style.css" rel='stylesheet' type='text/css' />
+  <link href="<?php echo SITE_URL ?>assets/admin/css/style.css" rel='stylesheet' type='text/css' />
 
   <!-- font-awesome icons CSS -->
-  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="<?php echo SITE_URL ?>assets/admin/css/font-awesome.css" rel="stylesheet">
   <!-- //font-awesome icons CSS-->
 
   <!-- side nav css file -->
-  <link href='css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
+  <link href='<?php echo SITE_URL ?>assets/admin/css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
   <!-- //side nav css file -->
 
   <!-- js-->
-  <script src="js/jquery-1.11.1.min.js"></script>
-  <script src="js/modernizr.custom.js"></script>
+  <script src="<?php echo SITE_URL ?>assets/admin/js/jquery-1.11.1.min.js"></script>
+  <script src="<?php echo SITE_URL ?>assets/admin/js/modernizr.custom.js"></script>
 
   <!--webfonts-->
-  <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext"
+    rel="stylesheet">
   <!--//webfonts-->
 
   <!-- chart -->
-  <script src="js/Chart.js"></script>
+  <script src="<?php echo SITE_URL ?>assets/admin/js/Chart.js"></script>
   <!-- //chart -->
 
   <!-- Metis Menu -->
-  <script src="js/metisMenu.min.js"></script>
-  <script src="js/custom.js"></script>
-  <link href="css/custom.css" rel="stylesheet">
+  <script src="<?php echo SITE_URL ?>assets/admin/js/metisMenu.min.js"></script>
+  <script src="<?php echo SITE_URL ?>assets/admin/js/custom.js"></script>
+  <link href="<?php echo SITE_URL ?>assets/admin/css/custom.css" rel="stylesheet">
   <!--//Metis Menu -->
   <style>
     #chartdiv {
@@ -108,9 +110,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Monthly Sales', 'Q1_Sales', 'Q2_Sales', 'Q3_Sales', 'Q4_Sales'],
-        ['Reviews', 40, 50, 60, 55],
-        ['Total Users', 50, 55, 45, 60]
+        ['Total', 'Suppliers', 'Invoices', 'Payments', 'Banks'],
+        ['Total ', <?php echo $ad_data = $ad_obj->GET_ALL_SUPPLIERS(); ?>, <?php echo $ad_data2 = $ad_obj->GET_TOTAL_INVOICES(); ?>, <?php echo $ad_data3 = $ad_obj->GET_TOTAL_PAYMENTS(); ?>, <?php echo $ad_data1 = $ad_obj->GET_TOTAL_BANKS(); ?>],
+
       ]);
 
       var options = {
@@ -136,15 +138,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 
   <!--pie-chart --><!-- index page sales reviews visitors pie chart -->
-  <script src="js/pie-chart.js" type="text/javascript"></script>
+  <script src="<?php echo SITE_URL ?>assets/admin/js/pie-chart.js" type="text/javascript"></script>
   <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('#demo-pie-1').pieChart({
         barColor: '#2dde98',
         trackColor: '#eee',
         lineCap: 'round',
         lineWidth: 8,
-        onStep: function(from, to, percent) {
+        onStep: function (from, to, percent) {
           $(this.element).find('.pie-value').text(Math.round(percent) + '%');
         }
       });
@@ -154,7 +156,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         trackColor: '#eee',
         lineCap: 'butt',
         lineWidth: 8,
-        onStep: function(from, to, percent) {
+        onStep: function (from, to, percent) {
           $(this.element).find('.pie-value').text(Math.round(percent) + '%');
         }
       });
@@ -164,7 +166,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         trackColor: '#eee',
         lineCap: 'square',
         lineWidth: 8,
-        onStep: function(from, to, percent) {
+        onStep: function (from, to, percent) {
           $(this.element).find('.pie-value').text(Math.round(percent) + '%');
         }
       });
@@ -175,10 +177,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
   <!-- //pie-chart --><!-- index page sales reviews visitors pie chart -->
 
   <!-- requried-jsfiles-for owl -->
-  <link href="css/owl.carousel.css" rel="stylesheet">
-  <script src="js/owl.carousel.js"></script>
+  <link href="<?php echo SITE_URL ?>assets/admin/css/owl.carousel.css" rel="stylesheet">
+  <script src="<?php echo SITE_URL ?>assets/admin/js/owl.carousel.js"></script>
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       $("#owl-demo").owlCarousel({
         items: 3,
         lazyLoad: true,
@@ -187,39 +189,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         nav: true,
       });
     });
-  </script>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
-  </script>
-
-  <script type="text/javascript">
-    google.charts.load('current', {
-      packages: ['corechart']
-    });
-    google.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['product', 'Sales'],
-        ['Shoes', 40],
-        ['Hats', 50],
-        ['Coats', 35],
-        ['Scarves', 20]
-      ]);
-      var options = {
-        title: "Product Sales",
-        pieHole: 0.4,
-        pieStartAngle: 90,
-        is3D: true,
-        animation: {
-          startup: true,
-          duration: 3000,
-          easing: 'inAndOut'
-        }
-
-      };
-      var chart = new google.visualization.PieChart(document.getElementById("apichart"));
-      chart.draw(data, options);
-    }
   </script>
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
@@ -238,7 +207,62 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         data: {
           action: 'list'
         },
-        success: function(data) {
+        success: function (data) {
+
+        }
+      });
+
+
+
+      var data = google.visualization.arrayToDataTable([
+        ['Month', 'Total Payments'],
+
+
+
+        <?php
+        $data_obj = new Admin;
+        $data = $data_obj->GET_PAYMENTS_FOR_MONTH();
+        foreach ($data as $val) { ?>['<?php echo $val->month ?>', <?php echo $val->total ?>],
+        <?php } ?>
+      ]);
+
+      var options = {
+        title: "Payments",
+        legend: "bottom",
+        hAxis: {
+          title: "Month"
+        },
+        vAxis: {
+          title: "Total Pay"
+        },
+        animation: {
+          startup: true,
+          duration: 3000,
+          easing: 'inAndOut'
+        }
+      };
+
+      var chart = new
+        google.visualization.ColumnChart(document.getElementById("apichart"));
+      chart.draw(data, options);
+    }
+  </script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript">
+    google.charts.load('current', {
+      packages: ['corechart']
+    });
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      $.ajax({
+        url: '../ajax/admin_ajax.php',
+        type: 'POST',
+        data: {
+          action: 'list'
+        },
+        success: function (data) {
 
         }
       });
@@ -268,13 +292,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         },
         animation: {
           startup: true,
-          duration: 2000,
+          duration: 3000,
           easing: 'inAndOut'
         }
       };
 
       var chart = new
-      google.visualization.ColumnChart(document.getElementById("chart"));
+        google.visualization.LineChart(document.getElementById("chart"));
       chart.draw(data, options);
     }
   </script>
@@ -308,7 +332,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="r3_counter_box">
               <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
               <div class="stats">
-                <h5><strong><?php echo $ad_data1 = $ad_obj->GET_TOTAL_BANKS(); ?></strong></h5>
+                <h5><strong>
+                    <?php echo $ad_data1 = $ad_obj->GET_TOTAL_BANKS(); ?>
+                  </strong></h5>
                 <span>Total Banks</span>
               </div>
             </div>
@@ -317,7 +343,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="r3_counter_box">
               <i class="pull-left fa fa-money user2 icon-rounded"></i>
               <div class="stats">
-                <h5><strong><?php echo  $ad_data2 = $ad_obj->GET_TOTAL_INVOICES(); ?></strong></h5>
+                <h5><strong>
+                    <?php echo $ad_data2 = $ad_obj->GET_TOTAL_INVOICES(); ?>
+                  </strong></h5>
                 <span>Total Invoices</span>
               </div>
             </div>
@@ -326,7 +354,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="r3_counter_box">
               <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
               <div class="stats">
-                <h5><strong><?php echo  $ad_data3 = $ad_obj->GET_TOTAL_PAYMENTS(); ?></strong></h5>
+                <h5><strong>
+                    <?php echo $ad_data3 = $ad_obj->GET_TOTAL_PAYMENTS(); ?>
+                  </strong></h5>
                 <span>Total Payments</span>
               </div>
             </div>
@@ -335,7 +365,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="r3_counter_box">
               <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
               <div class="stats">
-                <h5><strong><?php echo $ad_data = $ad_obj->GET_ALL_SUPPLIERS(); ?></strong></h5>
+                <h5><strong>
+                    <?php echo $ad_data = $ad_obj->GET_ALL_SUPPLIERS(); ?>
+                  </strong></h5>
                 <span>Total Suppliers</span>
               </div>
             </div>
@@ -347,7 +379,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
           <div class="col-md-7 content-top-2 card">
             <div class="agileinfo-cdr">
               <div class="card-header">
-                <h3>Weekly Sales</h3>
+                <h1>Monthly Sales</h1>
               </div>
 
               <div style="width:500px; height: 450px">
@@ -361,7 +393,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="content-top-1">
               <div class="col-md-6 top-content">
                 <h5>Sales</h5>
-                <label style="font-size:22px;"><i class="fa-sharp fa-solid fa-indian-rupee-sign"></i><?php echo number_format($ad_obj->TOTAL_SALES()); ?></label>
+                <label style="font-size:22px;"><i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
+                  <?php echo number_format($ad_obj->TOTAL_SALES()); ?>
+                </label>
               </div>
               <div class="col-md-6 top-content1">
                 <div id="demo-pie-1" class="pie-title-center" data-percent=<?php echo ($ad_data3 = $ad_obj->TOTAL_SALES() * 100) / 1000000 ?>> <span class="pie-value"></span> </div>
@@ -371,21 +405,31 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="content-top-1">
               <div class="col-md-6 top-content">
                 <h5>Total Balance</h5>
-                <label style="font-size:22px;"><i class="fa-sharp fa-solid fa-indian-rupee-sign"></i><?php echo  number_format($ad_obj->GET_ALL_BALANCEs()); ?></label>
+                <label style="font-size:22px;"><i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
+                  <?php echo number_format($ad_obj->GET_ALL_BALANCEs()); ?>
+                </label>
 
               </div>
               <div class="col-md-6 top-content1">
-                <div id="demo-pie-2" class="pie-title-center" data-percent="<?php echo ($ad_obj->GET_ALL_BALANCEs() / 1000000 * 100) ?><"> <span class="pie-value"></span> </div>
+                <div id="demo-pie-2" class="pie-title-center"
+                  data-percent="<?php echo ($ad_obj->GET_ALL_BALANCEs() / 1000000 * 100) ?><"> <span
+                    class="pie-value"></span> </div>
               </div>
               <div class="clearfix"> </div>
             </div>
             <div class="content-top-1">
               <div class="col-md-6 top-content">
-                <h5>Visitors</h5>
-                <label>12589+</label>
+                <h5>Total Entries</h5>
+
+                <label>
+                  <?php echo $total = $ad_obj->total_entries();
+                  // echo $total->TOTAL_INVOICES;
+                  ?>
+                </label>
               </div>
               <div class="col-md-6 top-content1">
-                <div id="demo-pie-3" class="pie-title-center" data-percent="90"> <span class="pie-value"></span> </div>
+                <div id="demo-pie-3" class="pie-title-center" data-percent="<?php echo $p = $total * 100 / 2000; ?>"> <span
+                    class="pie-value"></span> </div>
               </div>
               <div class="clearfix"> </div>
             </div>
@@ -438,17 +482,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         </div>
 
         <div class="charts">
-          <div class="col-md-5 charts-grids widget ">
+          <div class="col-md-7 charts-grids widget ">
             <div class="card-header">
-              <h1>Google API Bar Chart</h1>
+              <h1>Total Payments</h1>
             </div>
-            <div id="container" style="width: 100%; height:255px;">
-              <div id="apichart" style="width:360px;height:100%;margin:0"></div>
+            <div id="container" style="width: 100px; height:294px;">
+              <div id="apichart" style="width:450px;height:100%;margin:0"></div>
             </div>
           </div>
-          <div class="col-md-12 charts-grids widget states-mdl">
+          <div class="col-md-10 charts-grids widget states-mdl">
             <div class="card-header">
-              <h1>Google API Bar Chart</h1>
+              <h1>Overall Data</h1>
             </div>
             <div id="chartdiv">
               <div id="googlechart" style="width:730px;height:100%;margin:0"></div>
@@ -477,25 +521,25 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
               <!-- start content_slider -->
               <div id="owl-demo" class="owl-carousel text-center">
                 <div class="item">
-                  <img class="lazyOwl img-responsive" data-src="images/slider1.jpg" alt="name">
+                  <img class="lazyOwl img-responsive" data-src="<?php echo SITE_URL ?>assets/admin/images/slider1.jpg" alt="name">
                 </div>
                 <div class="item">
-                  <img class="lazyOwl img-responsive" data-src="images/slider2.jpg" alt="name">
+                  <img class="lazyOwl img-responsive" data-src="<?php echo SITE_URL ?>assets/admin/images/slider2.jpg" alt="name">
                 </div>
                 <div class="item">
-                  <img class="lazyOwl img-responsive" data-src="images/slider3.jpg" alt="name">
+                  <img class="lazyOwl img-responsive" data-src="<?php echo SITE_URL ?>assets/admin/images/slider3.jpg" alt="name">
                 </div>
                 <div class="item">
-                  <img class="lazyOwl img-responsive" data-src="images/slider4.jpg" alt="name">
+                  <img class="lazyOwl img-responsive" data-src="<?php echo SITE_URL ?>assets/admin/images/slider4.jpg" alt="name">
                 </div>
                 <div class="item">
-                  <img class="lazyOwl img-responsive" data-src="images/slider5.jpg" alt="name">
+                  <img class="lazyOwl img-responsive" data-src="<?php echo SITE_URL ?>assets/admin/images/slider5.jpg" alt="name">
                 </div>
                 <div class="item">
-                  <img class="lazyOwl img-responsive" data-src="images/slider6.jpg" alt="name">
+                  <img class="lazyOwl img-responsive" data-src="<?php echo SITE_URL ?>assets/admin/images/slider6.jpg" alt="name">
                 </div>
                 <div class="item">
-                  <img class="lazyOwl img-responsive" data-src="images/slider7.jpg" alt="name">
+                  <img class="lazyOwl img-responsive" data-src="<?php echo SITE_URL ?>assets/admin/images/slider7.jpg" alt="name">
                 </div>
 
               </div>
@@ -516,40 +560,51 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 for ($i = 0; $i < 5; $i++) {
                   while ($rows = mysqli_fetch_assoc($result)) {
 
-                ?>
+                    ?>
 
                     <div class="activity-row">
-                      <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /></div>
+                      <div class="col-xs-3 activity-img"><img src='<?php echo SITE_URL ?>assets/admin/images/1.jpg' class="img-responsive" alt="" /></div>
                       <div class="col-xs-7 activity-desc">
-                        <h5><a href="#"><?php echo $_SESSION['name']; ?></a></h5>
-                        <p>Hey ! I just Updated <?php
-                                                $id = $rows['supplier_id'];
-                                                $sup_obj = new Supplier;
-                                                $sup_data = $sup_obj->GET_SUPPLIER_BY_ID($id);
-                                                echo "<p style='font-weight:bold'>" . $sp_id = $sup_data->supplier_master_name . "</p>";
-                                                ?></p>
-                        <p><?php if ($rows['trans_type'] == 1) {
-                              echo "<p style='color:red;'>Paid</p>";
-                            } else if ($rows['trans_type'] == 2) {
-                              echo "<p style='color:green;'>Added an Invoice</p>";
-                            } else {
-                              echo "<p style='color:blue;'>Added New Supplier</p>";
-                            } ?></p>
-                        <p><?php echo $rows['trans_amnt']; ?></p>
+                        <h5><a href="#">
+                            <?php echo $_SESSION['name']; ?>
+                          </a></h5>
+                        <p>Hey ! I just Updated
+                          <?php
+                          $id = $rows['supplier_id'];
+                          $sup_obj = new Supplier;
+                          $sup_data = $sup_obj->GET_SUPPLIER_BY_ID($id);
+                          echo "<p style='font-weight:bold'>" . $sp_id = $sup_data->supplier_master_name . "</p>";
+                          ?>
+                        </p>
+                        <p>
+                          <?php if ($rows['trans_type'] == 1) {
+                            echo "<p style='color:red;'>Paid</p>";
+                          } else if ($rows['trans_type'] == 2) {
+                            echo "<p style='color:green;'>Added an Invoice</p>";
+                          } else {
+                            echo "<p style='color:blue;'>Added New Supplier</p>";
+                          } ?>
+                        </p>
+                        <p>
+                          <?php echo $rows['trans_amnt']; ?>
+                        </p>
                       </div>
                       <div class="col-xs-2 activity-desc1">
-                        <h6><?php $date = $sup_data->updated_on;
-                            echo  $dt = date("h:i A", strtotime($date));
+                        <h6>
+                          <?php $date = $sup_data->updated_on;
+                          echo $dt = date("h:i A", strtotime($date));
 
-                            ?></h6>
+                          ?>
+                        </h6>
                       </div>
                       <div class="clearfix"> </div>
                     </div>
-                <?php }
+                  <?php }
                 } ?>
               </div>
               <form action="#" method="post">
-                <input type="text" value="Enter your text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
+                <input type="text" value="Enter your text" onfocus="this.value = '';"
+                  onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
                 <input type="submit" value="Submit" />
               </form>
             </div>
@@ -559,7 +614,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
               <h3>chat</h3>
               <div class="scrollbar" id="style-3">
                 <div class="activity-row activity-row1">
-                  <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /><span>06:01 AM</span></div>
+                  <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /><span>06:01
+                      AM</span></div>
                   <div class="col-xs-5 activity-img1">
                     <div class="activity-desc-sub">
                       <h5>Michael Chris</h5>
@@ -577,11 +633,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                       <p>Hi,How are you ? What about our next meeting?</p>
                     </div>
                   </div>
-                  <div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt="" /><span>06:02 AM</span></div>
+                  <div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt="" /><span>06:02
+                      AM</span></div>
                   <div class="clearfix"> </div>
                 </div>
                 <div class="activity-row activity-row1">
-                  <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /><span>06:05 AM</span></div>
+                  <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /><span>06:05
+                      AM</span></div>
                   <div class="col-xs-5 activity-img1">
                     <div class="activity-desc-sub">
                       <h5>Michael Chris</h5>
@@ -599,12 +657,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                       <p>Wow that's great</p>
                     </div>
                   </div>
-                  <div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt="" /><span>06:20 PM</span></div>
+                  <div class="col-xs-3 activity-img"><img src='images/3.jpg' class="img-responsive" alt="" /><span>06:20
+                      PM</span></div>
                   <div class="clearfix"> </div>
                 </div>
               </div>
               <form action="#" method="post">
-                <input type="text" value="Enter your text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
+                <input type="text" value="Enter your text" onfocus="this.value = '';"
+                  onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
                 <input type="submit" value="Send" />
               </form>
             </div>
@@ -663,7 +723,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 </div>
               </div>
               <form action="#" method="post">
-                <input type="text" value="Enter your text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
+                <input type="text" value="Enter your text" onfocus="this.value = '';"
+                  onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
                 <input type="submit" value="Submit" />
               </form>
             </div>
@@ -707,7 +768,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
       };
 
       var chart = new
-      google.visualization.BarChart(document.getElementById("chart2"));
+        google.visualization.BarChart(document.getElementById("chart2"));
       chart.draw(data, options);
     }
   </script>
@@ -748,7 +809,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     };
 
-    window.onload = function() {
+    window.onload = function () {
       var ctx = document.getElementById("canvas").getContext("2d");
       window.myBar = new Chart(ctx, {
         type: 'bar',
@@ -767,10 +828,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     };
 
-    document.getElementById('randomizeData').addEventListener('click', function() {
+    document.getElementById('randomizeData').addEventListener('click', function () {
       var zero = Math.random() < 0.2 ? true : false;
-      barChartData.datasets.forEach(function(dataset) {
-        dataset.data = dataset.data.map(function() {
+      barChartData.datasets.forEach(function (dataset) {
+        dataset.data = dataset.data.map(function () {
           return zero ? 0.0 : randomScalingFactor();
         });
 
@@ -779,7 +840,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     });
 
     var colorNames = Object.keys(window.chartColors);
-    document.getElementById('addDataset').addEventListener('click', function() {
+    document.getElementById('addDataset').addEventListener('click', function () {
       var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
       var dsColor = window.chartColors[colorName];
       var newDataset = {
@@ -798,7 +859,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
       window.myBar.update();
     });
 
-    document.getElementById('addData').addEventListener('click', function() {
+    document.getElementById('addData').addEventListener('click', function () {
       if (barChartData.datasets.length > 0) {
         var month = MONTHS[barChartData.labels.length % MONTHS.length];
         barChartData.labels.push(month);
@@ -812,15 +873,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
       }
     });
 
-    document.getElementById('removeDataset').addEventListener('click', function() {
+    document.getElementById('removeDataset').addEventListener('click', function () {
       barChartData.datasets.splice(0, 1);
       window.myBar.update();
     });
 
-    document.getElementById('removeData').addEventListener('click', function() {
+    document.getElementById('removeData').addEventListener('click', function () {
       barChartData.labels.splice(-1, 1); // remove the label first
 
-      barChartData.datasets.forEach(function(dataset, datasetIndex) {
+      barChartData.datasets.forEach(function (dataset, datasetIndex) {
         dataset.data.pop();
       });
 
@@ -836,7 +897,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
       showLeftPush = document.getElementById('showLeftPush'),
       body = document.body;
 
-    showLeftPush.onclick = function() {
+    showLeftPush.onclick = function () {
       classie.toggle(this, 'active');
       classie.toggle(body, 'cbp-spmenu-push-toright');
       classie.toggle(menuLeft, 'cbp-spmenu-open');
@@ -871,424 +932,424 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
       linecolor: "#CCA300",
       title: "Monday",
       values: [{
-          X: "6:00",
-          Y: 10.00
-        },
-        {
-          X: "7:00",
-          Y: 20.00
-        },
-        {
-          X: "8:00",
-          Y: 40.00
-        },
-        {
-          X: "9:00",
-          Y: 34.00
-        },
-        {
-          X: "10:00",
-          Y: 40.25
-        },
-        {
-          X: "11:00",
-          Y: 28.56
-        },
-        {
-          X: "12:00",
-          Y: 18.57
-        },
-        {
-          X: "13:00",
-          Y: 34.00
-        },
-        {
-          X: "14:00",
-          Y: 40.89
-        },
-        {
-          X: "15:00",
-          Y: 12.57
-        },
-        {
-          X: "16:00",
-          Y: 28.24
-        },
-        {
-          X: "17:00",
-          Y: 18.00
-        },
-        {
-          X: "18:00",
-          Y: 34.24
-        },
-        {
-          X: "19:00",
-          Y: 40.58
-        },
-        {
-          X: "20:00",
-          Y: 12.54
-        },
-        {
-          X: "21:00",
-          Y: 28.00
-        },
-        {
-          X: "22:00",
-          Y: 18.00
-        },
-        {
-          X: "23:00",
-          Y: 34.89
-        },
-        {
-          X: "0:00",
-          Y: 40.26
-        },
-        {
-          X: "1:00",
-          Y: 28.89
-        },
-        {
-          X: "2:00",
-          Y: 18.87
-        },
-        {
-          X: "3:00",
-          Y: 34.00
-        },
-        {
-          X: "4:00",
-          Y: 40.00
-        }
+        X: "6:00",
+        Y: 10.00
+      },
+      {
+        X: "7:00",
+        Y: 20.00
+      },
+      {
+        X: "8:00",
+        Y: 40.00
+      },
+      {
+        X: "9:00",
+        Y: 34.00
+      },
+      {
+        X: "10:00",
+        Y: 40.25
+      },
+      {
+        X: "11:00",
+        Y: 28.56
+      },
+      {
+        X: "12:00",
+        Y: 18.57
+      },
+      {
+        X: "13:00",
+        Y: 34.00
+      },
+      {
+        X: "14:00",
+        Y: 40.89
+      },
+      {
+        X: "15:00",
+        Y: 12.57
+      },
+      {
+        X: "16:00",
+        Y: 28.24
+      },
+      {
+        X: "17:00",
+        Y: 18.00
+      },
+      {
+        X: "18:00",
+        Y: 34.24
+      },
+      {
+        X: "19:00",
+        Y: 40.58
+      },
+      {
+        X: "20:00",
+        Y: 12.54
+      },
+      {
+        X: "21:00",
+        Y: 28.00
+      },
+      {
+        X: "22:00",
+        Y: 18.00
+      },
+      {
+        X: "23:00",
+        Y: 34.89
+      },
+      {
+        X: "0:00",
+        Y: 40.26
+      },
+      {
+        X: "1:00",
+        Y: 28.89
+      },
+      {
+        X: "2:00",
+        Y: 18.87
+      },
+      {
+        X: "3:00",
+        Y: 34.00
+      },
+      {
+        X: "4:00",
+        Y: 40.00
+      }
       ]
     };
     var graphdata2 = {
       linecolor: "#00CC66",
       title: "Tuesday",
       values: [{
-          X: "6:00",
-          Y: 100.00
-        },
-        {
-          X: "7:00",
-          Y: 120.00
-        },
-        {
-          X: "8:00",
-          Y: 140.00
-        },
-        {
-          X: "9:00",
-          Y: 134.00
-        },
-        {
-          X: "10:00",
-          Y: 140.25
-        },
-        {
-          X: "11:00",
-          Y: 128.56
-        },
-        {
-          X: "12:00",
-          Y: 118.57
-        },
-        {
-          X: "13:00",
-          Y: 134.00
-        },
-        {
-          X: "14:00",
-          Y: 140.89
-        },
-        {
-          X: "15:00",
-          Y: 112.57
-        },
-        {
-          X: "16:00",
-          Y: 128.24
-        },
-        {
-          X: "17:00",
-          Y: 118.00
-        },
-        {
-          X: "18:00",
-          Y: 134.24
-        },
-        {
-          X: "19:00",
-          Y: 140.58
-        },
-        {
-          X: "20:00",
-          Y: 112.54
-        },
-        {
-          X: "21:00",
-          Y: 128.00
-        },
-        {
-          X: "22:00",
-          Y: 118.00
-        },
-        {
-          X: "23:00",
-          Y: 134.89
-        },
-        {
-          X: "0:00",
-          Y: 140.26
-        },
-        {
-          X: "1:00",
-          Y: 128.89
-        },
-        {
-          X: "2:00",
-          Y: 118.87
-        },
-        {
-          X: "3:00",
-          Y: 134.00
-        },
-        {
-          X: "4:00",
-          Y: 180.00
-        }
+        X: "6:00",
+        Y: 100.00
+      },
+      {
+        X: "7:00",
+        Y: 120.00
+      },
+      {
+        X: "8:00",
+        Y: 140.00
+      },
+      {
+        X: "9:00",
+        Y: 134.00
+      },
+      {
+        X: "10:00",
+        Y: 140.25
+      },
+      {
+        X: "11:00",
+        Y: 128.56
+      },
+      {
+        X: "12:00",
+        Y: 118.57
+      },
+      {
+        X: "13:00",
+        Y: 134.00
+      },
+      {
+        X: "14:00",
+        Y: 140.89
+      },
+      {
+        X: "15:00",
+        Y: 112.57
+      },
+      {
+        X: "16:00",
+        Y: 128.24
+      },
+      {
+        X: "17:00",
+        Y: 118.00
+      },
+      {
+        X: "18:00",
+        Y: 134.24
+      },
+      {
+        X: "19:00",
+        Y: 140.58
+      },
+      {
+        X: "20:00",
+        Y: 112.54
+      },
+      {
+        X: "21:00",
+        Y: 128.00
+      },
+      {
+        X: "22:00",
+        Y: 118.00
+      },
+      {
+        X: "23:00",
+        Y: 134.89
+      },
+      {
+        X: "0:00",
+        Y: 140.26
+      },
+      {
+        X: "1:00",
+        Y: 128.89
+      },
+      {
+        X: "2:00",
+        Y: 118.87
+      },
+      {
+        X: "3:00",
+        Y: 134.00
+      },
+      {
+        X: "4:00",
+        Y: 180.00
+      }
       ]
     };
     var graphdata3 = {
       linecolor: "#FF99CC",
       title: "Wednesday",
       values: [{
-          X: "6:00",
-          Y: 230.00
-        },
-        {
-          X: "7:00",
-          Y: 210.00
-        },
-        {
-          X: "8:00",
-          Y: 214.00
-        },
-        {
-          X: "9:00",
-          Y: 234.00
-        },
-        {
-          X: "10:00",
-          Y: 247.25
-        },
-        {
-          X: "11:00",
-          Y: 218.56
-        },
-        {
-          X: "12:00",
-          Y: 268.57
-        },
-        {
-          X: "13:00",
-          Y: 274.00
-        },
-        {
-          X: "14:00",
-          Y: 280.89
-        },
-        {
-          X: "15:00",
-          Y: 242.57
-        },
-        {
-          X: "16:00",
-          Y: 298.24
-        },
-        {
-          X: "17:00",
-          Y: 208.00
-        },
-        {
-          X: "18:00",
-          Y: 214.24
-        },
-        {
-          X: "19:00",
-          Y: 214.58
-        },
-        {
-          X: "20:00",
-          Y: 211.54
-        },
-        {
-          X: "21:00",
-          Y: 248.00
-        },
-        {
-          X: "22:00",
-          Y: 258.00
-        },
-        {
-          X: "23:00",
-          Y: 234.89
-        },
-        {
-          X: "0:00",
-          Y: 210.26
-        },
-        {
-          X: "1:00",
-          Y: 248.89
-        },
-        {
-          X: "2:00",
-          Y: 238.87
-        },
-        {
-          X: "3:00",
-          Y: 264.00
-        },
-        {
-          X: "4:00",
-          Y: 270.00
-        }
+        X: "6:00",
+        Y: 230.00
+      },
+      {
+        X: "7:00",
+        Y: 210.00
+      },
+      {
+        X: "8:00",
+        Y: 214.00
+      },
+      {
+        X: "9:00",
+        Y: 234.00
+      },
+      {
+        X: "10:00",
+        Y: 247.25
+      },
+      {
+        X: "11:00",
+        Y: 218.56
+      },
+      {
+        X: "12:00",
+        Y: 268.57
+      },
+      {
+        X: "13:00",
+        Y: 274.00
+      },
+      {
+        X: "14:00",
+        Y: 280.89
+      },
+      {
+        X: "15:00",
+        Y: 242.57
+      },
+      {
+        X: "16:00",
+        Y: 298.24
+      },
+      {
+        X: "17:00",
+        Y: 208.00
+      },
+      {
+        X: "18:00",
+        Y: 214.24
+      },
+      {
+        X: "19:00",
+        Y: 214.58
+      },
+      {
+        X: "20:00",
+        Y: 211.54
+      },
+      {
+        X: "21:00",
+        Y: 248.00
+      },
+      {
+        X: "22:00",
+        Y: 258.00
+      },
+      {
+        X: "23:00",
+        Y: 234.89
+      },
+      {
+        X: "0:00",
+        Y: 210.26
+      },
+      {
+        X: "1:00",
+        Y: 248.89
+      },
+      {
+        X: "2:00",
+        Y: 238.87
+      },
+      {
+        X: "3:00",
+        Y: 264.00
+      },
+      {
+        X: "4:00",
+        Y: 270.00
+      }
       ]
     };
     var graphdata4 = {
       linecolor: "Random",
       title: "Thursday",
       values: [{
-          X: "6:00",
-          Y: 300.00
-        },
-        {
-          X: "7:00",
-          Y: 410.98
-        },
-        {
-          X: "8:00",
-          Y: 310.00
-        },
-        {
-          X: "9:00",
-          Y: 314.00
-        },
-        {
-          X: "10:00",
-          Y: 310.25
-        },
-        {
-          X: "11:00",
-          Y: 318.56
-        },
-        {
-          X: "12:00",
-          Y: 318.57
-        },
-        {
-          X: "13:00",
-          Y: 314.00
-        },
-        {
-          X: "14:00",
-          Y: 310.89
-        },
-        {
-          X: "15:00",
-          Y: 512.57
-        },
-        {
-          X: "16:00",
-          Y: 318.24
-        },
-        {
-          X: "17:00",
-          Y: 318.00
-        },
-        {
-          X: "18:00",
-          Y: 314.24
-        },
-        {
-          X: "19:00",
-          Y: 310.58
-        },
-        {
-          X: "20:00",
-          Y: 312.54
-        },
-        {
-          X: "21:00",
-          Y: 318.00
-        },
-        {
-          X: "22:00",
-          Y: 318.00
-        },
-        {
-          X: "23:00",
-          Y: 314.89
-        },
-        {
-          X: "0:00",
-          Y: 310.26
-        },
-        {
-          X: "1:00",
-          Y: 318.89
-        },
-        {
-          X: "2:00",
-          Y: 518.87
-        },
-        {
-          X: "3:00",
-          Y: 314.00
-        },
-        {
-          X: "4:00",
-          Y: 310.00
-        }
+        X: "6:00",
+        Y: 300.00
+      },
+      {
+        X: "7:00",
+        Y: 410.98
+      },
+      {
+        X: "8:00",
+        Y: 310.00
+      },
+      {
+        X: "9:00",
+        Y: 314.00
+      },
+      {
+        X: "10:00",
+        Y: 310.25
+      },
+      {
+        X: "11:00",
+        Y: 318.56
+      },
+      {
+        X: "12:00",
+        Y: 318.57
+      },
+      {
+        X: "13:00",
+        Y: 314.00
+      },
+      {
+        X: "14:00",
+        Y: 310.89
+      },
+      {
+        X: "15:00",
+        Y: 512.57
+      },
+      {
+        X: "16:00",
+        Y: 318.24
+      },
+      {
+        X: "17:00",
+        Y: 318.00
+      },
+      {
+        X: "18:00",
+        Y: 314.24
+      },
+      {
+        X: "19:00",
+        Y: 310.58
+      },
+      {
+        X: "20:00",
+        Y: 312.54
+      },
+      {
+        X: "21:00",
+        Y: 318.00
+      },
+      {
+        X: "22:00",
+        Y: 318.00
+      },
+      {
+        X: "23:00",
+        Y: 314.89
+      },
+      {
+        X: "0:00",
+        Y: 310.26
+      },
+      {
+        X: "1:00",
+        Y: 318.89
+      },
+      {
+        X: "2:00",
+        Y: 518.87
+      },
+      {
+        X: "3:00",
+        Y: 314.00
+      },
+      {
+        X: "4:00",
+        Y: 310.00
+      }
       ]
     };
     var Piedata = {
       linecolor: "Random",
       title: "Profit",
       values: [{
-          X: "Monday",
-          Y: 50.00
-        },
-        {
-          X: "Tuesday",
-          Y: 110.98
-        },
-        {
-          X: "Wednesday",
-          Y: 70.00
-        },
-        {
-          X: "Thursday",
-          Y: 204.00
-        },
-        {
-          X: "Friday",
-          Y: 80.25
-        },
-        {
-          X: "Saturday",
-          Y: 38.56
-        },
-        {
-          X: "Sunday",
-          Y: 98.57
-        }
+        X: "Monday",
+        Y: 50.00
+      },
+      {
+        X: "Tuesday",
+        Y: 110.98
+      },
+      {
+        X: "Wednesday",
+        Y: 70.00
+      },
+      {
+        X: "Thursday",
+        Y: 204.00
+      },
+      {
+        X: "Friday",
+        Y: 80.25
+      },
+      {
+        X: "Saturday",
+        Y: 38.56
+      },
+      {
+        X: "Sunday",
+        Y: 98.57
+      }
       ]
     };
-    $(function() {
+    $(function () {
       $("#Bargraph").SimpleChart({
         ChartType: "Bar",
         toolwidth: "50",
@@ -1303,7 +1364,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         title: 'Weekly Profit',
         yaxislabel: 'Profit in $'
       });
-      $("#sltchartype").on('change', function() {
+      $("#sltchartype").on('change', function () {
         $("#Bargraph").SimpleChart('ChartType', $(this).val());
         $("#Bargraph").SimpleChart('reload', 'true');
       });
